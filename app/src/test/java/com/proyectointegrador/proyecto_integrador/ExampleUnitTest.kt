@@ -1,4 +1,4 @@
-package com.capacitacion2.sqlite_en_android
+package com.proyectointegrador.proyecto_integrador
 
 import org.junit.Test
 

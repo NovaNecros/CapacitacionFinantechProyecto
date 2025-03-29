@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.capacitacion2.sqlite_en_android"
+    namespace = "com.proyectointegrador.proyecto_integrador"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.capacitacion2.sqlite_en_android"
+        applicationId = "com.proyectointegrador.proyecto_integrador"
         minSdk = 24
         targetSdk = 35
         versionCode = 1

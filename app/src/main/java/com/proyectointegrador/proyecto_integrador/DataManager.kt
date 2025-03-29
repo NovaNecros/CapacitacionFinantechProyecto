@@ -1,7 +1,7 @@
 /*Esta clase gestiona la inserción, lectura y eliminación de personitas
 en la base de datos con SQLite*/
 
-package com.capacitacion2.sqlite_en_android
+package com.proyectointegrador.proyecto_integrador
 
 import android.content.ContentValues
 import android.content.Context

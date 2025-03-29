@@ -1,7 +1,7 @@
 /*Esta clase crea una actividad en donde se pueden agregar
 personitas a la base de datos */
 
-package com.capacitacion2.sqlite_en_android
+package com.proyectointegrador.proyecto_integrador
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

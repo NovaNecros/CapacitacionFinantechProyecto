@@ -1,6 +1,6 @@
 /*En esta clase se definen las propiedades de una personita*/
 
-package com.capacitacion2.sqlite_en_android
+package com.proyectointegrador.proyecto_integrador
 
 import android.content.Context
 

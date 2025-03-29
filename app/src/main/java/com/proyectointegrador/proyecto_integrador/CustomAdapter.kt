@@ -1,6 +1,6 @@
 /*Esta clase crea un adaptador personalizado para el ListView*/
 
-package com.capacitacion2.sqlite_en_android
+package com.proyectointegrador.proyecto_integrador
 
 import android.content.Context
 import android.view.LayoutInflater

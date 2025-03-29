@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "SQLite_en_Android"
+rootProject.name = "Proyecto_Integrador"
 include(":app")
  

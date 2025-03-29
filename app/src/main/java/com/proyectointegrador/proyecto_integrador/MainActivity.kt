@@ -1,6 +1,6 @@
 /*Esta clase crea una actividad que sirve como menú principal*/
 
-package com.capacitacion2.sqlite_en_android
+package com.proyectointegrador.proyecto_integrador
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

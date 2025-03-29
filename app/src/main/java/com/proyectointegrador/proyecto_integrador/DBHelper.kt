@@ -1,6 +1,6 @@
 /*Esta clase interactúa directamente con la base de datos de SQLite*/
 
-package com.capacitacion2.sqlite_en_android
+package com.proyectointegrador.proyecto_integrador
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase

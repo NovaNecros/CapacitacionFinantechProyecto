@@ -1,6 +1,6 @@
 /*Esta clase permite mostrar un snackbar personalizado*/
 
-package com.capacitacion2.sqlite_en_android
+package com.proyectointegrador.proyecto_integrador
 
 import android.content.Context
 import android.view.Gravity
