@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 import android.view.View
+import android.widget.TextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.CheckBox
@@ -37,13 +38,17 @@ class NuevoAlumno : AppCompatActivity()
         val lectorNombre = findViewById<EditText>(R.id.lector_nombre)
         val lectorApellidoP = findViewById<EditText>(R.id.lector_apellido_p)
         val lectorApellidoM = findViewById<EditText>(R.id.lector_apellido_m)
+        val botonFecha = findViewById<Button>(R.id.fecha_calendario)
+        val fechaCumple = findViewById<TextView>(R.id.cumple)
         val masculino = findViewById<CheckBox>(R.id.masculino)
         val femenino = findViewById<CheckBox>(R.id.femenino)
         val nobinario = findViewById<CheckBox>(R.id.nobinario)
         val otroGenero = findViewById<EditText>(R.id.lector_otro_genero)
+        val botonGenero = findViewById<Button>(R.id.btn_otro_genero)
         val calendarioView = null //TODO
 
         dataManager = DataManager(this)
+        fechaCumple.visibility = View.GONE
 
         botonGuardar.setOnClickListener(View.OnClickListener
         {
@@ -105,7 +110,7 @@ class NuevoAlumno : AppCompatActivity()
 
         botonRegresar.setOnClickListener(View.OnClickListener
         {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, AdministrarAlumnos::class.java)
             startActivity(intent)
         })
     }

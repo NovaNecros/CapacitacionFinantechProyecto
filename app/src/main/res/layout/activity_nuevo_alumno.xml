@@ -46,6 +46,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
                 android:orientation="vertical">
 
                 <TextView
@@ -103,16 +104,26 @@
                     android:layout_height="wrap_content"
                     android:text="@string/bdate"
                     android:textStyle="bold"
-                    android:textSize="18sp"/>
-
-                <Button
-                    android:id="@+id/fecha_calendario"
+                    android:textSize="18sp" />
+                <EditText
+                    android:id="@+id/cumple"
+                    android:visibility="visible"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/default_text"
+                    android:ems="10"
+                    android:textStyle="normal"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="24dp"/>
+                <Button
+                    android:id="@+id/fecha_calendario"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/azulmetalico"
+                    android:text="@string/btn_fecha"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:visibility="visible" />
+                    android:visibility="visible"
+                    android:layout_marginBottom="24dp"/>
 
                 <TextView
                     android:id="@+id/genero"
@@ -144,20 +155,33 @@
                     android:text="@string/nonbinary"
                     android:visibility="visible"
                     android:gravity="center_vertical"/>
-                <Button
-                    android:id="@+id/btn_otro_genero"
-                    android:layout_width="80dp"
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/other_gender"
-                    android:visibility="visible"
-                    android:gravity="center_vertical"/>
-                <EditText
-                    android:id="@+id/lector_otro_genero"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:visibility="visible"
-                    android:inputType="text"/>
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal">
+
+                    <Button
+                        android:id="@+id/btn_otro_genero"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/other_gender"
+                        android:visibility="visible"
+                        android:gravity="center_vertical"
+                        android:backgroundTint="@color/azulmetalico"
+                        android:textColor="@color/white"
+                        android:layout_marginEnd="32dp"/>
+                    <EditText
+                        android:id="@+id/lector_otro_genero"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/gender_hint"
+                        android:gravity="center"
+                        android:visibility="visible"
+                        android:inputType="text"/>
+            </LinearLayout>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
@@ -179,7 +203,7 @@
             android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/azulchillon"
+            android:backgroundTint="@color/brat"
             android:text="@string/save"
             android:textSize="28sp"
             android:textColor="@color/white"/>
