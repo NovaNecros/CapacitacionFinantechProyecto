@@ -25,7 +25,11 @@
             android:exported="true">
         </activity>
         <activity
-            android:name=".SecondActivity"
+            android:name=".AdministrarAlumnos"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".NuevoAlumno"
             android:exported="true">
         </activity>
         <activity

@@ -13,6 +13,7 @@ import android.widget.Button
 import android.view.View
 
 import android.content.Intent
+import android.widget.ListView
 
 class AdministrarAlumnos : AppCompatActivity(), View.OnClickListener
 {
@@ -20,8 +21,8 @@ class AdministrarAlumnos : AppCompatActivity(), View.OnClickListener
     {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_control_escolar)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.control_escolar))
+        setContentView(R.layout.activity_administrar_alumnos)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.administrar_alumnos))
         { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -31,29 +32,70 @@ class AdministrarAlumnos : AppCompatActivity(), View.OnClickListener
         val nuevo = findViewById<Button>(R.id.btn_nuevo)
         val borrar = findViewById<Button>(R.id.btn_borrar)
         val regresar = findViewById<TextView>(R.id.btn_back)
+        val listaPersonitas = findViewById<ListView>(R.id.lista_alumnos)
+        val dataManager = DataManager(applicationContext)
 
-        alumnos.setOnClickListener(this)
-        materias.setOnClickListener(this)
+        nuevo.setOnClickListener(this)
+        borrar.setOnClickListener(this)
         regresar.setOnClickListener(this)
+
+        try
+        {
+            val personitas = dataManager.leerPersonitas()
+            val adaptador = CustomAdapter(applicationContext, personitas)
+            listaPersonitas.adapter = adaptador
+            listaPersonitas.isVerticalScrollBarEnabled = true
+        }
+        catch(ex : Exception)
+        {
+            val view = findViewById<View>(android.R.id.content)
+            val texto : String = ex.message.toString()
+            val color : Int = resources.getColor(R.color.rojosangre)
+            SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
+        }
+
+        listaPersonitas.setOnItemClickListener(
+        { parent, view, pos, id ->
+
+            val selected = parent.getItemAtPosition(pos) as Alumno
+            val res : Int = dataManager.borrarPersonita(selected)
+            if(res>0)
+            {
+                val texto : String = "Alumno ${selected} eliminada"
+                val color : Int = resources.getColor(R.color.brat)
+                SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
+
+                //reinicia la actividad para actualizar la lista
+                intent = Intent(applicationContext, ThirdActivity::class.java)
+                startActivity(intent)
+            }
+            else
+            {
+                //inidca el ID que tiene la personita que no se pudo eliminar
+                //para ayudar a rastrear el error a la implemntación de la base de datos
+                val texto : String = "Error al eliminar.\nID=${res}"
+                val color : Int = resources.getColor(R.color.rojosangre)
+                SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
+            }
+        })
     }
 
     override fun onClick(view : View?)
     {
         when(view?.id)
         {
-            R.id.btn_alumnos ->
+            R.id.btn_nuevo ->
             {
-                intent = Intent(applicationContext, ControlEscolar::class.java)
+                intent = Intent(applicationContext, NuevoAlumno::class.java)
                 startActivity(intent)
             }
-            R.id.btn_materias ->
+            R.id.btn_borrar ->
             {
-                intent = Intent(applicationContext, ThirdActivity::class.java)
-                startActivity(intent)
+                //TODO
             }
             R.id.btn_back ->
             {
-                intent = Intent(applicationContext, MainActivity::class.java)
+                intent = Intent(applicationContext, ControlEscolar::class.java)
                 startActivity(intent)
             }
         }

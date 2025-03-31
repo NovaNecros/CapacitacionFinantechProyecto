@@ -3,15 +3,32 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/second"
+    android:id="@+id/nuevo_alumno"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/verdepastel"
-    tools:context=".SecondActivity">
+    android:background="@color/moradopastel"
+    tools:context=".NuevoAlumno">
+
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="375dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:gravity="center"
+        android:text="@string/btn_new"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.15"
+        app:layout_constraintHorizontal_bias="0.5"/>
 
     <LinearLayout
         android:layout_width="375dp"
-        android:layout_height="694dp"
+        android:layout_height="344dp"
         android:layout_marginTop="21dp"
         android:layout_marginBottom="16dp"
         android:orientation="vertical"
@@ -22,19 +39,9 @@
         app:layout_constraintVertical_bias="0.5"
         app:layout_constraintHorizontal_bias="0.5">
 
-        <TextView
-            android:id="@+id/titulo"
-            android:visibility="visible"
-            android:layout_width="375dp"
-            android:layout_height="wrap_content"
-            android:text="@string/titulo"
-            android:textStyle="bold"
-            android:textSize="34sp"
-            android:gravity="center"/>
-
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="494dp">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -98,12 +105,13 @@
                     android:textStyle="bold"
                     android:textSize="18sp"/>
 
-                <CalendarView
+                <Button
                     android:id="@+id/fecha_calendario"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="text"
+                    android:text="@string/default_text"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
                     android:visibility="visible" />
 
                 <TextView
@@ -136,45 +144,56 @@
                     android:text="@string/nonbinary"
                     android:visibility="visible"
                     android:gravity="center_vertical"/>
-
-                <TextView
-                    android:id="@+id/otro_genero"
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/btn_otro_genero"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/other_gender"/>
+                    android:text="@string/other_gender"
+                    android:visibility="visible"
+                    android:gravity="center_vertical"/>
                 <EditText
                     android:id="@+id/lector_otro_genero"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="text"/>
-
-                <Button
-                    android:id="@+id/boton_guardar"
                     android:visibility="visible"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/azulchillon"
-                    android:text="@string/save"/>
+                    android:inputType="text"/>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_back"
-        android:visibility="visible"
+
+    <LinearLayout
         android:layout_width="375dp"
         android:layout_height="wrap_content"
-        android:text="@string/btn_regresar"
-        android:textStyle="bold"
-        android:textSize="28sp"
-        android:textColor="@color/black"
-        android:backgroundTint="@color/crema"
+        android:orientation="vertical"
+        android:gravity="center_horizontal|bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.95"
-        app:layout_constraintHorizontal_bias="0.5"/>
+        app:layout_constraintHorizontal_bias="0.5">
+        <Button
+            android:id="@+id/boton_guardar"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/azulchillon"
+            android:text="@string/save"
+            android:textSize="28sp"
+            android:textColor="@color/white"/>
+        <Button
+            android:id="@+id/btn_back"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_back"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/naranjaclaro"/>
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -42,7 +42,7 @@
         android:visibility="visible"
         android:layout_width="375dp"
         android:layout_height="wrap_content"
-        android:text="@string/btn_regresar"
+        android:text="@string/btn_back"
         android:textStyle="bold"
         android:textSize="28sp"
         android:textColor="@color/black"

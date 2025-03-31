@@ -1,5 +1,5 @@
 /*Esta clase crea una actividad en donde se pueden agregar
-personitas a la base de datos */
+alumnos a la base de datos */
 
 package com.proyectointegrador.proyecto_integrador
 
@@ -11,13 +11,12 @@ import androidx.core.view.WindowInsetsCompat
 
 import android.view.View
 import android.widget.Button
-import android.widget.CalendarView
 import android.widget.EditText
 import android.widget.CheckBox
 import android.content.Intent
 import com.google.android.material.snackbar.Snackbar
 
-class SecondActivity : AppCompatActivity()
+class NuevoAlumno : AppCompatActivity()
 {
     var dataManager : DataManager? = null
 
@@ -25,8 +24,8 @@ class SecondActivity : AppCompatActivity()
     {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_second)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.second))
+        setContentView(R.layout.activity_nuevo_alumno)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.nuevo_alumno))
         { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -42,7 +41,7 @@ class SecondActivity : AppCompatActivity()
         val femenino = findViewById<CheckBox>(R.id.femenino)
         val nobinario = findViewById<CheckBox>(R.id.nobinario)
         val otroGenero = findViewById<EditText>(R.id.lector_otro_genero)
-        val calendarioView = findViewById<CalendarView>(R.id.fecha_calendario)
+        val calendarioView = null //TODO
 
         dataManager = DataManager(this)
 
@@ -52,7 +51,7 @@ class SecondActivity : AppCompatActivity()
             val apellidoP : String = lectorApellidoP.getText().toString()
             val apellidoM : String = lectorApellidoM.getText().toString()
             val generosUsuario = mutableListOf<String>()
-            val cumFecha : String = calendarioView.date.toString()
+            val cumFecha : String = "" //TODO
             val generos = arrayOf(masculino, femenino, nobinario)
 
             //se incluyen las opciones no-binario y otro y se utilizan
@@ -87,7 +86,7 @@ class SecondActivity : AppCompatActivity()
                 lectorNombre.text.clear()
                 lectorApellidoP.text.clear()
                 lectorApellidoM.text.clear()
-                calendarioView.date = System.currentTimeMillis()
+                //calendarioView.date = System.currentTimeMillis() //TODO
 
                 for(genero in generos)
                 {

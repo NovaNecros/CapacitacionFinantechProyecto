@@ -43,12 +43,12 @@ class ControlEscolar : AppCompatActivity(), View.OnClickListener
         {
             R.id.btn_alumnos ->
             {
-                intent = Intent(applicationContext, ControlEscolar::class.java)
+                intent = Intent(applicationContext, AdministrarAlumnos::class.java)
                 startActivity(intent)
             }
             R.id.btn_materias ->
             {
-                intent = Intent(applicationContext, ThirdActivity::class.java)
+                intent = Intent(applicationContext, ::class.java)
                 startActivity(intent)
             }
             R.id.btn_back ->
