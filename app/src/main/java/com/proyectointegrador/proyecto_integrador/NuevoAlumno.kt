@@ -10,12 +10,12 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 import android.view.View
-import android.widget.TextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.CheckBox
 import android.content.Intent
 import com.google.android.material.snackbar.Snackbar
+import androidx.core.view.isGone
 
 class NuevoAlumno : AppCompatActivity()
 {
@@ -39,9 +39,11 @@ class NuevoAlumno : AppCompatActivity()
         val lectorApellidoP = findViewById<EditText>(R.id.lector_apellido_p)
         val lectorApellidoM = findViewById<EditText>(R.id.lector_apellido_m)
         val botonFecha = findViewById<Button>(R.id.fecha_calendario)
-        val fechaCumple = findViewById<TextView>(R.id.cumple)
+        val fechaCumple = findViewById<EditText>(R.id.cumple)
         val masculino = findViewById<CheckBox>(R.id.masculino)
         val femenino = findViewById<CheckBox>(R.id.femenino)
+        //se incluyen las opciones no-binario y otro y se utilizan
+        //checkboxes en vez de radiobuttons para fines de inclusividad
         val nobinario = findViewById<CheckBox>(R.id.nobinario)
         val otroGenero = findViewById<EditText>(R.id.lector_otro_genero)
         val botonGenero = findViewById<Button>(R.id.btn_otro_genero)
@@ -49,6 +51,19 @@ class NuevoAlumno : AppCompatActivity()
 
         dataManager = DataManager(this)
         fechaCumple.visibility = View.GONE
+
+        botonGenero.setOnClickListener(View.OnClickListener
+        {
+            if(otroGenero.isGone)
+            {
+                otroGenero.visibility = View.VISIBLE
+            }
+            else
+            {
+                otroGenero.text.clear()
+                otroGenero.visibility = View.GONE
+            }
+        })
 
         botonGuardar.setOnClickListener(View.OnClickListener
         {
@@ -59,9 +74,28 @@ class NuevoAlumno : AppCompatActivity()
             val cumFecha : String = "" //TODO
             val generos = arrayOf(masculino, femenino, nobinario)
 
-            //se incluyen las opciones no-binario y otro y se utilizan
-            //checkboxes en vez de radiobuttons para fines de inclusividad
-            for(genero in generos)
+            val view = findViewById<View>(android.R.id.content)
+            var texto : String = ""
+            var color : Int = 0
+
+            //se valida que el usuario haya llenado los datos solicitados
+            //excepto posiblemente el apellido materno
+            if(nombre.isEmpty())
+            {
+                texto = resources.getString(R.string.no_nombre_ex)
+                color = resources.getColor(R.color.rojosangre)
+            }
+            else if(apellidoP.isEmpty())
+            {
+                texto = resources.getString(R.string.no_apellido_p_ex)
+                color = resources.getColor(R.color.rojosangre)
+            }
+            else if(cumFecha.isEmpty())
+            {
+                texto = resources.getString(R.string.no_cum_ex)
+                color = resources.getColor(R.color.rojosangre)
+            }
+            else for(genero in generos)
             {
                 if(genero.isChecked)
                 {
@@ -76,17 +110,13 @@ class NuevoAlumno : AppCompatActivity()
             {
                 Snackbar.make(it, resources.getString(R.string.no_genero_ex), Snackbar.LENGTH_SHORT).show()
             }
-            else if(nombre.isNotEmpty() && apellidoP.isNotEmpty() && cumFecha.isNotEmpty())
+            else
             {
-                //valida que el usuario haya llenado los datos solicitados
-                //excepto posiblemente el apellido materno
                 val fulanito = Alumno(applicationContext, nombre, apellidoP, apellidoM, generosUsuario.toString(), cumFecha)
                 dataManager!!.guardarPersonita(fulanito)
 
-                val view = findViewById<View>(android.R.id.content)
-                val texto : String = "Alumno ${fulanito} guardada"
-                val color : Int = resources.getColor(R.color.brat)
-                SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
+                texto = "Alumno ${fulanito} guardado"
+                color = resources.getColor(R.color.brat)
 
                 lectorNombre.text.clear()
                 lectorApellidoP.text.clear()
@@ -99,13 +129,8 @@ class NuevoAlumno : AppCompatActivity()
                 }
                 otroGenero.text.clear()
             }
-            else
-            {
-                val view = findViewById<View>(android.R.id.content)
-                val texto : String = resources.getString(R.string.datos_incompletos_ex)
-                val color : Int = resources.getColor(R.color.rojosangre)
-                SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
-            }
+
+            SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
         })
 
         botonRegresar.setOnClickListener(View.OnClickListener

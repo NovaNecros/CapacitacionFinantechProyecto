@@ -26,6 +26,9 @@
 
     <string name="gender_hint" translatable="false">Escribe el género"</string>
 
+    <string name="no_nombre_ex" translatable="false">Debes escribir tu nombre</string>
+    <string name="no_apellido_p_ex" translatable="false">Debes escribir tu apellido paterno</string>
+    <string name="no_cum_ex" translatable="false">Debes indicar tu fecha de nacimiento</string>
     <string name="no_genero_ex" translatable="false">Debes seleccionar al menos un género</string>
     <string name="datos_incompletos_ex" translatable="false">"Debes llenar todos los campos"</string>
     <string name="default_text" translatable="false">:b</string>
