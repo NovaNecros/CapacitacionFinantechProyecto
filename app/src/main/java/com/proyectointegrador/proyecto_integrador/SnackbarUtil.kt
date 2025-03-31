@@ -1,4 +1,4 @@
-/*Esta clase permite mostrar un snackbar personalizado*/
+/*Esta clase permite btn_menu_alumno un snackbar personalizado*/
 
 package com.proyectointegrador.proyecto_integrador
 

@@ -29,7 +29,7 @@ class DataManager(contexto : Context)
         dbHelper.onUpgrade(baseDatos, 1, 1)
     }
 
-    fun guardarPersonita(fulanito : Personita)
+    fun guardarPersonita(fulanito : Alumno)
     {
         val valores = ContentValues()
         valores.put("id_personitas", fulanito.id)
@@ -42,15 +42,15 @@ class DataManager(contexto : Context)
         baseDatos.insert("personitas", null, valores)
     }
 
-    fun leerPersonitas() : Array<Personita>
+    fun leerPersonitas() : Array<Alumno>
     {
-        val personitas = mutableListOf<Personita>()
+        val alumnos = mutableListOf<Alumno>()
         val columnas = arrayOf("id_personitas", "nombre", "apellidoP", "apellidoM", "genero", "fecha")
         val cursor : Cursor = baseDatos.query("personitas", columnas, null, null, null, null, null)
 
         while(cursor.moveToNext())
         {
-            val fulanito = Personita()
+            val fulanito = Alumno()
 
             fulanito.id = cursor.getInt(0)
             fulanito.nombre = cursor.getString(1)
@@ -59,18 +59,18 @@ class DataManager(contexto : Context)
             fulanito.generos = cursor.getString(4)
             fulanito.fecha = cursor.getString(5)
 
-            personitas.add(fulanito)
+            alumnos.add(fulanito)
         }
 
         cursor.close()
 
-        return personitas.toTypedArray()
+        return alumnos.toTypedArray()
     }
 
-    fun borrarPersonita(fulanito: Personita)
+    fun borrarPersonita(fulanito: Alumno)
     : Int = baseDatos.delete("personitas", "id_personitas = ?", arrayOf(fulanito.id.toString()))
 
-    //asigna el primer ID disponible al crear una nueva personita
+    //asigna el primer ID disponible al crear una btn_ctrl_escolar personita
     fun getNewID() : Int
     {
         val cursor = baseDatos.rawQuery("SELECT id_personitas FROM personitas ORDER BY id_personitas", null)

@@ -1,4 +1,4 @@
-/*Esta clase crea una actividad en donde se pueden borrar
+/*Esta clase crea una actividad en donde se pueden btn_menu_prof
 personitas de la base de datos*/
 
 package com.proyectointegrador.proyecto_integrador
@@ -51,11 +51,11 @@ class ThirdActivity : AppCompatActivity()
         listaPersonitas.setOnItemClickListener(
         { parent, view, pos, id ->
 
-            val selected = parent.getItemAtPosition(pos) as Personita
+            val selected = parent.getItemAtPosition(pos) as Alumno
             val res : Int = dataManager.borrarPersonita(selected)
             if(res>0)
             {
-                val texto : String = "Personita ${selected} eliminada"
+                val texto : String = "Alumno ${selected} eliminada"
                 val color : Int = resources.getColor(R.color.brat)
                 SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
 

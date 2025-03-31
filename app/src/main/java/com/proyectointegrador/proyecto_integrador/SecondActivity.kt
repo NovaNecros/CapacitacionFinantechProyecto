@@ -10,7 +10,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.CalendarView
 import android.widget.EditText
@@ -77,11 +76,11 @@ class SecondActivity : AppCompatActivity()
             {
                 //valida que el usuario haya llenado los datos solicitados
                 //excepto posiblemente el apellido materno
-                val fulanito = Personita(applicationContext, nombre, apellidoP, apellidoM, generosUsuario.toString(), cumFecha)
+                val fulanito = Alumno(applicationContext, nombre, apellidoP, apellidoM, generosUsuario.toString(), cumFecha)
                 dataManager!!.guardarPersonita(fulanito)
 
                 val view = findViewById<View>(android.R.id.content)
-                val texto : String = "Personita ${fulanito} guardada"
+                val texto : String = "Alumno ${fulanito} guardada"
                 val color : Int = resources.getColor(R.color.brat)
                 SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
 

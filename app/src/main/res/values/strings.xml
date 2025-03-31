@@ -1,27 +1,28 @@
 <resources>
-    <string name="app_name">SQLite_en_Android</string>
-    <string name="db_name">personitas.db</string>
-    <string name="titulo">Personita</string>
+    <string name="app_name" translatable="false">SQLite_en_Android</string>
+    <string name="db_name" translatable="false">personitas.db</string>
+    <string name="titulo" translatable="false">Módulo Escolar</string>
 
-    <string name="name">Nombre</string>
-    <string name="apellido_p">Apellido Paterno</string>
-    <string name="apellido_m">Apellido Materno</string>
-    <string name="bdate">Fecha de Nacimiento</string>
-    <string name="gender">Género</string>
+    <string name="name" translatable="false">Nombre</string>
+    <string name="apellido_p" translatable="false">Apellido Paterno</string>
+    <string name="apellido_m" translatable="false">Apellido Materno</string>
+    <string name="bdate" translatable="false">Fecha de Nacimiento</string>
+    <string name="gender" translatable="false">Género</string>
 
-    <string name="male">Masculino</string>
-    <string name="female">Femenino</string>
-    <string name="nonbinary">No Binario</string>
-    <string name="other_gender">Otro</string>
+    <string name="male" translatable="false">Masculino</string>
+    <string name="female" translatable="false">Femenino</string>
+    <string name="nonbinary" translatable="false">No Binario</string>
+    <string name="other_gender" translatable="false">Otro</string>
 
-    <string name="save">Guardar</string>
-    <string name="nueva">Nueva Personita</string>
-    <string name="borrar">Eliminar Personita</string>
-    <string name="mostrar">Mostrar Personitas</string>
-    <string name="regresar">Regresar</string>
+    <string name="save" translatable="false">Guardar</string>
+    <string name="btn_ctrl_escolar" translatable="false">Control Escolar</string>
+    <string name="btn_prof" translatable="false">Profesores</string>
+    <string name="btn_alumno" translatable="false">Alumnos</string>
+    <string name="btn_materias" translatable="false">Materias</string>
+    <string name="btn_regresar" translatable="false">Regresar</string>
 
-    <string name="no_genero_ex">Debes seleccionar al menos un género</string>
-    <string name="datos_incompletos_ex">"Debes llenar todos los campos"</string>
-    <string name="default_text">:b</string>
+    <string name="no_genero_ex" translatable="false">Debes seleccionar al menos un género</string>
+    <string name="datos_incompletos_ex" translatable="false">"Debes llenar todos los campos"</string>
+    <string name="default_text" translatable="false">:b</string>
 
 </resources>

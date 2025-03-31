@@ -3,18 +3,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/control_escolar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/crema"
-    tools:context=".MainActivity">
+    android:background="@color/verdepastel"
+    tools:context=".ControlEscolar">
 
     <TextView
         android:id="@+id/titulo"
         android:visibility="visible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/titulo"
+        android:text="@string/btn_ctrl_escolar"
         android:textStyle="bold"
         android:textSize="64sp"
         android:textColor="@color/black"
@@ -39,31 +39,7 @@
         app:layout_constraintHorizontal_bias="0.5">
 
         <Button
-            android:id="@+id/btn_ctrl_escolar"
-            android:visibility="visible"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_ctrl_escolar"
-            android:textStyle="bold"
-            android:textSize="28sp"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/verdeclaro"
-            android:layout_marginBottom="24dp"/>
-
-        <Button
-            android:id="@+id/btn_profesores"
-            android:visibility="visible"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_prof"
-            android:textStyle="bold"
-            android:textSize="28sp"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/azulchillon"
-            android:layout_marginBottom="24dp"/>
-
-        <Button
-            android:id="@+id/btn_alumnos"
+            android:id="@+id/btn_menu_alumno"
             android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -71,7 +47,31 @@
             android:textStyle="bold"
             android:textSize="28sp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/violeta"/>
+            android:backgroundTint="@color/naranja"
+            android:layout_marginBottom="24dp"/>
+
+        <Button
+            android:id="@+id/btn_materias"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_materias"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/rosafuerte"
+            android:layout_marginBottom="24dp"/>
+
+        <Button
+            android:id="@+id/btn_back"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_regresar"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/dorado"/>
 
     </LinearLayout>
 

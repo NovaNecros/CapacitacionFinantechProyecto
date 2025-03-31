@@ -4,7 +4,7 @@ package com.proyectointegrador.proyecto_integrador
 
 import android.content.Context
 
-class Personita()
+class Alumno()
 {
     var id : Int = 0
     var nombre : String = ""

@@ -1,4 +1,4 @@
-/*Esta clase crea una actividad que sirve como menú principal*/
+/*Esta clase crea un menú para el control escolar*/
 
 package com.proyectointegrador.proyecto_integrador
 
@@ -14,46 +14,46 @@ import android.view.View
 
 import android.content.Intent
 
-class MainActivity : AppCompatActivity(), View.OnClickListener
+class ControlEscolar : AppCompatActivity(), View.OnClickListener
 {
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main))
+        setContentView(R.layout.activity_control_escolar)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.control_escolar))
         { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        val controlEscolar = findViewById<Button>(R.id.btn_ctrl_escolar)
-        val menuProfesores = findViewById<Button>(R.id.btn_profesores)
-        val menuAlumnos = findViewById<TextView>(R.id.btn_alumnos)
+        val alumnos = findViewById<Button>(R.id.btn_alumnos)
+        val materias = findViewById<Button>(R.id.btn_materias)
+        val regresar = findViewById<TextView>(R.id.btn_back)
 
-        controlEscolar.setOnClickListener(this)
-        menuProfesores.setOnClickListener(this)
-        menuAlumnos.setOnClickListener(this)
+        alumnos.setOnClickListener(this)
+        materias.setOnClickListener(this)
+        regresar.setOnClickListener(this)
     }
 
     override fun onClick(view : View?)
     {
         when(view?.id)
         {
-            R.id.btn_ctrl_escolar ->
+            R.id.btn_alumnos ->
             {
                 intent = Intent(applicationContext, ControlEscolar::class.java)
                 startActivity(intent)
             }
-            R.id.btn_profesores ->
+            R.id.btn_materias ->
             {
                 intent = Intent(applicationContext, ThirdActivity::class.java)
                 startActivity(intent)
             }
-            R.id.btn_alumnos ->
+            R.id.btn_back ->
             {
-                intent = Intent(applicationContext, FourthActivity::class.java)
+                intent = Intent(applicationContext, MainActivity::class.java)
                 startActivity(intent)
             }
         }

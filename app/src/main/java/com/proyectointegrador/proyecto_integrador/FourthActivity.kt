@@ -51,7 +51,7 @@ class FourthActivity : AppCompatActivity()
         listaPersonitas.setOnItemClickListener(
             { parent, view, pos, id ->
 
-                val selected = parent.getItemAtPosition(pos) as Personita
+                val selected = parent.getItemAtPosition(pos) as Alumno
 
                 val texto : String = "Seleccionaste a ${selected}"
                 val color : Int = resources.getColor(R.color.brat)
