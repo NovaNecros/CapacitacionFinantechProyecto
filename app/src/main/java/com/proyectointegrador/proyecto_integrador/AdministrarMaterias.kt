@@ -30,12 +30,15 @@ class AdministrarMaterias : AppCompatActivity()
         }
 
         val nuevo = findViewById<Button>(R.id.btn_nuevo)
+        val editar = findViewById<Button>(R.id.btn_edit)
         val borrar = findViewById<Button>(R.id.btn_borrar)
         val regresar = findViewById<TextView>(R.id.btn_back)
         val materias = findViewById<ListView>(R.id.materias)
         val dataManager = DataManager(applicationContext, resources.getString(R.string.db_materias))
-
         var selected = Materia()
+
+        editar.visibility = View.INVISIBLE
+        borrar.visibility = View.INVISIBLE
 
         try
         {
@@ -56,13 +59,20 @@ class AdministrarMaterias : AppCompatActivity()
         { parent, view, pos, id ->
 
             selected = parent.getItemAtPosition(pos) as Materia
-            val res : Int = dataManager.borrarMateria(selected)
+            editar.visibility = View.VISIBLE
+            borrar.visibility = View.VISIBLE
             val texto : String = "Materia ${selected} seleccionada"
             val color : Int = resources.getColor(R.color.brat)
             SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
         })
 
         nuevo.setOnClickListener(View.OnClickListener
+        {
+            intent = Intent(applicationContext, NuevaMateria::class.java)
+            startActivity(intent)
+        })
+
+        editar.setOnClickListener(View.OnClickListener
         {
             intent = Intent(applicationContext, NuevaMateria::class.java)
             startActivity(intent)

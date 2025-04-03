@@ -11,25 +11,31 @@
     <string name="creditos" translatable="false">Créditos</string>
     <string name="apellido_p" translatable="false">Apellido Paterno</string>
     <string name="apellido_m" translatable="false">Apellido Materno</string>
-    <string name="bdate" translatable="false">Fecha de Nacimiento</string>
-    <string name="gender" translatable="false">Género</string>
 
+    <string name="btn_fecha" translatable="false">Presiona para ingresar\nla fecha de nacimiento</string>
+    <string name="bdate" translatable="false">Fecha de Nacimiento</string>
+
+    <string name="gender" translatable="false">Género</string>
     <string name="male" translatable="false">Masculino</string>
     <string name="female" translatable="false">Femenino</string>
     <string name="nonbinary" translatable="false">No Binario</string>
     <string name="other_gender" translatable="false">Otro</string>
 
     <string name="save" translatable="false">Guardar</string>
+    <string name="btn_back" translatable="false">Regresar</string>
+    <string name="btn_clear" translatable="false">Limpiar datos</string>
+
     <string name="btn_ctrl_escolar" translatable="false">Control Escolar</string>
     <string name="btn_prof" translatable="false">Profesores</string>
     <string name="btn_alumno" translatable="false">Alumnos</string>
-    <string name="btn_fecha" translatable="false">Presiona para ingresar\ntu fecha de nacimiento</string>
     <string name="btn_materias" translatable="false">Materias</string>
+
     <string name="btn_new_alumno" translatable="false">Nuevo Alumno</string>
     <string name="btn_delete_alumno" translatable="false">Eliminar Alumno</string>
+
     <string name="btn_new_materia" translatable="false">Nueva Materia</string>
+    <string name="btn_edit_materia" translatable="false">Editar Materia</string>
     <string name="btn_delete_materia" translatable="false">Eliminar Materia</string>
-    <string name="btn_back" translatable="false">Regresar</string>
 
     <string name="gender_hint" translatable="false">Escribe el género"</string>
 

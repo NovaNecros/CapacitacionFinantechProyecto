@@ -36,7 +36,7 @@ class NuevoAlumno : AppCompatActivity()
             insets
         }
 
-        val botonGuardar = findViewById<Button>(R.id.boton_guardar)
+        val botonGuardar = findViewById<Button>(R.id.btn_save)
         val botonRegresar = findViewById<Button>(R.id.btn_back)
 
         val lectorNombre = findViewById<EditText>(R.id.lector_nombre)

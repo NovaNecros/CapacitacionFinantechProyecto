@@ -29,13 +29,13 @@
     <ListView
         android:id="@+id/materias"
         android:layout_width="375dp"
-        android:layout_height="250dp"
+        android:layout_height="200dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintVertical_bias="0.35"
         app:layout_constraintHorizontal_bias="0.5"/>
 
     <LinearLayout
@@ -60,7 +60,19 @@
             android:textSize="28sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/azulmetalico"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="12dp"/>
+
+        <Button
+            android:id="@+id/btn_edit"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_edit_materia"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/dorado"
+            android:layout_marginBottom="12dp"/>
 
         <Button
             android:id="@+id/btn_borrar"
@@ -72,7 +84,7 @@
             android:textSize="28sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/rojochillon"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="12dp"/>
 
         <Button
             android:id="@+id/btn_back"
@@ -84,6 +96,7 @@
             android:textSize="28sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/brat"/>
+
 
     </LinearLayout>
 

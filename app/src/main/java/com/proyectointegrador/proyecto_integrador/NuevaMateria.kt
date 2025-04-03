@@ -30,7 +30,8 @@ class NuevaMateria : AppCompatActivity()
             insets
         }
 
-        val botonGuardar = findViewById<Button>(R.id.boton_guardar)
+        val botonGuardar = findViewById<Button>(R.id.btn_save)
+        val botonLimpiar = findViewById<Button>(R.id.btn_clear)
         val botonRegresar = findViewById<Button>(R.id.btn_back)
 
         val lectorNombre = findViewById<EditText>(R.id.lector_nombre)
@@ -71,6 +72,12 @@ class NuevaMateria : AppCompatActivity()
             }
 
             SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
+        })
+
+        botonLimpiar.setOnClickListener(View.OnClickListener
+        {
+            lectorNombre.text.clear()
+            lectorCreditos.text.clear()
         })
 
         botonRegresar.setOnClickListener(View.OnClickListener

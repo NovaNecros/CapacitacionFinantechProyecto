@@ -84,8 +84,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.95"
         app:layout_constraintHorizontal_bias="0.5">
+
         <Button
-            android:id="@+id/boton_guardar"
+            android:id="@+id/btn_save"
             android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -93,6 +94,17 @@
             android:text="@string/save"
             android:textSize="28sp"
             android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/btn_clear"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/rojopastel"
+            android:text="@string/btn_clear"
+            android:textSize="28sp"
+            android:textColor="@color/white"/>
+
         <Button
             android:id="@+id/btn_back"
             android:visibility="visible"
