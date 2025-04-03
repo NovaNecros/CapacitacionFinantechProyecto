@@ -25,6 +25,7 @@
 
     <string name="btn_save" translatable="false">Guardar</string>
     <string name="btn_update" translatable="false">Actualizar</string>
+    <string name="btn_cancel" translatable="false">Cancelar</string>"
     <string name="btn_back" translatable="false">Regresar</string>
     <string name="btn_clear" translatable="false">Limpiar datos</string>
 

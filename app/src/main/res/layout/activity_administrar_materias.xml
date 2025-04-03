@@ -71,7 +71,7 @@
             android:textStyle="bold"
             android:textSize="28sp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/dorado"
+            android:backgroundTint="@color/moradofuerte"
             android:layout_marginBottom="12dp"/>
 
         <Button
