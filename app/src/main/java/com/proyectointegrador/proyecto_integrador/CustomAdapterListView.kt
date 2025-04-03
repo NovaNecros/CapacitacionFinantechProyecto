@@ -8,9 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 
-class CustomAdapter<T>(context : Context, private val data : Array<T>, val colores : Array<Int>)
+class CustomAdapterListView<T>(context : Context, private val data : Array<T>, val colores : Array<Int>)
     : ArrayAdapter<T>(context, R.layout.item_listview, R.id.textViewItem, data)
 {
 

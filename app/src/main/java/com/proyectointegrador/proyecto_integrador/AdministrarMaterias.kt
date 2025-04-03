@@ -44,7 +44,7 @@ class AdministrarMaterias : AppCompatActivity()
         {
             val colores = arrayOf(resources.getColor(R.color.naranja), resources.getColor(R.color.naranjafuerte))
             val materiasToDisplay = dataManager.leerMaterias()
-            val adaptador = CustomAdapter<Materia>(applicationContext, materiasToDisplay, colores)
+            val adaptador = CustomAdapterListView<Materia>(applicationContext, materiasToDisplay, colores)
             materias.adapter = adaptador
             materias.isVerticalScrollBarEnabled = true
         }

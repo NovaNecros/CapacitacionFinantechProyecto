@@ -41,7 +41,7 @@ class AdministrarAlumnos : AppCompatActivity()
         {
             val colores = arrayOf(resources.getColor(R.color.dorado), resources.getColor(R.color.amarillosuave))
             val alumnosToDisplay = dataManager.leerAlumnos()
-            val adaptador = CustomAdapter<Alumno>(applicationContext, alumnosToDisplay, colores)
+            val adaptador = CustomAdapterListView<Alumno>(applicationContext, alumnosToDisplay, colores)
             alumnos.adapter = adaptador
             alumnos.isVerticalScrollBarEnabled = true
         }

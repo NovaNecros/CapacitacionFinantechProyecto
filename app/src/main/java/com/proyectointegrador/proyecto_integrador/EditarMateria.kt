@@ -1,5 +1,5 @@
-/*Esta clase crea una actividad en donde se pueden agregar
-materias a la base de datos */
+/*Esta clase crea una actividad en donde se pueden editar
+materias existentes en la base de datos */
 
 package com.proyectointegrador.proyecto_integrador
 
