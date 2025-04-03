@@ -17,7 +17,7 @@ class DBHelper(val contexto : Context?, val dbName : String?) : SQLiteOpenHelper
     {
         if(dbName == contexto!!.resources.getString(R.string.db_alumnos))
         {
-            val comandoSQL : String = "CREATE TABLE " + tableName + "(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+            val comandoSQL : String = "CREATE TABLE ${tableName}(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
                     "nombre VARCHAR(100), apellidoP VARCHAR(100), apellidoM VARCHAR(100), " +
                     "fecha VARCHAR(20), genero VARCHAR(100))"
 
@@ -25,7 +25,7 @@ class DBHelper(val contexto : Context?, val dbName : String?) : SQLiteOpenHelper
         }
         else if(dbName == contexto.resources.getString(R.string.db_materias))
         {
-            val comandoSQL : String = "CREATE TABLE " + tableName + "(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+            val comandoSQL : String = "CREATE TABLE ${tableName}(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
                     "clave VARCHAR(20), nombre VARCHAR(100), creditos VARCHAR(10))"
 
             db.execSQL(comandoSQL)
@@ -36,7 +36,7 @@ class DBHelper(val contexto : Context?, val dbName : String?) : SQLiteOpenHelper
 
     override fun onUpgrade(db : SQLiteDatabase, oldVersion : Int, newVersion : Int)
     {
-        val comandoSQL : String = "DROP TABLE IF EXISTS " + tableName
+        val comandoSQL : String = "DROP TABLE IF EXISTS ${tableName}"
         db.execSQL(comandoSQL)
         onCreate(db)
     }

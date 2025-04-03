@@ -9,7 +9,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class DataManager(val contexto : Context, dbName : String)
+class DataManager(contexto : Context, dbName : String)
 {
     val dbHelper  : SQLiteOpenHelper = DBHelper(contexto, dbName)
     var baseDatos : SQLiteDatabase = dbHelper.writableDatabase
@@ -149,8 +149,7 @@ class DataManager(val contexto : Context, dbName : String)
     //asigna el primer ID disponible al crear un nuevo alumno
     fun getNewAlumnoID() : Int
     {
-        val cursor = baseDatos.rawQuery("SELECT matricula FROM" + tableName +
-                " ORDER BY id", null)
+        val cursor = baseDatos.rawQuery("SELECT id FROM ${tableName} ORDER BY id", null)
 
         if(cursor.count == 0)
         {
@@ -179,8 +178,7 @@ class DataManager(val contexto : Context, dbName : String)
     //asigna el primer ID disponible al crear una nueva materia
     fun getNewMateriaID() : Int
     {
-        val cursor = baseDatos.rawQuery("SELECT id FROM" + tableName +
-                " ORDER BY id", null)
+        val cursor = baseDatos.rawQuery("SELECT id FROM ${tableName} ORDER BY id", null)
 
         if(cursor.count == 0)
         {
