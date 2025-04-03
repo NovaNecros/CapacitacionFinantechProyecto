@@ -89,7 +89,7 @@ class DataManager(val contexto : Context, dbName : String)
 
             materia.clave = cursor.getInt(0)
             materia.nombre = cursor.getString(1)
-            materia.creditos = cursor.getInt(2)
+            materia.creditos = cursor.getString(2)
 
             materias.add(materia)
         }

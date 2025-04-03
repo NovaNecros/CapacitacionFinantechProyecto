@@ -8,6 +8,7 @@
     <string name="table_materias" translatable="false">materias</string>
 
     <string name="name" translatable="false">Nombre</string>
+    <string name="creditos" translatable="false">Créditos</string>
     <string name="apellido_p" translatable="false">Apellido Paterno</string>
     <string name="apellido_m" translatable="false">Apellido Materno</string>
     <string name="bdate" translatable="false">Fecha de Nacimiento</string>
@@ -32,11 +33,14 @@
 
     <string name="gender_hint" translatable="false">Escribe el género"</string>
 
-    <string name="no_nombre_alumno_ex" translatable="false">Debes escribir tu nombre</string>
-    <string name="no_apellido_p_ex" translatable="false">Debes escribir tu apellido paterno</string>
-    <string name="no_cum_ex" translatable="false">Debes indicar tu fecha de nacimiento</string>
-    <string name="no_genero_ex" translatable="false">Debes seleccionar al menos un género</string>
+    <string name="no_nombre_alumno_ex" translatable="false">Escribe el nombre</string>
+    <string name="no_apellido_p_ex" translatable="false">Escribe el apellido paterno</string>
+    <string name="no_cum_ex" translatable="false">Indica la fecha de nacimiento</string>
+    <string name="no_genero_ex" translatable="false">Selecciona al menos un género</string>
     <string name="eliminar_ex" translatable="false">Error al eliminar a "</string>
+
+    <string name="no_nombre_materia_ex" translatable="false">Escribe el nombre</string>
+    <string name="no_creditos_ex" translatable="false">Indica el número de créditos</string>
 
     <string name="default_text" translatable="false">:b</string>
 

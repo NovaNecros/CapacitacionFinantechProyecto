@@ -8,9 +8,9 @@ class Materia()
 {
     var clave : Int = 0
     var nombre : String = ""
-    var creditos : Int = 0
+    var creditos : String = ""
 
-    constructor(contexto : Context, clave : Int, nombre : String, creditos : Int)
+    constructor(contexto : Context, nombre : String, creditos : String)
             : this()
     {
         this.clave = DataManager(contexto, contexto.resources.getString(R.string.db_materias)).getNewAlumnoID()

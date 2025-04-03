@@ -12,13 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.CheckBox
 import android.content.Intent
-import com.google.android.material.snackbar.Snackbar
-import android.app.DatePickerDialog
-import androidx.core.view.isGone
-
-import java.util.Calendar
 
 class NuevaMateria : AppCompatActivity()
 {
@@ -66,23 +60,14 @@ class NuevaMateria : AppCompatActivity()
             }
             else
             {
-                val fulanito = Alumno(applicationContext, nombre, apellidoP, apellidoM, generosUsuario.toString(), cumFecha)
-                dataManager!!.guardarAlumno(fulanito)
+                val materia = Materia(applicationContext, nombre, creditos)
+                dataManager!!.guardarMateria(materia)
 
-                texto = "Alumno ${fulanito} guardado"
+                texto = "Materia ${materia} guardada"
                 color = resources.getColor(R.color.brat)
 
                 lectorNombre.text.clear()
-                lectorApellidoP.text.clear()
-                lectorApellidoM.text.clear()
-                fechaDisplay.text.clear()
-                fechaDisplay.visibility = View.GONE
-
-                for(genero in generos)
-                {
-                    genero.isChecked = false
-                }
-                otroGenero.text.clear()
+                lectorCreditos.text.clear()
             }
 
             SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
