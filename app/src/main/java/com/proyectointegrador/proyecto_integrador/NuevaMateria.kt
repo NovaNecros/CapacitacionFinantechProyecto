@@ -75,7 +75,7 @@ class NuevaMateria : AppCompatActivity()
 
         botonRegresar.setOnClickListener(View.OnClickListener
         {
-            val intent = Intent(this, AdministrarAlumnos::class.java)
+            val intent = Intent(this, AdministrarMaterias::class.java)
             startActivity(intent)
         })
     }
