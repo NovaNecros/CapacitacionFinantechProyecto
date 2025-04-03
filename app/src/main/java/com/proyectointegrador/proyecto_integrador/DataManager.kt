@@ -11,8 +11,11 @@ import android.database.sqlite.SQLiteOpenHelper
 
 class DataManager(val contexto : Context, dbName : String)
 {
-    val dbHelper : SQLiteOpenHelper = DBHelper(contexto, dbName)
+    val dbHelper  : SQLiteOpenHelper = DBHelper(contexto, dbName)
     var baseDatos : SQLiteDatabase = dbHelper.writableDatabase
+    val tableName : String = if(dbName == contexto.resources.getString(R.string.db_alumnos)) { contexto.resources.getString(R.string.table_alumnos) }
+    else if(dbName == contexto.resources.getString(R.string.db_materias)) { contexto.resources.getString(R.string.table_materias) }
+    else { "" }
 
     fun abrir()
     {
@@ -32,6 +35,7 @@ class DataManager(val contexto : Context, dbName : String)
     fun guardarAlumno(alumno : Alumno)
     {
         val valores = ContentValues()
+
         valores.put("id", alumno.matricula)
         valores.put("nombre", alumno.nombre)
         valores.put("apellidoP", alumno.apellidoP)
@@ -39,24 +43,25 @@ class DataManager(val contexto : Context, dbName : String)
         valores.put("fecha", alumno.fecha)
         valores.put("genero", alumno.generos.toString())
 
-        baseDatos.insert(contexto.resources.getString(R.string.table_alumnos), null, valores)
+        baseDatos.insert(tableName, null, valores)
     }
 
     fun guardarMateria(materia : Materia)
     {
         val valores = ContentValues()
+
         valores.put("id", materia.clave)
         valores.put("nombre", materia.nombre)
         valores.put("creditos", materia.creditos)
 
-        baseDatos.insert(contexto.resources.getString(R.string.table_materias), null, valores)
+        baseDatos.insert(tableName, null, valores)
     }
 
     fun leerAlumnos() : Array<Alumno>
     {
         val alumnos = mutableListOf<Alumno>()
         val columnas = arrayOf("id", "nombre", "apellidoP", "apellidoM", "genero", "fecha")
-        val cursor : Cursor = baseDatos.query(contexto.resources.getString(R.string.table_alumnos), columnas, null, null, null, null, null)
+        val cursor : Cursor = baseDatos.query(tableName, columnas, null, null, null, null, null)
 
         while(cursor.moveToNext())
         {
@@ -77,11 +82,29 @@ class DataManager(val contexto : Context, dbName : String)
         return alumnos.toTypedArray()
     }
 
+    fun leerAlumno(id : Int) : Alumno
+    {
+        val alumno = Alumno()
+        val columnas = arrayOf("id", "nombre", "apellidoP", "apellidoM", "genero", "fecha")
+        val cursor : Cursor = baseDatos.query(tableName, columnas, "id = ?", arrayOf(id.toString()), null, null, null)
+
+        cursor.moveToFirst()
+        alumno.matricula = cursor.getInt(0)
+        alumno.nombre = cursor.getString(1)
+        alumno.apellidoP = cursor.getString(2)
+        alumno.apellidoM = cursor.getString(3)
+        alumno.generos = cursor.getString(4)
+        alumno.fecha = cursor.getString(5)
+        cursor.close()
+
+        return alumno
+    }
+
     fun leerMaterias() : Array<Materia>
     {
         val materias = mutableListOf<Materia>()
         val columnas = arrayOf("id", "clave", "nombre", "creditos")
-        val cursor : Cursor = baseDatos.query(contexto.resources.getString(R.string.table_materias), columnas, null, null, null, null, null)
+        val cursor : Cursor = baseDatos.query(tableName, columnas, null, null, null, null, null)
 
         while(cursor.moveToNext())
         {
@@ -100,16 +123,32 @@ class DataManager(val contexto : Context, dbName : String)
         return materias.toTypedArray()
     }
 
+    fun leerMateria(id : Int) : Materia
+    {
+        val materia = Materia()
+        val columnas = arrayOf("id", "clave", "nombre", "creditos")
+        val cursor : Cursor = baseDatos.query(tableName, columnas, "id = ?", arrayOf(id.toString()), null, null, null)
+
+        cursor.moveToFirst()
+        materia.id = cursor.getInt(0)
+        materia.clave = cursor.getString(1)
+        materia.nombre = cursor.getString(2)
+        materia.creditos = cursor.getString(3)
+        cursor.close()
+
+        return materia
+    }
+
     fun borrarAlumno(alumno : Alumno)
-    : Int = baseDatos.delete(contexto.resources.getString(R.string.table_alumnos), "id = ?", arrayOf(alumno.matricula.toString()))
+    : Int = baseDatos.delete(tableName, "id = ?", arrayOf(alumno.matricula.toString()))
 
     fun borrarMateria(materia : Materia)
-    : Int = baseDatos.delete(contexto.resources.getString(R.string.table_materias), "id = ?", arrayOf(materia.clave.toString()))
+    : Int = baseDatos.delete(tableName, "id = ?", arrayOf(materia.clave.toString()))
 
     //asigna el primer ID disponible al crear un nuevo alumno
     fun getNewAlumnoID() : Int
     {
-        val cursor = baseDatos.rawQuery("SELECT matricula FROM" + contexto.resources.getString(R.string.table_alumnos) +
+        val cursor = baseDatos.rawQuery("SELECT matricula FROM" + tableName +
                 " ORDER BY id", null)
 
         if(cursor.count == 0)
@@ -139,7 +178,7 @@ class DataManager(val contexto : Context, dbName : String)
     //asigna el primer ID disponible al crear una nueva materia
     fun getNewMateriaID() : Int
     {
-        val cursor = baseDatos.rawQuery("SELECT id FROM" + contexto.resources.getString(R.string.table_materias) +
+        val cursor = baseDatos.rawQuery("SELECT id FROM" + tableName +
                 " ORDER BY id", null)
 
         if(cursor.count == 0)

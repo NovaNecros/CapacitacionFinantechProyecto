@@ -13,6 +13,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.content.Intent
+import android.widget.TextView
 
 class NuevaMateria : AppCompatActivity()
 {
@@ -36,8 +37,21 @@ class NuevaMateria : AppCompatActivity()
 
         val lectorNombre = findViewById<EditText>(R.id.lector_nombre)
         val lectorCreditos = findViewById<EditText>(R.id.lector_creditos)
+        val lectorClave = findViewById<EditText>(R.id.lector_clave)
 
         dataManager = DataManager(this, resources.getString(R.string.db_materias))
+
+        val bundle = intent.extras
+        val data = bundle?.getString("idParaEditar")
+
+        if(data != null)
+        {
+            val materia = dataManager!!.leerMateria(data.toInt())
+            lectorClave.setText(materia.id.toString())
+            lectorNombre.setText(materia.nombre)
+            lectorCreditos.setText(materia.creditos)
+            botonGuardar.text = resources.getString(R.string.btn_update)
+        }
 
         botonGuardar.setOnClickListener(View.OnClickListener
         {

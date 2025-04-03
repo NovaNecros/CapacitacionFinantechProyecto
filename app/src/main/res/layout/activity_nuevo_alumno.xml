@@ -205,7 +205,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/brat"
-            android:text="@string/save"
+            android:text="@string/btn_save"
             android:textSize="28sp"
             android:textColor="@color/white"/>
         <Button

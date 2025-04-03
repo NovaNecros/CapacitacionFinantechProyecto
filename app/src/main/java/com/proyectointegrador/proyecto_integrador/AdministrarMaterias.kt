@@ -74,9 +74,9 @@ class AdministrarMaterias : AppCompatActivity()
 
         editar.setOnClickListener(View.OnClickListener
         {
-            var data = eText.text.toString()
+            var data = selected.id.toString()
             val intent = Intent(applicationContext, NuevaMateria::class.java)
-            intent.putExtra("userdata", data) //manda el input a la segunda actividad
+            intent.putExtra("idParaEditar", data) //manda el input a la segunda actividad
             startActivity(intent)
         })
 

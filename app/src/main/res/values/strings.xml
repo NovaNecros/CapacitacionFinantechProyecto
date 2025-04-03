@@ -9,6 +9,8 @@
 
     <string name="name" translatable="false">Nombre</string>
     <string name="creditos" translatable="false">Créditos</string>
+    <string name="key" translatable="false">Clave</string>
+
     <string name="apellido_p" translatable="false">Apellido Paterno</string>
     <string name="apellido_m" translatable="false">Apellido Materno</string>
 
@@ -21,7 +23,8 @@
     <string name="nonbinary" translatable="false">No Binario</string>
     <string name="other_gender" translatable="false">Otro</string>
 
-    <string name="save" translatable="false">Guardar</string>
+    <string name="btn_save" translatable="false">Guardar</string>
+    <string name="btn_update" translatable="false">Actualizar</string>
     <string name="btn_back" translatable="false">Regresar</string>
     <string name="btn_clear" translatable="false">Limpiar datos</string>
 
