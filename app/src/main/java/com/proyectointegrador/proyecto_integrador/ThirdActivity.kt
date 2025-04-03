@@ -1,4 +1,4 @@
-/*Esta clase crea una actividad en donde se pueden btn_menu_prof
+/*Esta clase crea una actividad en donde se pueden borrar
 personitas de la base de datos*/
 
 package com.proyectointegrador.proyecto_integrador

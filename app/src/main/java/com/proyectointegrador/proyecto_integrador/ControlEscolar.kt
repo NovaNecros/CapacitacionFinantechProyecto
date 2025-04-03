@@ -48,7 +48,7 @@ class ControlEscolar : AppCompatActivity(), View.OnClickListener
             }
             R.id.btn_materias ->
             {
-                intent = Intent(applicationContext, ::class.java)
+                intent = Intent(applicationContext, AdministrarMaterias::class.java)
                 startActivity(intent)
             }
             R.id.btn_back ->

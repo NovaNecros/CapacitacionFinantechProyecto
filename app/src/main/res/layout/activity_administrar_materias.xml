@@ -3,18 +3,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/administrar_alumnos"
+    android:id="@+id/administrar_materias"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/naranjapastel"
-    tools:context=".AdministrarAlumnos">
+    android:background="@color/rosapastel"
+    tools:context=".AdministrarMaterias">
 
     <TextView
         android:id="@+id/titulo"
         android:visibility="visible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btn_alumno"
+        android:text="@string/btn_materias"
         android:textStyle="bold"
         android:textSize="64sp"
         android:textColor="@color/black"
@@ -27,7 +27,7 @@
         app:layout_constraintHorizontal_bias="0.5"/>
 
     <ListView
-        android:id="@+id/lista_alumnos"
+        android:id="@+id/materias"
         android:layout_width="375dp"
         android:layout_height="250dp"
         android:orientation="vertical"
@@ -55,11 +55,11 @@
             android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/btn_new_alumno"
+            android:text="@string/btn_new_materia"
             android:textStyle="bold"
             android:textSize="28sp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/moradofuerte"
+            android:backgroundTint="@color/azulmetalico"
             android:layout_marginBottom="24dp"/>
 
         <Button
@@ -67,7 +67,7 @@
             android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/btn_delete_alumno"
+            android:text="@string/btn_delete_materia"
             android:textStyle="bold"
             android:textSize="28sp"
             android:textColor="@color/white"

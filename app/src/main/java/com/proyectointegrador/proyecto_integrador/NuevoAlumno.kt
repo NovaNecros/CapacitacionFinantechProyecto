@@ -15,7 +15,10 @@ import android.widget.EditText
 import android.widget.CheckBox
 import android.content.Intent
 import com.google.android.material.snackbar.Snackbar
+import android.app.DatePickerDialog
 import androidx.core.view.isGone
+
+import java.util.Calendar
 
 class NuevoAlumno : AppCompatActivity()
 {
@@ -35,11 +38,23 @@ class NuevoAlumno : AppCompatActivity()
 
         val botonGuardar = findViewById<Button>(R.id.boton_guardar)
         val botonRegresar = findViewById<Button>(R.id.btn_back)
+
         val lectorNombre = findViewById<EditText>(R.id.lector_nombre)
         val lectorApellidoP = findViewById<EditText>(R.id.lector_apellido_p)
         val lectorApellidoM = findViewById<EditText>(R.id.lector_apellido_m)
+
+        val fechaDisplay = findViewById<EditText>(R.id.cumple)
         val botonFecha = findViewById<Button>(R.id.fecha_calendario)
-        val fechaCumple = findViewById<EditText>(R.id.cumple)
+        val calendario = Calendar.getInstance()
+        val year = calendario.get(Calendar.YEAR)
+        val mes  = calendario.get(Calendar.YEAR)
+        val dia  = calendario.get(Calendar.YEAR)
+        val lectorFecha = DatePickerDialog(applicationContext,
+            { view, selectedYear, selectedMonth, selectedDay ->
+                val fecha = "${selectedDay}/${selectedMonth+1}/${selectedYear}"
+                fechaDisplay.setText(fecha)
+            }, year, mes, dia)
+
         val masculino = findViewById<CheckBox>(R.id.masculino)
         val femenino = findViewById<CheckBox>(R.id.femenino)
         //se incluyen las opciones no-binario y otro y se utilizan
@@ -47,10 +62,10 @@ class NuevoAlumno : AppCompatActivity()
         val nobinario = findViewById<CheckBox>(R.id.nobinario)
         val otroGenero = findViewById<EditText>(R.id.lector_otro_genero)
         val botonGenero = findViewById<Button>(R.id.btn_otro_genero)
-        val calendarioView = null //TODO
 
         dataManager = DataManager(this)
-        fechaCumple.visibility = View.GONE
+        fechaDisplay.visibility = View.GONE
+        otroGenero.visibility = View.GONE
 
         botonGenero.setOnClickListener(View.OnClickListener
         {
@@ -65,13 +80,19 @@ class NuevoAlumno : AppCompatActivity()
             }
         })
 
+        botonFecha.setOnClickListener(View.OnClickListener
+        {
+            lectorFecha.show()
+            fechaDisplay.visibility = View.VISIBLE
+        })
+
         botonGuardar.setOnClickListener(View.OnClickListener
         {
             val nombre : String = lectorNombre.getText().toString()
             val apellidoP : String = lectorApellidoP.getText().toString()
             val apellidoM : String = lectorApellidoM.getText().toString()
             val generosUsuario = mutableListOf<String>()
-            val cumFecha : String = "" //TODO
+            val cumFecha : String = fechaDisplay.getText().toString()
             val generos = arrayOf(masculino, femenino, nobinario)
 
             val view = findViewById<View>(android.R.id.content)
@@ -121,7 +142,8 @@ class NuevoAlumno : AppCompatActivity()
                 lectorNombre.text.clear()
                 lectorApellidoP.text.clear()
                 lectorApellidoM.text.clear()
-                //calendarioView.date = System.currentTimeMillis() //TODO
+                fechaDisplay.text.clear()
+                fechaDisplay.visibility = View.GONE
 
                 for(genero in generos)
                 {

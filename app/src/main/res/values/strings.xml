@@ -20,8 +20,10 @@
     <string name="btn_alumno" translatable="false">Alumnos</string>
     <string name="btn_fecha" translatable="false">Presiona para ingresar\ntu fecha de nacimiento</string>
     <string name="btn_materias" translatable="false">Materias</string>
-    <string name="btn_new" translatable="false">Nuevo Alumno</string>
-    <string name="btn_delete" translatable="false">Eliminar Alumno</string>
+    <string name="btn_new_alumno" translatable="false">Nuevo Alumno</string>
+    <string name="btn_delete_alumno" translatable="false">Eliminar Alumno</string>
+    <string name="btn_new_materia" translatable="false">Nueva Materia</string>
+    <string name="btn_delete_materia" translatable="false">Eliminar Materia</string>
     <string name="btn_back" translatable="false">Regresar</string>
 
     <string name="gender_hint" translatable="false">Escribe el género"</string>
@@ -29,8 +31,9 @@
     <string name="no_nombre_ex" translatable="false">Debes escribir tu nombre</string>
     <string name="no_apellido_p_ex" translatable="false">Debes escribir tu apellido paterno</string>
     <string name="no_cum_ex" translatable="false">Debes indicar tu fecha de nacimiento</string>
-    <string name="no_genero_ex" translatable="false">Debes seleccionar al menos un género</string>
-    <string name="datos_incompletos_ex" translatable="false">"Debes llenar todos los campos"</string>
+    <string name="no_genero_ex" translatable="false">Debes seleccionar al menos un género</string>¿
+    <string name="eliminar_ex" translatable="false">Error al eliminar a "</string>
+
     <string name="default_text" translatable="false">:b</string>
 
 </resources>

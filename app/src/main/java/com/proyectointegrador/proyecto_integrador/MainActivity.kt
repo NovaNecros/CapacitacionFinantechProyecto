@@ -48,13 +48,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
             }
             R.id.btn_profesores ->
             {
-                intent = Intent(applicationContext, ::class.java)
-                startActivity(intent)
+                //TODO
+                //intent = Intent(applicationContext, ::class.java)
+                //startActivity(intent)
             }
             R.id.btn_alumnos ->
             {
-                intent = Intent(applicationContext, ::class.java)
-                startActivity(intent)
+                //TODO
+                //intent = Intent(applicationContext, ::class.java)
+                //startActivity(intent)
             }
         }
     }
