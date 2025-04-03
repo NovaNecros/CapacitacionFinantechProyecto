@@ -43,13 +43,16 @@ class NuevaMateria : AppCompatActivity()
 
         val bundle = intent.extras
         val data = bundle?.getString("idParaEditar")
+        var materia = Materia()
 
         if(data != null)
         {
-            val materia = dataManager!!.leerMateria(data.toInt())
+            materia = dataManager!!.leerMateria(data.toInt())
+
             lectorClave.setText(materia.id.toString())
             lectorNombre.setText(materia.nombre)
             lectorCreditos.setText(materia.creditos)
+
             botonGuardar.text = resources.getString(R.string.btn_update)
         }
 
@@ -63,8 +66,13 @@ class NuevaMateria : AppCompatActivity()
             var texto : String = ""
             var color : Int = 0
 
-            //se valida que se haya introducido el nombre y numero de creditos de la materia
-            if(nombre.isEmpty())
+            //se valida que se haya introducido la clave, el nombre y número de creditos de la materia
+            if(clave.isEmpty())
+            {
+                texto = resources.getString(R.string.no_clave_ex)
+                color = resources.getColor(R.color.rojosangre)
+            }
+            else if(nombre.isEmpty())
             {
                 texto = resources.getString(R.string.no_nombre_materia_ex)
                 color = resources.getColor(R.color.rojosangre)
@@ -76,11 +84,17 @@ class NuevaMateria : AppCompatActivity()
             }
             else
             {
-                val materia = Materia(applicationContext, clave, nombre, creditos)
-                dataManager!!.guardarMateria(materia)
-
                 texto = "Materia ${materia} guardada"
                 color = resources.getColor(R.color.brat)
+
+                if(data != null)
+                {
+                    texto = "Materia ${materia} actualizada"
+                    dataManager!!.borrarMateria(materia)
+                }
+
+                materia = Materia(applicationContext, clave, nombre, creditos)
+                dataManager!!.guardarMateria(materia)
 
                 lectorNombre.text.clear()
                 lectorCreditos.text.clear()

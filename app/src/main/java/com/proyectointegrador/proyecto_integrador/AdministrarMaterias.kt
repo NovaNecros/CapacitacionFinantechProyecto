@@ -42,8 +42,8 @@ class AdministrarMaterias : AppCompatActivity()
 
         try
         {
-            val materiasToDisplay = dataManager.leerAlumnos()
-            val adaptador = CustomAdapter(applicationContext, materiasToDisplay)
+            val materiasToDisplay = dataManager.leerMaterias()
+            val adaptador = CustomAdapter<Materia>(applicationContext, materiasToDisplay)
             materias.adapter = adaptador
             materias.isVerticalScrollBarEnabled = true
         }

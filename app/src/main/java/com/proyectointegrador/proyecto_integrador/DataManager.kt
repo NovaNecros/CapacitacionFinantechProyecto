@@ -36,7 +36,7 @@ class DataManager(val contexto : Context, dbName : String)
     {
         val valores = ContentValues()
 
-        valores.put("id", alumno.matricula)
+        valores.put("id", alumno.id)
         valores.put("nombre", alumno.nombre)
         valores.put("apellidoP", alumno.apellidoP)
         valores.put("apellidoM", alumno.apellidoM)
@@ -50,7 +50,8 @@ class DataManager(val contexto : Context, dbName : String)
     {
         val valores = ContentValues()
 
-        valores.put("id", materia.clave)
+        valores.put("id", materia.id)
+        valores.put("clave", materia.clave)
         valores.put("nombre", materia.nombre)
         valores.put("creditos", materia.creditos)
 
@@ -67,7 +68,7 @@ class DataManager(val contexto : Context, dbName : String)
         {
             val alumno = Alumno()
 
-            alumno.matricula = cursor.getInt(0)
+            alumno.id = cursor.getInt(0)
             alumno.nombre = cursor.getString(1)
             alumno.apellidoP = cursor.getString(2)
             alumno.apellidoM = cursor.getString(3)
@@ -89,7 +90,7 @@ class DataManager(val contexto : Context, dbName : String)
         val cursor : Cursor = baseDatos.query(tableName, columnas, "id = ?", arrayOf(id.toString()), null, null, null)
 
         cursor.moveToFirst()
-        alumno.matricula = cursor.getInt(0)
+        alumno.id = cursor.getInt(0)
         alumno.nombre = cursor.getString(1)
         alumno.apellidoP = cursor.getString(2)
         alumno.apellidoM = cursor.getString(3)
@@ -140,10 +141,10 @@ class DataManager(val contexto : Context, dbName : String)
     }
 
     fun borrarAlumno(alumno : Alumno)
-    : Int = baseDatos.delete(tableName, "id = ?", arrayOf(alumno.matricula.toString()))
+    : Int = baseDatos.delete(tableName, "id = ?", arrayOf(alumno.id.toString()))
 
     fun borrarMateria(materia : Materia)
-    : Int = baseDatos.delete(tableName, "id = ?", arrayOf(materia.clave.toString()))
+    : Int = baseDatos.delete(tableName, "id = ?", arrayOf(materia.id.toString()))
 
     //asigna el primer ID disponible al crear un nuevo alumno
     fun getNewAlumnoID() : Int

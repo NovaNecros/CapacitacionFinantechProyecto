@@ -6,7 +6,7 @@ import android.content.Context
 
 class Alumno()
 {
-    var matricula : Int = 0
+    var id : Int = 0
     var nombre : String = ""
     var apellidoP : String = ""
     var apellidoM : String = ""
@@ -16,7 +16,7 @@ class Alumno()
     constructor(contexto : Context, nombre : String, apellidoP : String, apellidoM : String, generos : String, fecha : String)
             : this()
     {
-        this.matricula = DataManager(contexto, contexto.resources.getString(R.string.db_alumnos)).getNewAlumnoID()
+        this.id = DataManager(contexto, contexto.resources.getString(R.string.db_alumnos)).getNewAlumnoID()
         this.nombre = nombre
         this.apellidoP = apellidoP
         this.apellidoM = apellidoM

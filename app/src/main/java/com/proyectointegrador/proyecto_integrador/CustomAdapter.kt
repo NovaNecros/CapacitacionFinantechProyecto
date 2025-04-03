@@ -10,8 +10,8 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 
-class CustomAdapter(context : Context, private val data : Array<Alumno>
-) : ArrayAdapter<Alumno>(context, R.layout.item_listview, R.id.textViewItem, data)
+class CustomAdapter<T>(context : Context, private val data : Array<T>
+) : ArrayAdapter<T>(context, R.layout.item_listview, R.id.textViewItem, data)
 {
 
     override fun getView(pos : Int, convertView : View?, parent : ViewGroup) : View
