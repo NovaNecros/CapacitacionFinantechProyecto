@@ -32,6 +32,7 @@
     <string name="btn_prof" translatable="false">Profesores</string>
     <string name="btn_alumno" translatable="false">Alumnos</string>
     <string name="btn_materias" translatable="false">Materias</string>
+    <string name="btn_calificar" translatable="false">Calificar</string>"
 
     <string name="btn_new_alumno" translatable="false">Nuevo Alumno</string>
     <string name="btn_delete_alumno" translatable="false">Eliminar Alumno</string>

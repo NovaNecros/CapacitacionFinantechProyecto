@@ -39,13 +39,13 @@ class NuevaMateria : AppCompatActivity()
         val lectorCreditos = findViewById<EditText>(R.id.lector_creditos)
         val lectorClave = findViewById<EditText>(R.id.lector_clave)
 
-        dataManager = DataManager(this, resources.getString(R.string.db_materias))
+        dataManager = DataManager(applicationContext, resources.getString(R.string.db_materias))
 
         val bundle = intent.extras
         val data = bundle?.getString("idParaEditar")
         var materia = Materia()
 
-        if(data != null)
+        /*if(data != null)
         {
             materia = dataManager!!.leerMateria(data.toInt())
 
@@ -54,7 +54,7 @@ class NuevaMateria : AppCompatActivity()
             lectorCreditos.setText(materia.creditos)
 
             botonGuardar.text = resources.getString(R.string.btn_update)
-        }
+        }*/
 
         botonGuardar.setOnClickListener(View.OnClickListener
         {
@@ -87,15 +87,16 @@ class NuevaMateria : AppCompatActivity()
                 texto = "Materia ${materia} guardada"
                 color = resources.getColor(R.color.brat)
 
-                if(data != null)
+                /*if(data != null)
                 {
                     texto = "Materia ${materia} actualizada"
                     dataManager!!.borrarMateria(materia)
-                }
+                }*/
 
                 materia = Materia(applicationContext, clave, nombre, creditos)
                 dataManager!!.guardarMateria(materia)
 
+                lectorClave.text.clear()
                 lectorNombre.text.clear()
                 lectorCreditos.text.clear()
             }
@@ -105,6 +106,7 @@ class NuevaMateria : AppCompatActivity()
 
         botonLimpiar.setOnClickListener(View.OnClickListener
         {
+            lectorClave.text.clear()
             lectorNombre.text.clear()
             lectorCreditos.text.clear()
         })

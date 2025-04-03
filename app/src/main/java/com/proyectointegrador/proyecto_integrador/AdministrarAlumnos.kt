@@ -40,7 +40,7 @@ class AdministrarAlumnos : AppCompatActivity()
         try
         {
             val alumnosToDisplay = dataManager.leerAlumnos()
-            val adaptador = CustomAdapter(applicationContext, alumnosToDisplay)
+            val adaptador = CustomAdapter<Alumno>(applicationContext, alumnosToDisplay)
             alumnos.adapter = adaptador
             alumnos.isVerticalScrollBarEnabled = true
         }
