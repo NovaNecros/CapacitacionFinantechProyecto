@@ -41,6 +41,7 @@ class NuevaMateria : AppCompatActivity()
 
         botonGuardar.setOnClickListener(View.OnClickListener
         {
+            val clave : String = lectorClave.getText().toString()
             val nombre : String = lectorNombre.getText().toString()
             val creditos : String = lectorCreditos.getText().toString()
 
@@ -61,7 +62,7 @@ class NuevaMateria : AppCompatActivity()
             }
             else
             {
-                val materia = Materia(applicationContext, nombre, creditos)
+                val materia = Materia(applicationContext, clave, nombre, creditos)
                 dataManager!!.guardarMateria(materia)
 
                 texto = "Materia ${materia} guardada"

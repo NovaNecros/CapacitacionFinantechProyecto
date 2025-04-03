@@ -80,16 +80,17 @@ class DataManager(val contexto : Context, dbName : String)
     fun leerMaterias() : Array<Materia>
     {
         val materias = mutableListOf<Materia>()
-        val columnas = arrayOf("id", "nombre", "creditos")
+        val columnas = arrayOf("id", "clave", "nombre", "creditos")
         val cursor : Cursor = baseDatos.query(contexto.resources.getString(R.string.table_materias), columnas, null, null, null, null, null)
 
         while(cursor.moveToNext())
         {
             val materia = Materia()
 
-            materia.clave = cursor.getInt(0)
-            materia.nombre = cursor.getString(1)
-            materia.creditos = cursor.getString(2)
+            materia.id = cursor.getInt(0)
+            materia.clave = cursor.getString(1)
+            materia.nombre = cursor.getString(2)
+            materia.creditos = cursor.getString(3)
 
             materias.add(materia)
         }
@@ -138,7 +139,7 @@ class DataManager(val contexto : Context, dbName : String)
     //asigna el primer ID disponible al crear una nueva materia
     fun getNewMateriaID() : Int
     {
-        val cursor = baseDatos.rawQuery("SELECT clave FROM" + contexto.resources.getString(R.string.table_materias) +
+        val cursor = baseDatos.rawQuery("SELECT id FROM" + contexto.resources.getString(R.string.table_materias) +
                 " ORDER BY id", null)
 
         if(cursor.count == 0)
