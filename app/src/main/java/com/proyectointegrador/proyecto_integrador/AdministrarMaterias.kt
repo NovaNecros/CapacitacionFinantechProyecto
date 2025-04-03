@@ -42,8 +42,9 @@ class AdministrarMaterias : AppCompatActivity()
 
         try
         {
+            val colores = arrayOf(resources.getColor(R.color.naranja), resources.getColor(R.color.naranjafuerte))
             val materiasToDisplay = dataManager.leerMaterias()
-            val adaptador = CustomAdapter<Materia>(applicationContext, materiasToDisplay)
+            val adaptador = CustomAdapter<Materia>(applicationContext, materiasToDisplay, colores)
             materias.adapter = adaptador
             materias.isVerticalScrollBarEnabled = true
         }
@@ -75,7 +76,7 @@ class AdministrarMaterias : AppCompatActivity()
         editar.setOnClickListener(View.OnClickListener
         {
             var data = selected.id.toString()
-            val intent = Intent(applicationContext, NuevaMateria::class.java)
+            val intent = Intent(applicationContext, EditarMateria::class.java)
             intent.putExtra("idParaEditar", data) //manda el input a la segunda actividad
             startActivity(intent)
         })

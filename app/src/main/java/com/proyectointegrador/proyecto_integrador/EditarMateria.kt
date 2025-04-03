@@ -45,7 +45,7 @@ class EditarMateria : AppCompatActivity()
         val data = bundle?.getString("idParaEditar")
         var materia = dataManager!!.leerMateria(data!!.toInt())
 
-        lectorClave.setText(materia.id.toString())
+        lectorClave.setText(materia.clave.toString())
         lectorNombre.setText(materia.nombre)
         lectorCreditos.setText(materia.creditos)
 

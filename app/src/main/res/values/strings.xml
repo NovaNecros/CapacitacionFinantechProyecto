@@ -10,6 +10,7 @@
     <string name="name" translatable="false">Nombre</string>
     <string name="creditos" translatable="false">Créditos</string>
     <string name="key" translatable="false">Clave</string>
+    <string name="calif" translatable="false">Calificación</string>
 
     <string name="apellido_p" translatable="false">Apellido Paterno</string>
     <string name="apellido_m" translatable="false">Apellido Materno</string>
@@ -22,6 +23,7 @@
     <string name="female" translatable="false">Femenino</string>
     <string name="nonbinary" translatable="false">No Binario</string>
     <string name="other_gender" translatable="false">Otro</string>
+    <string name="gender_hint" translatable="false">Escribe el género"</string>
 
     <string name="btn_save" translatable="false">Guardar</string>
     <string name="btn_update" translatable="false">Actualizar</string>
@@ -41,8 +43,6 @@
     <string name="btn_new_materia" translatable="false">Nueva Materia</string>
     <string name="btn_edit_materia" translatable="false">Editar Materia</string>
     <string name="btn_delete_materia" translatable="false">Eliminar Materia</string>
-
-    <string name="gender_hint" translatable="false">Escribe el género"</string>
 
     <string name="no_nombre_alumno_ex" translatable="false">Escribe el nombre</string>
     <string name="no_apellido_p_ex" translatable="false">Escribe el apellido paterno</string>

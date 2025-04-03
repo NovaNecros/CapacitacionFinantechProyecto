@@ -70,11 +70,11 @@ class NuevaMateria : AppCompatActivity()
             }
             else
             {
-                texto = "Materia ${materia} guardada"
-                color = resources.getColor(R.color.brat)
-
                 materia = Materia(applicationContext, clave, nombre, creditos)
                 dataManager!!.guardarMateria(materia)
+
+                texto = "Materia ${materia} guardada"
+                color = resources.getColor(R.color.brat)
 
                 lectorClave.text.clear()
                 lectorNombre.text.clear()
