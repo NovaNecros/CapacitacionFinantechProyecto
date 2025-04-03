@@ -33,13 +33,13 @@ class AdministrarMaterias : AppCompatActivity()
         val borrar = findViewById<Button>(R.id.btn_borrar)
         val regresar = findViewById<TextView>(R.id.btn_back)
         val materias = findViewById<ListView>(R.id.materias)
-        val dataManager = DataManager(applicationContext)
+        val dataManager = DataManager(applicationContext, resources.getString(R.string.db_materias))
 
-        var selected = Alumno()
+        var selected = Materia()
 
         try
         {
-            val materiasToDisplay = dataManager.leerPersonitas()
+            val materiasToDisplay = dataManager.leerAlumnos()
             val adaptador = CustomAdapter(applicationContext, materiasToDisplay)
             materias.adapter = adaptador
             materias.isVerticalScrollBarEnabled = true
@@ -55,53 +55,37 @@ class AdministrarMaterias : AppCompatActivity()
         materias.setOnItemClickListener(
         { parent, view, pos, id ->
 
-                selected = parent.getItemAtPosition(pos) as Alumno
-                val res : Int = dataManager.borrarPersonita(selected)
-                if(res>0)
-                {
-                    val texto : String = "Alumno ${selected} eliminado"
-                    val color : Int = resources.getColor(R.color.brat)
-                    SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
-
-                    //reinicia la actividad para actualizar la lista
-                    intent = Intent(applicationContext, ThirdActivity::class.java)
-                    startActivity(intent)
-                }
-                else
-                {
-                    //inidca el ID que tiene la personita que no se pudo eliminar
-                    //para ayudar a rastrear el error a la implemntación de la base de datos
-                    val texto : String = resources.getString(R.string.eliminar_ex) + "\nID=${res} - ${selected}"
-                    val color : Int = resources.getColor(R.color.rojosangre)
-                    SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
-                }
-            })
+            selected = parent.getItemAtPosition(pos) as Materia
+            val res : Int = dataManager.borrarMateria(selected)
+            val texto : String = "Materia ${selected} seleccionada"
+            val color : Int = resources.getColor(R.color.brat)
+            SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
+        })
 
         nuevo.setOnClickListener(View.OnClickListener
         {
-            //TODO
-            //intent = Intent(applicationContext, NuevaMateria::class.java)
-            //startActivity(intent)
+            intent = Intent(applicationContext, NuevaMateria::class.java)
+            startActivity(intent)
         })
 
         borrar.setOnClickListener(View.OnClickListener
         { view ->
-            val res : Int = dataManager.borrarPersonita(selected)
+            val res : Int = dataManager.borrarMateria(selected)
             if(res>0)
             {
-                val texto : String = "Alumno ${selected} eliminada"
+                val texto : String = "Materia ${selected} eliminada"
                 val color : Int = resources.getColor(R.color.brat)
                 SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
 
                 //reinicia la actividad para actualizar la lista
-                intent = Intent(applicationContext, ThirdActivity::class.java)
+                intent = Intent(applicationContext, AdministrarMaterias::class.java)
                 startActivity(intent)
             }
             else
             {
-                //inidca el ID que tiene la personita que no se pudo eliminar
+                //inidca el ID que tiene la materia que no se pudo eliminar
                 //para ayudar a rastrear el error a la implementación de la base de datos
-                val texto : String = "Error al eliminar.\nID=${res}"
+                val texto : String = "Error al eliminar\nID=${res}"
                 val color : Int = resources.getColor(R.color.rojosangre)
                 SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
             }

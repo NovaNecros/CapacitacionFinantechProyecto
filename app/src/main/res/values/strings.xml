@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name" translatable="false">SQLite_en_Android</string>
-    <string name="db_name" translatable="false">personitas.db</string>
     <string name="titulo" translatable="false">Módulo Escolar</string>
+
+    <string name="db_alumnos" translatable="false">alumnos.db</string>
+    <string name="table_alumnos" translatable="false">alumnos</string>"
+    <string name="db_materias" translatable="false">materias.db</string>
+    <string name="table_materias" translatable="false">materias</string>
 
     <string name="name" translatable="false">Nombre</string>
     <string name="apellido_p" translatable="false">Apellido Paterno</string>
@@ -28,10 +32,10 @@
 
     <string name="gender_hint" translatable="false">Escribe el género"</string>
 
-    <string name="no_nombre_ex" translatable="false">Debes escribir tu nombre</string>
+    <string name="no_nombre_alumno_ex" translatable="false">Debes escribir tu nombre</string>
     <string name="no_apellido_p_ex" translatable="false">Debes escribir tu apellido paterno</string>
     <string name="no_cum_ex" translatable="false">Debes indicar tu fecha de nacimiento</string>
-    <string name="no_genero_ex" translatable="false">Debes seleccionar al menos un género</string>¿
+    <string name="no_genero_ex" translatable="false">Debes seleccionar al menos un género</string>
     <string name="eliminar_ex" translatable="false">Error al eliminar a "</string>
 
     <string name="default_text" translatable="false">:b</string>

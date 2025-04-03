@@ -63,7 +63,7 @@ class NuevoAlumno : AppCompatActivity()
         val otroGenero = findViewById<EditText>(R.id.lector_otro_genero)
         val botonGenero = findViewById<Button>(R.id.btn_otro_genero)
 
-        dataManager = DataManager(this)
+        dataManager = DataManager(this, resources.getString(R.string.db_alumnos))
         fechaDisplay.visibility = View.GONE
         otroGenero.visibility = View.GONE
 
@@ -103,7 +103,7 @@ class NuevoAlumno : AppCompatActivity()
             //excepto posiblemente el apellido materno
             if(nombre.isEmpty())
             {
-                texto = resources.getString(R.string.no_nombre_ex)
+                texto = resources.getString(R.string.no_nombre_alumno_ex)
                 color = resources.getColor(R.color.rojosangre)
             }
             else if(apellidoP.isEmpty())
@@ -134,7 +134,7 @@ class NuevoAlumno : AppCompatActivity()
             else
             {
                 val fulanito = Alumno(applicationContext, nombre, apellidoP, apellidoM, generosUsuario.toString(), cumFecha)
-                dataManager!!.guardarPersonita(fulanito)
+                dataManager!!.guardarAlumno(fulanito)
 
                 texto = "Alumno ${fulanito} guardado"
                 color = resources.getColor(R.color.brat)

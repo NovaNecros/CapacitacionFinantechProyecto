@@ -33,13 +33,13 @@ class AdministrarAlumnos : AppCompatActivity()
         val borrar = findViewById<Button>(R.id.btn_borrar)
         val regresar = findViewById<TextView>(R.id.btn_back)
         val alumnos = findViewById<ListView>(R.id.lista_alumnos)
-        val dataManager = DataManager(applicationContext)
+        val dataManager = DataManager(applicationContext, resources.getString(R.string.db_alumnos))
 
         var selected = Alumno()
 
         try
         {
-            val alumnosToDisplay = dataManager.leerPersonitas()
+            val alumnosToDisplay = dataManager.leerAlumnos()
             val adaptador = CustomAdapter(applicationContext, alumnosToDisplay)
             alumnos.adapter = adaptador
             alumnos.isVerticalScrollBarEnabled = true
@@ -56,25 +56,9 @@ class AdministrarAlumnos : AppCompatActivity()
         { parent, view, pos, id ->
 
             selected = parent.getItemAtPosition(pos) as Alumno
-            val res : Int = dataManager.borrarPersonita(selected)
-            if(res>0)
-            {
-                val texto : String = "Alumno ${selected} eliminado"
-                val color : Int = resources.getColor(R.color.brat)
-                SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
-
-                //reinicia la actividad para actualizar la lista
-                intent = Intent(applicationContext, ThirdActivity::class.java)
-                startActivity(intent)
-            }
-            else
-            {
-                //inidca el ID que tiene la personita que no se pudo eliminar
-                //para ayudar a rastrear el error a la implemntación de la base de datos
-                val texto : String = resources.getString(R.string.eliminar_ex) + "\nID=${res} - ${selected}"
-                val color : Int = resources.getColor(R.color.rojosangre)
-                SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
-            }
+            val texto : String = "Alumno ${selected} seleccionado"
+            val color : Int = resources.getColor(R.color.brat)
+            SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
         })
 
         nuevo.setOnClickListener(View.OnClickListener
@@ -85,22 +69,22 @@ class AdministrarAlumnos : AppCompatActivity()
 
         borrar.setOnClickListener(View.OnClickListener
         { view ->
-            val res : Int = dataManager.borrarPersonita(selected)
+            val res : Int = dataManager.borrarAlumno(selected)
             if(res>0)
             {
-                val texto : String = "Alumno ${selected} eliminada"
+                val texto : String = "Alumno ${selected} eliminado"
                 val color : Int = resources.getColor(R.color.brat)
                 SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
 
                 //reinicia la actividad para actualizar la lista
-                intent = Intent(applicationContext, ThirdActivity::class.java)
+                intent = Intent(applicationContext, AdministrarAlumnos::class.java)
                 startActivity(intent)
             }
             else
             {
-                //inidca el ID que tiene la personita que no se pudo eliminar
+                //inidca el ID que tiene el alumno que no se pudo eliminar
                 //para ayudar a rastrear el error a la implemntación de la base de datos
-                val texto : String = "Error al eliminar.\nID=${res}"
+                val texto : String = "Error al eliminar\nID=${res}"
                 val color : Int = resources.getColor(R.color.rojosangre)
                 SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
             }
