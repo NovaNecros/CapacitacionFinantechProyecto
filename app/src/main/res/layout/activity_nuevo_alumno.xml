@@ -50,6 +50,22 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/matricula"
+                    android:visibility="visible"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/matricula"
+                    android:textStyle="bold"
+                    android:textSize="18sp"/>
+                <EditText
+                    android:id="@+id/lector_matricula"
+                    android:visibility="visible"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="text"/>
+
+                <TextView
                     android:id="@+id/nombre"
                     android:visibility="visible"
                     android:layout_width="match_parent"
@@ -105,26 +121,33 @@
                     android:text="@string/bdate"
                     android:textStyle="bold"
                     android:textSize="18sp" />
-                <EditText
-                    android:id="@+id/cumple"
-                    android:visibility="visible"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:textStyle="normal"
-                    android:textSize="14sp"
-                    android:layout_marginBottom="24dp"
-                    android:focusable="false"/>
-                <Button
-                    android:id="@+id/fecha_calendario"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/azulmetalico"
-                    android:text="@string/btn_fecha"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:visibility="visible"
-                    android:layout_marginBottom="24dp"/>
+                    android:orientation="horizontal"
+                    android:gravity="start||center_vertical"
+                    android:layout_marginBottom="12dp">
+
+                    <EditText
+                        android:id="@+id/cumple"
+                        android:visibility="visible"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:ems="6"
+                        android:textStyle="normal"
+                        android:textSize="14sp"
+                        android:focusable="false"/>
+                    <Button
+                        android:id="@+id/fecha_calendario"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/azulmetalico"
+                        android:text="@string/btn_fecha"
+                        android:textSize="11sp"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:visibility="visible"/>
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/genero"

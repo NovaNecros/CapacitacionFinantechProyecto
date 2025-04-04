@@ -39,6 +39,7 @@ class NuevoAlumno : AppCompatActivity()
         val botonGuardar = findViewById<Button>(R.id.btn_save)
         val botonRegresar = findViewById<Button>(R.id.btn_back)
 
+        val lectorMatricula = findViewById<EditText>(R.id.lector_matricula)
         val lectorNombre = findViewById<EditText>(R.id.lector_nombre)
         val lectorApellidoP = findViewById<EditText>(R.id.lector_apellido_p)
         val lectorApellidoM = findViewById<EditText>(R.id.lector_apellido_m)
@@ -88,6 +89,7 @@ class NuevoAlumno : AppCompatActivity()
 
         botonGuardar.setOnClickListener(View.OnClickListener
         {
+            val matricula : String = lectorMatricula.getText().toString()
             val nombre : String = lectorNombre.getText().toString()
             val apellidoP : String = lectorApellidoP.getText().toString()
             val apellidoM : String = lectorApellidoM.getText().toString()
@@ -101,7 +103,12 @@ class NuevoAlumno : AppCompatActivity()
 
             //se valida que el usuario haya llenado los datos solicitados
             //excepto posiblemente el apellido materno
-            if(nombre.isEmpty())
+            if(matricula.isEmpty())
+            {
+                texto = resources.getString(R.string.no_matricula_ex)
+                color = resources.getColor(R.color.rojosangre)
+            }
+            else if(nombre.isEmpty())
             {
                 texto = resources.getString(R.string.no_nombre_alumno_ex)
                 color = resources.getColor(R.color.rojosangre)
@@ -133,7 +140,7 @@ class NuevoAlumno : AppCompatActivity()
             }
             else
             {
-                val fulanito = Alumno(applicationContext, nombre, apellidoP, apellidoM, generosUsuario.toString(), cumFecha)
+                val fulanito = Alumno(applicationContext, matricula, nombre, apellidoP, apellidoM, generosUsuario.toString(), cumFecha)
                 dataManager!!.guardarAlumno(fulanito)
 
                 texto = "Alumno ${fulanito} guardado"

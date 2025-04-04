@@ -3,10 +3,11 @@
     <string name="titulo" translatable="false">Módulo Escolar</string>
 
     <string name="db_alumnos" translatable="false">alumnos.db</string>
-    <string name="table_alumnos" translatable="false">alumnos</string>"
+    <string name="table_alumnos" translatable="false">alumnos</string>
     <string name="db_materias" translatable="false">materias.db</string>
     <string name="table_materias" translatable="false">materias</string>
 
+    <string name="matricula" translatable="false">Matrícula</string>
     <string name="name" translatable="false">Nombre</string>
     <string name="creditos" translatable="false">Créditos</string>
     <string name="key" translatable="false">Clave</string>
@@ -23,11 +24,11 @@
     <string name="female" translatable="false">Femenino</string>
     <string name="nonbinary" translatable="false">No Binario</string>
     <string name="other_gender" translatable="false">Otro</string>
-    <string name="gender_hint" translatable="false">Escribe el género"</string>
+    <string name="gender_hint" translatable="false">Escribe el género</string>
 
     <string name="btn_save" translatable="false">Guardar</string>
     <string name="btn_update" translatable="false">Actualizar</string>
-    <string name="btn_cancel" translatable="false">Cancelar</string>"
+    <string name="btn_cancel" translatable="false">Cancelar</string>
     <string name="btn_back" translatable="false">Regresar</string>
     <string name="btn_clear" translatable="false">Limpiar datos</string>
 
@@ -35,7 +36,9 @@
     <string name="btn_prof" translatable="false">Profesores</string>
     <string name="btn_alumno" translatable="false">Alumnos</string>
     <string name="btn_materias" translatable="false">Materias</string>
-    <string name="btn_calificar" translatable="false">Calificar</string>"
+    <string name="btn_calificar" translatable="false">Calificar</string>
+
+    <string name="btn_matricula" translatable="false">Confirmar Matrícula</string>
 
     <string name="btn_new_alumno" translatable="false">Nuevo Alumno</string>
     <string name="btn_delete_alumno" translatable="false">Eliminar Alumno</string>
@@ -44,11 +47,12 @@
     <string name="btn_edit_materia" translatable="false">Editar Materia</string>
     <string name="btn_delete_materia" translatable="false">Eliminar Materia</string>
 
+    <string name="no_matricula_ex" translatable="false">Escribe la matrícula</string>
     <string name="no_nombre_alumno_ex" translatable="false">Escribe el nombre</string>
     <string name="no_apellido_p_ex" translatable="false">Escribe el apellido paterno</string>
     <string name="no_cum_ex" translatable="false">Indica la fecha de nacimiento</string>
     <string name="no_genero_ex" translatable="false">Selecciona al menos un género</string>
-    <string name="eliminar_ex" translatable="false">Error al eliminar a "</string>
+    <string name="eliminar_ex" translatable="false">Error al eliminar a </string>
 
     <string name="no_clave_ex" translatable="false">Escribe la clave</string>
     <string name="no_nombre_materia_ex" translatable="false">Escribe el nombre</string>
