@@ -43,9 +43,9 @@ class MenuProfesores : AppCompatActivity()
             val dataManager = DataManager(applicationContext, resources.getString(R.string.db_materias))
             val colores = arrayOf(resources.getColor(R.color.azulchillon), resources.getColor(R.color.azulmetalico))
             val materiasToDisplay = dataManager.leerMaterias()
-            val adaptador = CustomAdapterSpinner<Materia>(applicationContext, materiasToDisplay, colores)
-            materias.adapter = adaptador
-            materias.isVerticalScrollBarEnabled = true
+            //val adaptador = CustomAdapterSpinner<Materia>(applicationContext, materiasToDisplay, colores)
+            //materias.adapter = adaptador
+            //materias.isVerticalScrollBarEnabled = true
         }
         catch(ex : Exception)
         {
@@ -55,7 +55,7 @@ class MenuProfesores : AppCompatActivity()
             SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
         }
 
-        materias.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
+        /*materias.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
         {
             override fun onItemSelected(parent : AdapterView<*>, view : View?, pos : Int, id : Long)
             {
@@ -116,7 +116,7 @@ class MenuProfesores : AppCompatActivity()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) { }
-        }
+        }*/
 
         calificar.setOnClickListener(View.OnClickListener
         {
