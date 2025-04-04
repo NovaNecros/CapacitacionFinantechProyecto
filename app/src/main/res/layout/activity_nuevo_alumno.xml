@@ -121,32 +121,15 @@
                     android:text="@string/bdate"
                     android:textStyle="bold"
                     android:textSize="18sp" />
-
-                <LinearLayout
+                <EditText
+                    android:id="@+id/lector_fecha"
+                    android:visibility="visible"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:id="@+id/cumple"
-                        android:visibility="visible"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:ems="6"
-                        android:textStyle="normal"
-                        android:textSize="14sp"
-                        android:focusable="false"/>
-                    <Button
-                        android:id="@+id/fecha_calendario"
-                        android:layout_width="180dp"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/azulmetalico"
-                        android:text="@string/btn_fecha"
-                        android:textSize="11sp"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:visibility="visible"/>
-                </LinearLayout>
+                    android:ems="10"
+                    android:textStyle="normal"
+                    android:textSize="14sp"
+                    android:inputType="text"/>
 
                 <TextView
                     android:id="@+id/genero"
@@ -227,8 +210,17 @@
             android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/brat"
+            android:backgroundTint="@color/verdebosque"
             android:text="@string/btn_save"
+            android:textSize="28sp"
+            android:textColor="@color/white"/>
+        <Button
+            android:id="@+id/btn_clear"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/rojopastel"
+            android:text="@string/btn_clear"
             android:textSize="28sp"
             android:textColor="@color/white"/>
         <Button

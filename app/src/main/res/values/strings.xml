@@ -30,7 +30,7 @@
     <string name="btn_update" translatable="false">Actualizar</string>
     <string name="btn_cancel" translatable="false">Cancelar</string>
     <string name="btn_back" translatable="false">Regresar</string>
-    <string name="btn_clear" translatable="false">Limpiar datos</string>
+    <string name="btn_clear" translatable="false">Limpiar Datos</string>
 
     <string name="btn_ctrl_escolar" translatable="false">Control Escolar</string>
     <string name="btn_prof" translatable="false">Profesores</string>

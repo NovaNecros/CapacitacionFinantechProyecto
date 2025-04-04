@@ -15,7 +15,6 @@ import android.widget.EditText
 import android.widget.CheckBox
 import android.content.Intent
 import com.google.android.material.snackbar.Snackbar
-import android.app.DatePickerDialog
 import androidx.core.view.isGone
 
 import java.util.Calendar
@@ -37,6 +36,7 @@ class NuevoAlumno : AppCompatActivity()
         }
 
         val botonGuardar = findViewById<Button>(R.id.btn_save)
+        val botonLimpiar = findViewById<Button>(R.id.btn_clear)
         val botonRegresar = findViewById<Button>(R.id.btn_back)
 
         val lectorMatricula = findViewById<EditText>(R.id.lector_matricula)
@@ -44,28 +44,22 @@ class NuevoAlumno : AppCompatActivity()
         val lectorApellidoP = findViewById<EditText>(R.id.lector_apellido_p)
         val lectorApellidoM = findViewById<EditText>(R.id.lector_apellido_m)
 
-        val fechaDisplay = findViewById<EditText>(R.id.cumple)
-        val botonFecha = findViewById<Button>(R.id.fecha_calendario)
         val calendario = Calendar.getInstance()
         val year = calendario.get(Calendar.YEAR)
         val mes  = calendario.get(Calendar.YEAR)
         val dia  = calendario.get(Calendar.YEAR)
-        val lectorFecha = DatePickerDialog(applicationContext,
-            { view, selectedYear, selectedMonth, selectedDay ->
-                val fecha = "${selectedDay}/${selectedMonth+1}/${selectedYear}"
-                fechaDisplay.setText(fecha)
-            }, year, mes, dia)
+        val lectorFecha = findViewById<EditText>(R.id.lector_fecha)
 
         val masculino = findViewById<CheckBox>(R.id.masculino)
         val femenino = findViewById<CheckBox>(R.id.femenino)
         //se incluyen las opciones no-binario y otro y se utilizan
         //checkboxes en vez de radiobuttons para fines de inclusividad
         val nobinario = findViewById<CheckBox>(R.id.nobinario)
+        val generos = arrayOf(masculino, femenino, nobinario)
         val otroGenero = findViewById<EditText>(R.id.lector_otro_genero)
         val botonGenero = findViewById<Button>(R.id.btn_otro_genero)
 
         dataManager = DataManager(this, resources.getString(R.string.db_alumnos))
-        fechaDisplay.visibility = View.GONE
         otroGenero.visibility = View.GONE
 
         botonGenero.setOnClickListener(View.OnClickListener
@@ -81,12 +75,6 @@ class NuevoAlumno : AppCompatActivity()
             }
         })
 
-        botonFecha.setOnClickListener(View.OnClickListener
-        {
-            lectorFecha.show()
-            fechaDisplay.visibility = View.VISIBLE
-        })
-
         botonGuardar.setOnClickListener(View.OnClickListener
         {
             val matricula : String = lectorMatricula.getText().toString()
@@ -94,12 +82,23 @@ class NuevoAlumno : AppCompatActivity()
             val apellidoP : String = lectorApellidoP.getText().toString()
             val apellidoM : String = lectorApellidoM.getText().toString()
             val generosUsuario = mutableListOf<String>()
-            val cumFecha : String = fechaDisplay.getText().toString()
-            val generos = arrayOf(masculino, femenino, nobinario)
+            val cumFecha : String = lectorFecha.getText().toString()
 
             val view = findViewById<View>(android.R.id.content)
             var texto : String = ""
             var color : Int = 0
+
+            for(genero in generos)
+            {
+                if(genero.isChecked)
+                {
+                    generosUsuario.add(genero.text.toString())
+                }
+            }
+            if(otroGenero.text.toString().isNotEmpty())
+            {
+                generosUsuario.add(otroGenero.text.toString())
+            }
 
             //se valida que el usuario haya llenado los datos solicitados
             //excepto posiblemente el apellido materno
@@ -123,20 +122,10 @@ class NuevoAlumno : AppCompatActivity()
                 texto = resources.getString(R.string.no_cum_ex)
                 color = resources.getColor(R.color.rojosangre)
             }
-            else for(genero in generos)
-            {
-                if(genero.isChecked)
-                {
-                    generosUsuario.add(genero.text.toString())
-                }
-            }
-            if(otroGenero.text.toString().isNotEmpty())
-            {
-                generosUsuario.add(otroGenero.text.toString())
-            }
             else if(generosUsuario.isEmpty()) //valida que se haya seleccionado un género
             {
-                Snackbar.make(it, resources.getString(R.string.no_genero_ex), Snackbar.LENGTH_SHORT).show()
+                texto = resources.getString(R.string.no_genero_ex)
+                color = resources.getColor(R.color.rojosangre)
             }
             else
             {
@@ -146,20 +135,37 @@ class NuevoAlumno : AppCompatActivity()
                 texto = "Alumno ${fulanito} guardado"
                 color = resources.getColor(R.color.brat)
 
+                lectorMatricula.text.clear()
                 lectorNombre.text.clear()
                 lectorApellidoP.text.clear()
                 lectorApellidoM.text.clear()
-                fechaDisplay.text.clear()
-                fechaDisplay.visibility = View.GONE
+                lectorFecha.text.clear()
 
                 for(genero in generos)
                 {
                     genero.isChecked = false
                 }
                 otroGenero.text.clear()
+                otroGenero.visibility = View.GONE
             }
 
             SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
+        })
+
+        botonLimpiar.setOnClickListener(View.OnClickListener
+        {
+            lectorMatricula.text.clear()
+            lectorNombre.text.clear()
+            lectorApellidoP.text.clear()
+            lectorApellidoM.text.clear()
+            lectorFecha.text.clear()
+
+            for(genero in generos)
+            {
+                genero.isChecked = false
+            }
+            otroGenero.text.clear()
+            otroGenero.visibility = View.GONE
         })
 
         botonRegresar.setOnClickListener(View.OnClickListener
