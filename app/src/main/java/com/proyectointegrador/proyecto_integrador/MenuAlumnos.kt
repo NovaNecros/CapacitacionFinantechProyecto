@@ -34,7 +34,8 @@ class MenuAlumnos : AppCompatActivity()
 
         ingresar.setOnClickListener(View.OnClickListener
         {
-            //TODO
+            intent = Intent(applicationContext, PerfilAcademico::class.java)
+            startActivity(intent)
         })
 
         regresar.setOnClickListener(View.OnClickListener

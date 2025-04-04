@@ -121,12 +121,11 @@
                     android:text="@string/bdate"
                     android:textStyle="bold"
                     android:textSize="18sp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="start||center_vertical"
-                    android:layout_marginBottom="12dp">
+                    android:orientation="horizontal">
 
                     <EditText
                         android:id="@+id/cumple"
@@ -157,6 +156,7 @@
                     android:text="@string/gender"
                     android:textStyle="bold"
                     android:textSize="18sp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginBottom="24dp"/>
                 <CheckBox
                     android:id="@+id/masculino"

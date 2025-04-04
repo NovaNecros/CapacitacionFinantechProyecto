@@ -53,9 +53,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
             }
             R.id.btn_alumnos ->
             {
-                //TODO
-                //intent = Intent(applicationContext, MenuAlumnos::class.java)
-                //startActivity(intent)
+                intent = Intent(applicationContext, MenuAlumnos::class.java)
+                startActivity(intent)
             }
         }
     }

@@ -15,14 +15,14 @@ import android.widget.Spinner
 import android.view.View
 import android.content.Intent
 
-class MenuProfesores : AppCompatActivity()
+class PerfilAcademico : AppCompatActivity()
 {
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_menu_profesores)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.menu_profesores))
+        setContentView(R.layout.activity_perfil_academico)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.perfil_academico))
         { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -37,6 +37,9 @@ class MenuProfesores : AppCompatActivity()
 
         val materias = findViewById<Spinner>(R.id.spinner_materias)
         val alumnos = findViewById<Spinner>(R.id.spinner_alumnos)
+
+        alumnos.visibility = View.INVISIBLE
+        calificar.visibility = View.INVISIBLE
 
         try
         {
