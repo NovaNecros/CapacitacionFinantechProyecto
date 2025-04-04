@@ -58,6 +58,7 @@
     <string name="no_nombre_materia_ex" translatable="false">Escribe el nombre</string>
     <string name="no_creditos_ex" translatable="false">Indica el número de créditos</string>
 
+    <string name="spinner_default" translatable="false">Selecciona...</string>
     <string name="default_text" translatable="false">:b</string>
 
 </resources>

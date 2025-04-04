@@ -9,6 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 import android.widget.TextView
+import android.widget.EditText
 import android.widget.Button
 import android.widget.AdapterView
 import android.widget.Spinner
@@ -29,6 +30,9 @@ class MenuProfesores : AppCompatActivity()
             insets
         }
 
+        val calificacion = findViewById<TextView>(R.id.calificacion)
+        val lectorCalificacion = findViewById<EditText>(R.id.lector_calificacion)
+
         val calificar = findViewById<Button>(R.id.btn_calificar)
         val regresar = findViewById<TextView>(R.id.btn_back)
 
@@ -38,58 +42,52 @@ class MenuProfesores : AppCompatActivity()
         val materias = findViewById<Spinner>(R.id.spinner_materias)
         val alumnos = findViewById<Spinner>(R.id.spinner_alumnos)
 
-        try
-        {
-            val dataManager = DataManager(applicationContext, resources.getString(R.string.db_materias))
-            val colores = arrayOf(resources.getColor(R.color.azulchillon), resources.getColor(R.color.azulmetalico))
-            val materiasToDisplay = dataManager.leerMaterias()
-            //val adaptador = CustomAdapterSpinner<Materia>(applicationContext, materiasToDisplay, colores)
-            //materias.adapter = adaptador
-            //materias.isVerticalScrollBarEnabled = true
-        }
-        catch(ex : Exception)
-        {
-            val view = findViewById<View>(android.R.id.content)
-            val texto : String = ex.message.toString()
-            val color : Int = resources.getColor(R.color.rojosangre)
-            SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
-        }
+        calificacion.visibility = View.INVISIBLE
+        lectorCalificacion.visibility = View.INVISIBLE
+        alumnos.visibility = View.INVISIBLE
+        calificar.visibility = View.INVISIBLE
 
-        /*materias.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
+        val dataManager = DataManager(applicationContext, resources.getString(R.string.db_materias))
+        val colores = arrayOf(resources.getColor(R.color.azulchillon), resources.getColor(R.color.azulmetalico))
+        val materiasToDisplay = dataManager.leerMaterias().toMutableList()
+
+        val adaptadorMaterias = CustomAdapterSpinner<Materia>(applicationContext, R.layout.item_spinner, materiasToDisplay, colores)
+        adaptadorMaterias.setDropDownViewResource(R.layout.item_dropdown)
+        materias.adapter = adaptadorMaterias
+        materias.isVerticalScrollBarEnabled = true
+
+        materias.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
         {
             override fun onItemSelected(parent : AdapterView<*>, view : View?, pos : Int, id : Long)
             {
                 if(pos > 0)
                 {
-                    try
-                    {
-                        materia = parent.getItemAtPosition(pos) as Materia
+                    materia = parent.getItemAtPosition(pos) as Materia
 
-                        val dataManager = DataManager(applicationContext, resources.getString(R.string.db_alumnos))
-                        val colores = arrayOf(resources.getColor(R.color.azulmetalico), resources.getColor(R.color.azulchillon))
-                        val alumnosToDisplay = dataManager.leerAlumnos()
-                        val adaptador = CustomAdapterSpinner<Alumno>(applicationContext, alumnosToDisplay, colores)
-                        alumnos.adapter = adaptador
-                        alumnos.isVerticalScrollBarEnabled = true
+                    val dataManager = DataManager(applicationContext, resources.getString(R.string.db_alumnos))
+                    val colores = arrayOf(resources.getColor(R.color.azulmetalico), resources.getColor(R.color.azulchillon))
+                    val alumnosToDisplay = dataManager.leerAlumnos().toMutableList()
 
-                        val texto : String = "${materia} seleccionada"
-                        val color : Int = resources.getColor(R.color.brat)
-                        SnackbarUtil.showSnackbar(applicationContext, view!!, texto, color)
+                    val adaptadorAlumnos = CustomAdapterSpinner<Alumno>(applicationContext, R.layout.item_spinner, alumnosToDisplay, colores)
+                    adaptadorAlumnos.setDropDownViewResource(R.layout.item_dropdown)
+                    alumnos.adapter = adaptadorAlumnos
+                    alumnos.isVerticalScrollBarEnabled = true
 
-                        alumnos.visibility = View.VISIBLE
-                    }
-                    catch(ex : Exception)
-                    {
-                        val view = findViewById<View>(android.R.id.content)
-                        val texto : String = ex.message.toString()
-                        val color : Int = resources.getColor(R.color.rojosangre)
-                        SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
-                    }
+                    val texto : String = "${materia} seleccionada"
+                    val color : Int = resources.getColor(R.color.brat)
+                    SnackbarUtil.showSnackbar(applicationContext, view!!, texto, color)
+
+                    alumnos.setSelection(0)
+                    alumnos.visibility = View.VISIBLE
                 }
                 else
                 {
                     alumnos.visibility = View.INVISIBLE
                 }
+
+                calificacion.visibility = View.INVISIBLE
+                lectorCalificacion.visibility = View.INVISIBLE
+                calificar.visibility = View.INVISIBLE
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) { }
@@ -103,20 +101,24 @@ class MenuProfesores : AppCompatActivity()
                 {
                     alumno = parent.getItemAtPosition(pos) as Alumno
 
-                    val texto: String = "${alumno} seleccionado"
-                    val color: Int = resources.getColor(R.color.brat)
+                    val texto : String = "${alumno} seleccionado"
+                    val color : Int = resources.getColor(R.color.brat)
                     SnackbarUtil.showSnackbar(applicationContext, view!!, texto, color)
 
+                    calificacion.visibility = View.VISIBLE
+                    lectorCalificacion.visibility = View.VISIBLE
                     calificar.visibility = View.VISIBLE
                 }
                 else
                 {
+                    calificacion.visibility = View.INVISIBLE
+                    lectorCalificacion.visibility = View.INVISIBLE
                     calificar.visibility = View.INVISIBLE
                 }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) { }
-        }*/
+        }
 
         calificar.setOnClickListener(View.OnClickListener
         {

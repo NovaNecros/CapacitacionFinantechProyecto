@@ -9,9 +9,12 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 
-class CustomAdapterListView<T>(context : Context, private val data : Array<T>, val colores : Array<Int>)
+class CustomAdapterListView<T>(context : Context, val data : MutableList<T>, val colores : Array<Int>)
     : ArrayAdapter<T>(context, R.layout.item_listview, R.id.textViewItem, data)
 {
+
+    constructor(contexto : Context, data : Array<T>, colores : Array<Int>)
+    : this(contexto, data.toMutableList(), colores)
 
     override fun getView(pos : Int, convertView : View?, parent : ViewGroup) : View
     {

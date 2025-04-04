@@ -11,7 +11,7 @@ import androidx.core.view.WindowInsetsCompat
 import android.widget.TextView
 import android.widget.Button
 import android.widget.AdapterView
-import android.widget.Spinner
+import android.widget.ListView
 import android.view.View
 import android.content.Intent
 
@@ -29,102 +29,9 @@ class PerfilAcademico : AppCompatActivity()
             insets
         }
 
-        val calificar = findViewById<Button>(R.id.btn_calificar)
         val regresar = findViewById<TextView>(R.id.btn_back)
-
         var materia = Materia()
-        var alumno = Alumno()
-
-        val materias = findViewById<Spinner>(R.id.spinner_materias)
-        val alumnos = findViewById<Spinner>(R.id.spinner_alumnos)
-
-        alumnos.visibility = View.INVISIBLE
-        calificar.visibility = View.INVISIBLE
-
-        try
-        {
-            val dataManager = DataManager(applicationContext, resources.getString(R.string.db_materias))
-            val colores = arrayOf(resources.getColor(R.color.azulchillon), resources.getColor(R.color.azulmetalico))
-            val materiasToDisplay = dataManager.leerMaterias()
-            val adaptador = CustomAdapterSpinner<Materia>(applicationContext, materiasToDisplay, colores)
-            materias.adapter = adaptador
-            materias.isVerticalScrollBarEnabled = true
-        }
-        catch(ex : Exception)
-        {
-            val view = findViewById<View>(android.R.id.content)
-            val texto : String = ex.message.toString()
-            val color : Int = resources.getColor(R.color.rojosangre)
-            SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
-        }
-
-        materias.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
-        {
-            override fun onItemSelected(parent : AdapterView<*>, view : View?, pos : Int, id : Long)
-            {
-                if(pos > 0)
-                {
-                    try
-                    {
-                        materia = parent.getItemAtPosition(pos) as Materia
-
-                        val dataManager = DataManager(applicationContext, resources.getString(R.string.db_alumnos))
-                        val colores = arrayOf(resources.getColor(R.color.azulmetalico), resources.getColor(R.color.azulchillon))
-                        val alumnosToDisplay = dataManager.leerAlumnos()
-                        val adaptador = CustomAdapterSpinner<Alumno>(applicationContext, alumnosToDisplay, colores)
-                        alumnos.adapter = adaptador
-                        alumnos.isVerticalScrollBarEnabled = true
-
-                        val texto : String = "${materia} seleccionada"
-                        val color : Int = resources.getColor(R.color.brat)
-                        SnackbarUtil.showSnackbar(applicationContext, view!!, texto, color)
-
-                        alumnos.visibility = View.VISIBLE
-                    }
-                    catch(ex : Exception)
-                    {
-                        val view = findViewById<View>(android.R.id.content)
-                        val texto : String = ex.message.toString()
-                        val color : Int = resources.getColor(R.color.rojosangre)
-                        SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
-                    }
-                }
-                else
-                {
-                    alumnos.visibility = View.INVISIBLE
-                }
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) { }
-        }
-
-        alumnos.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
-        {
-            override fun onItemSelected(parent : AdapterView<*>, view : View?, pos : Int, id : Long)
-            {
-                if(pos > 0)
-                {
-                    alumno = parent.getItemAtPosition(pos) as Alumno
-
-                    val texto: String = "${alumno} seleccionado"
-                    val color: Int = resources.getColor(R.color.brat)
-                    SnackbarUtil.showSnackbar(applicationContext, view!!, texto, color)
-
-                    calificar.visibility = View.VISIBLE
-                }
-                else
-                {
-                    calificar.visibility = View.INVISIBLE
-                }
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) { }
-        }
-
-        calificar.setOnClickListener(View.OnClickListener
-        {
-            //TODO
-        })
+        val materias = findViewById<ListView>(R.id.lista_materias)
 
         regresar.setOnClickListener(View.OnClickListener
         {
