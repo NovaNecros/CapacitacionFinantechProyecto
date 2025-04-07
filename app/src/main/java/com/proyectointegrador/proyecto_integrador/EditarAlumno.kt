@@ -3,6 +3,7 @@ alumnos a la base de datos */
 
 package com.proyectointegrador.proyecto_integrador
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,7 @@ import android.widget.EditText
 import android.widget.CheckBox
 import android.content.Intent
 import androidx.core.view.isGone
+import com.proyectointegrador.proyecto_integrador.NuevoAlumno
 
 import java.util.Calendar
 
@@ -47,6 +49,11 @@ class EditarAlumno : AppCompatActivity()
         val mes  = calendario.get(Calendar.MONTH)
         val dia  = calendario.get(Calendar.DAY_OF_MONTH)
         val lectorFecha = findViewById<EditText>(R.id.lector_fecha)
+        val datePicker = DatePickerDialog(this@EditarAlumno,
+            { view, year, mes, dia ->
+                val fecha = "${dia}/${mes+1}/${year}"
+                lectorFecha.setText(fecha)
+            }, year, mes, dia)
 
         val masculino = findViewById<CheckBox>(R.id.masculino)
         val femenino = findViewById<CheckBox>(R.id.femenino)
@@ -69,6 +76,11 @@ class EditarAlumno : AppCompatActivity()
         lectorApellidoP.setText(alumno.apellidoP)
         lectorApellidoM.setText(alumno.apellidoM)
         lectorFecha.setText(alumno.fecha)
+
+        lectorFecha.setOnClickListener(View.OnClickListener
+        {
+            datePicker.show()
+        })
 
         for(genero in generos)
         {

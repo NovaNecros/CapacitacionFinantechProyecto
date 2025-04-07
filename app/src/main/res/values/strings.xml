@@ -45,6 +45,8 @@
     <string name="btn_new_materia" translatable="false">Nueva Materia</string>
     <string name="btn_delete" translatable="false">Eliminar</string>
     <string name="btn_edit" translatable="false">Editar</string>
+    <string name="btn_edit_materia" translatable="false">Editar Materia</string>
+    <string name="btn_edit_alumno" translatable="false">Editar Alumno</string>
 
     <string name="no_matricula_ex" translatable="false">Escribe la matrícula</string>
     <string name="no_nombre_alumno_ex" translatable="false">Escribe el nombre</string>

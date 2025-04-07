@@ -68,6 +68,11 @@ class NuevoAlumno : AppCompatActivity()
         dataManager = DataManager(this, resources.getString(R.string.db_alumnos))
         otroGenero.visibility = View.GONE
 
+        lectorFecha.setOnClickListener(View.OnClickListener
+        {
+            datePicker.show()
+        })
+
         botonGenero.setOnClickListener(View.OnClickListener
         {
             if(otroGenero.isGone)
@@ -79,11 +84,6 @@ class NuevoAlumno : AppCompatActivity()
                 otroGenero.text.clear()
                 otroGenero.visibility = View.GONE
             }
-        })
-
-        lectorFecha.setOnClickListener(View.OnClickListener
-        {
-            datePicker.show()
         })
 
         botonGuardar.setOnClickListener(View.OnClickListener

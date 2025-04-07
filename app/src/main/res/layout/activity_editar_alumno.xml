@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
         android:gravity="center"
-        android:text="@string/btn_edit"
+        android:text="@string/btn_edit_alumno"
         android:textSize="34sp"
         android:textStyle="bold"
         android:visibility="visible"
@@ -127,8 +127,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:textStyle="normal"
-                    android:inputType="text"/>
+                    android:inputType="date"
+                    android:focusable="false"/>
 
                 <TextView
                     android:id="@+id/genero"
