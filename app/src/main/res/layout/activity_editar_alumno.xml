@@ -28,7 +28,7 @@
 
     <LinearLayout
         android:layout_width="375dp"
-        android:layout_height="344dp"
+        android:layout_height="324dp"
         android:layout_marginTop="21dp"
         android:layout_marginBottom="16dp"
         android:orientation="vertical"
@@ -36,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintVertical_bias="0.4"
         app:layout_constraintHorizontal_bias="0.5">
 
         <ScrollView
@@ -211,15 +211,6 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/verdebosque"
             android:text="@string/btn_save"
-            android:textSize="28sp"
-            android:textColor="@color/white"/>
-        <Button
-            android:id="@+id/btn_clear"
-            android:visibility="visible"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/rojopastel"
-            android:text="@string/btn_clear"
             android:textSize="28sp"
             android:textColor="@color/white"/>
         <Button
