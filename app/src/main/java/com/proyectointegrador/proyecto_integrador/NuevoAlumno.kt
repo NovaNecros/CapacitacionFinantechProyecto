@@ -48,11 +48,11 @@ class NuevoAlumno : AppCompatActivity()
         val year = calendario.get(Calendar.YEAR)
         val mes  = calendario.get(Calendar.MONTH)
         val dia  = calendario.get(Calendar.DAY_OF_MONTH)
-        val fechaDisplay = findViewById<EditText>(R.id.lector_fecha)
-        val datePicker = DatePickerDialog(applicationContext,
+        val lectorFecha = findViewById<EditText>(R.id.lector_fecha)
+        val datePicker = DatePickerDialog(this@NuevoAlumno,
             { view, year, mes, dia ->
                 val fecha = "${dia}/${mes+1}/${year}"
-                fechaDisplay.text = fecha
+                lectorFecha.setText(fecha)
             }, year, mes, dia)
 
 
@@ -81,7 +81,7 @@ class NuevoAlumno : AppCompatActivity()
             }
         })
 
-        fechaDisplay.setOnClickListener(View.OnClickListener
+        lectorFecha.setOnClickListener(View.OnClickListener
         {
             datePicker.show()
         })
