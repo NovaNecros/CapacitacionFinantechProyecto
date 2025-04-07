@@ -59,20 +59,29 @@
             android:textStyle="bold"
             android:textSize="28sp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/moradofuerte"
-            android:layout_marginBottom="24dp"/>
+            android:backgroundTint="@color/moradofuerte"/>
+
+        <Button
+            android:id="@+id/btn_edit"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_edit"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/dorado"/>
 
         <Button
             android:id="@+id/btn_borrar"
             android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/btn_delete_alumno"
+            android:text="@string/btn_delete"
             android:textStyle="bold"
             android:textSize="28sp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/rojochillon"
-            android:layout_marginBottom="24dp"/>
+            android:backgroundTint="@color/rojochillon"/>
 
         <Button
             android:id="@+id/btn_back"
@@ -83,7 +92,7 @@
             android:textStyle="bold"
             android:textSize="28sp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/brat"/>
+            android:backgroundTint="@color/verdeclaro"/>
 
     </LinearLayout>
 

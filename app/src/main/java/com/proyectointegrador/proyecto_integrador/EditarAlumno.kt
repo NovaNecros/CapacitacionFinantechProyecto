@@ -14,12 +14,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.CheckBox
 import android.content.Intent
-import android.app.DatePickerDialog
 import androidx.core.view.isGone
 
 import java.util.Calendar
 
-class NuevoAlumno : AppCompatActivity()
+class EditarAlumno : AppCompatActivity()
 {
     var dataManager : DataManager? = null
 
@@ -27,17 +26,16 @@ class NuevoAlumno : AppCompatActivity()
     {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_nuevo_alumno)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.nuevo_alumno))
+        setContentView(R.layout.activity_editar_alumno)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.editar_alumno))
         { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        val botonGuardar = findViewById<Button>(R.id.btn_save)
-        val botonLimpiar = findViewById<Button>(R.id.btn_clear)
-        val botonRegresar = findViewById<Button>(R.id.btn_back)
+        val botonActualizar = findViewById<Button>(R.id.btn_save)
+        val botonCancelar = findViewById<Button>(R.id.btn_back)
 
         val lectorMatricula = findViewById<EditText>(R.id.lector_matricula)
         val lectorNombre = findViewById<EditText>(R.id.lector_nombre)
@@ -48,13 +46,7 @@ class NuevoAlumno : AppCompatActivity()
         val year = calendario.get(Calendar.YEAR)
         val mes  = calendario.get(Calendar.MONTH)
         val dia  = calendario.get(Calendar.DAY_OF_MONTH)
-        val fechaDisplay = findViewById<EditText>(R.id.lector_fecha)
-        val datePicker = DatePickerDialog(applicationContext,
-            { view, year, mes, dia ->
-                val fecha = "${dia}/${mes+1}/${year}"
-                fechaDisplay.text = fecha
-            }, year, mes, dia)
-
+        val lectorFecha = findViewById<EditText>(R.id.lector_fecha)
 
         val masculino = findViewById<CheckBox>(R.id.masculino)
         val femenino = findViewById<CheckBox>(R.id.femenino)
@@ -67,6 +59,24 @@ class NuevoAlumno : AppCompatActivity()
 
         dataManager = DataManager(this, resources.getString(R.string.db_alumnos))
         otroGenero.visibility = View.GONE
+
+        val bundle = intent.extras
+        val data = bundle?.getString("idParaEditar")
+        var alumno = dataManager!!.leerAlumno(data!!.toInt())
+
+        lectorMatricula.setText(alumno.matricula.toString())
+        lectorNombre.setText(alumno.nombre)
+        lectorApellidoP.setText(alumno.apellidoP)
+        lectorApellidoM.setText(alumno.apellidoM)
+        lectorFecha.setText(alumno.fecha)
+
+        for(genero in generos)
+        {
+            if(alumno.generos.contains(genero.text.toString()))
+            {
+                genero.isChecked = true
+            }
+        }
 
         botonGenero.setOnClickListener(View.OnClickListener
         {
@@ -81,12 +91,7 @@ class NuevoAlumno : AppCompatActivity()
             }
         })
 
-        fechaDisplay.setOnClickListener(View.OnClickListener
-        {
-            datePicker.show()
-        })
-
-        botonGuardar.setOnClickListener(View.OnClickListener
+        botonActualizar.setOnClickListener(View.OnClickListener
         {
             val matricula : String = lectorMatricula.getText().toString()
             val nombre : String = lectorNombre.getText().toString()
@@ -141,11 +146,11 @@ class NuevoAlumno : AppCompatActivity()
             else
             {
                 val fulanito = Alumno(applicationContext, matricula, nombre, apellidoP, apellidoM, generosUsuario.toString(), cumFecha)
+                dataManager!!.borrarAlumno(alumno)
                 dataManager!!.guardarAlumno(fulanito)
 
-                texto = "Alumno ${fulanito} guardado"
+                texto = "Alumno ${alumno} actualizado"
                 color = resources.getColor(R.color.brat)
-                SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
 
                 lectorMatricula.text.clear()
                 lectorNombre.text.clear()
@@ -160,30 +165,14 @@ class NuevoAlumno : AppCompatActivity()
                 otroGenero.text.clear()
                 otroGenero.visibility = View.GONE
 
-                intent = Intent(this, AdministrarAlumnos::class.java)
+                val intent = Intent(this, AdministrarAlumnos::class.java)
                 startActivity(intent)
             }
 
             SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
         })
 
-        botonLimpiar.setOnClickListener(View.OnClickListener
-        {
-            lectorMatricula.text.clear()
-            lectorNombre.text.clear()
-            lectorApellidoP.text.clear()
-            lectorApellidoM.text.clear()
-            lectorFecha.text.clear()
-
-            for(genero in generos)
-            {
-                genero.isChecked = false
-            }
-            otroGenero.text.clear()
-            otroGenero.visibility = View.GONE
-        })
-
-        botonRegresar.setOnClickListener(View.OnClickListener
+        botonCancelar.setOnClickListener(View.OnClickListener
         {
             val intent = Intent(this, AdministrarAlumnos::class.java)
             startActivity(intent)

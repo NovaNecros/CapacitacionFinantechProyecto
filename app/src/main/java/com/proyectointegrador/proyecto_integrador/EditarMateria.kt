@@ -13,7 +13,6 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.content.Intent
-import android.widget.TextView
 
 class EditarMateria : AppCompatActivity()
 {
@@ -32,7 +31,6 @@ class EditarMateria : AppCompatActivity()
         }
 
         val botonActualizar = findViewById<Button>(R.id.btn_update)
-        val botonLimpiar = findViewById<Button>(R.id.btn_clear)
         val botonCancelar = findViewById<Button>(R.id.btn_cancel)
 
         val lectorClave = findViewById<EditText>(R.id.lector_clave)
@@ -79,6 +77,7 @@ class EditarMateria : AppCompatActivity()
             {
                 texto = "Materia ${materia} actualizada"
                 color = resources.getColor(R.color.brat)
+                SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
 
                 dataManager!!.borrarMateria(materia)
                 materia = Materia(applicationContext, clave, nombre, creditos)
@@ -87,19 +86,12 @@ class EditarMateria : AppCompatActivity()
                 lectorClave.text.clear()
                 lectorNombre.text.clear()
                 lectorCreditos.text.clear()
+
+                val intent = Intent(this, AdministrarMaterias::class.java)
+                startActivity(intent)
             }
 
             SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
-
-            val intent = Intent(this, AdministrarMaterias::class.java)
-            startActivity(intent)
-        })
-
-        botonLimpiar.setOnClickListener(View.OnClickListener
-        {
-            lectorClave.text.clear()
-            lectorNombre.text.clear()
-            lectorCreditos.text.clear()
         })
 
         botonCancelar.setOnClickListener(View.OnClickListener

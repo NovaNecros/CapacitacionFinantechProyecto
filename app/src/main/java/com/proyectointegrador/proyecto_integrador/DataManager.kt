@@ -37,6 +37,7 @@ class DataManager(contexto : Context, dbName : String)
         val valores = ContentValues()
 
         valores.put("id", alumno.id)
+        valores.put("matricula", alumno.matricula)
         valores.put("nombre", alumno.nombre)
         valores.put("apellidoP", alumno.apellidoP)
         valores.put("apellidoM", alumno.apellidoM)
@@ -61,7 +62,7 @@ class DataManager(contexto : Context, dbName : String)
     fun leerAlumnos() : Array<Alumno>
     {
         val alumnos = mutableListOf<Alumno>()
-        val columnas = arrayOf("id", "nombre", "apellidoP", "apellidoM", "genero", "fecha")
+        val columnas = arrayOf("id", "matricula", "nombre", "apellidoP", "apellidoM", "genero", "fecha")
         val cursor : Cursor = baseDatos.query(tableName, columnas, null, null, null, null, null)
 
         while(cursor.moveToNext())
@@ -69,11 +70,12 @@ class DataManager(contexto : Context, dbName : String)
             val alumno = Alumno()
 
             alumno.id = cursor.getInt(0)
-            alumno.nombre = cursor.getString(1)
-            alumno.apellidoP = cursor.getString(2)
-            alumno.apellidoM = cursor.getString(3)
-            alumno.generos = cursor.getString(4)
-            alumno.fecha = cursor.getString(5)
+            alumno.matricula = cursor.getString(1)
+            alumno.nombre = cursor.getString(2)
+            alumno.apellidoP = cursor.getString(3)
+            alumno.apellidoM = cursor.getString(4)
+            alumno.generos = cursor.getString(5)
+            alumno.fecha = cursor.getString(6)
 
             alumnos.add(alumno)
         }
@@ -86,16 +88,17 @@ class DataManager(contexto : Context, dbName : String)
     fun leerAlumno(id : Int) : Alumno
     {
         val alumno = Alumno()
-        val columnas = arrayOf("id", "nombre", "apellidoP", "apellidoM", "genero", "fecha")
+        val columnas = arrayOf("id", "matricula", "nombre", "apellidoP", "apellidoM", "genero", "fecha")
         val cursor : Cursor = baseDatos.query(tableName, columnas, "id = ?", arrayOf(id.toString()), null, null, null)
 
         cursor.moveToFirst()
         alumno.id = cursor.getInt(0)
-        alumno.nombre = cursor.getString(1)
-        alumno.apellidoP = cursor.getString(2)
-        alumno.apellidoM = cursor.getString(3)
-        alumno.generos = cursor.getString(4)
-        alumno.fecha = cursor.getString(5)
+        alumno.matricula = cursor.getString(1)
+        alumno.nombre = cursor.getString(2)
+        alumno.apellidoP = cursor.getString(3)
+        alumno.apellidoM = cursor.getString(4)
+        alumno.generos = cursor.getString(5)
+        alumno.fecha = cursor.getString(6)
         cursor.close()
 
         return alumno
@@ -146,7 +149,7 @@ class DataManager(contexto : Context, dbName : String)
     fun borrarMateria(materia : Materia)
     : Int = baseDatos.delete(tableName, "id = ?", arrayOf(materia.id.toString()))
 
-    //asigna el primer ID disponible al crear un nuevo alumno
+    //asigna el primer ID disponible al inscribir un nuevo alumno
     fun getNewAlumnoID() : Int
     {
         val cursor = baseDatos.rawQuery("SELECT id FROM ${tableName} ORDER BY id", null)

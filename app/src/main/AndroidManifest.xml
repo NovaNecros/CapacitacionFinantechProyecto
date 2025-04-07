@@ -42,6 +42,10 @@
             android:exported="true">
         </activity>
         <activity
+            android:name=".EditarAlumno"
+            android:exported="true">
+        </activity>
+        <activity
             android:name=".AdministrarMaterias"
             android:exported="true">
         </activity>

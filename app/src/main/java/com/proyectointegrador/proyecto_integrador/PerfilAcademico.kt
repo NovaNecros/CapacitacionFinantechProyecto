@@ -30,12 +30,19 @@ class PerfilAcademico : AppCompatActivity()
         }
 
         val regresar = findViewById<TextView>(R.id.btn_back)
-        var materia = Materia()
         val materias = findViewById<ListView>(R.id.lista_materias)
+
+        val colores = arrayOf(resources.getColor(R.color.naranja), resources.getColor(R.color.naranjafuerte))
+        val dataManager = DataManager(applicationContext, resources.getString(R.string.db_materias))
+        val materiasToDisplay = dataManager.leerMaterias()
+
+        val adaptador = CustomAdapterListView<Materia>(applicationContext, materiasToDisplay, colores)
+        materias.adapter = adaptador
+        materias.isVerticalScrollBarEnabled = true
 
         regresar.setOnClickListener(View.OnClickListener
         {
-            intent = Intent(applicationContext, MainActivity::class.java)
+            intent = Intent(applicationContext, MenuAlumnos::class.java)
             startActivity(intent)
         })
     }

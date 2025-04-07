@@ -11,7 +11,6 @@ import androidx.core.view.WindowInsetsCompat
 import android.widget.TextView
 import android.widget.Button
 import android.view.View
-
 import android.content.Intent
 import android.widget.ListView
 
@@ -30,6 +29,7 @@ class AdministrarAlumnos : AppCompatActivity()
         }
 
         val nuevo = findViewById<Button>(R.id.btn_nuevo)
+        val editar = findViewById<Button>(R.id.btn_edit)
         val borrar = findViewById<Button>(R.id.btn_borrar)
         val regresar = findViewById<TextView>(R.id.btn_back)
         val alumnos = findViewById<ListView>(R.id.lista_alumnos)
@@ -37,26 +37,25 @@ class AdministrarAlumnos : AppCompatActivity()
 
         var selected = Alumno()
 
-        try
-        {
-            val colores = arrayOf(resources.getColor(R.color.dorado), resources.getColor(R.color.amarillosuave))
-            val alumnosToDisplay = dataManager.leerAlumnos()
-            val adaptador = CustomAdapterListView<Alumno>(applicationContext, alumnosToDisplay, colores)
-            alumnos.adapter = adaptador
-            alumnos.isVerticalScrollBarEnabled = true
-        }
-        catch(ex : Exception)
-        {
-            val view = findViewById<View>(android.R.id.content)
-            val texto : String = ex.message.toString()
-            val color : Int = resources.getColor(R.color.rojosangre)
-            SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
-        }
+        val colores = arrayOf(resources.getColor(R.color.naranja), resources.getColor(R.color.naranjafuerte))
+        val alumnosToDisplay = dataManager.leerAlumnos()
+        val adaptador = CustomAdapterListView<Alumno>(applicationContext, alumnosToDisplay, colores)
+        alumnos.adapter = adaptador
+        alumnos.isVerticalScrollBarEnabled = true
+
+        editar.visibility = View.INVISIBLE
+        borrar.visibility = View.INVISIBLE
 
         alumnos.setOnItemClickListener(
         { parent, view, pos, id ->
 
             selected = parent.getItemAtPosition(pos) as Alumno
+
+            editar.text = resources.getString(R.string.btn_edit) + " a ${selected}"
+            borrar.text = resources.getString(R.string.btn_delete) + " a ${selected}"
+            editar.visibility = View.VISIBLE
+            borrar.visibility = View.VISIBLE
+
             val texto : String = "Alumno ${selected} seleccionado"
             val color : Int = resources.getColor(R.color.brat)
             SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
@@ -65,6 +64,14 @@ class AdministrarAlumnos : AppCompatActivity()
         nuevo.setOnClickListener(View.OnClickListener
         {
             intent = Intent(applicationContext, NuevoAlumno::class.java)
+            startActivity(intent)
+        })
+
+        editar.setOnClickListener(View.OnClickListener
+        {
+            var data = selected.id.toString()
+            val intent = Intent(applicationContext, EditarAlumno::class.java)
+            intent.putExtra("idParaEditar", data)
             startActivity(intent)
         })
 

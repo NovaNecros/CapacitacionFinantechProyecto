@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
         android:gravity="center"
-        android:text="@string/btn_edit_materia"
+        android:text="@string/btn_edit"
         android:textSize="34sp"
         android:textStyle="bold"
         android:visibility="visible"
@@ -87,7 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="text"/>
+            android:inputType="number"/>
     </LinearLayout>
 
     <LinearLayout
@@ -107,18 +107,8 @@
             android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/brat"
+            android:backgroundTint="@color/verdebosque"
             android:text="@string/btn_update"
-            android:textSize="28sp"
-            android:textColor="@color/white"/>
-
-        <Button
-            android:id="@+id/btn_clear"
-            android:visibility="visible"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/rojopastel"
-            android:text="@string/btn_clear"
             android:textSize="28sp"
             android:textColor="@color/white"/>
 

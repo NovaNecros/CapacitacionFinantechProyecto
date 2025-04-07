@@ -11,7 +11,6 @@ import androidx.core.view.WindowInsetsCompat
 import android.widget.TextView
 import android.widget.Button
 import android.view.View
-
 import android.content.Intent
 import android.widget.ListView
 
@@ -37,31 +36,27 @@ class AdministrarMaterias : AppCompatActivity()
         val dataManager = DataManager(applicationContext, resources.getString(R.string.db_materias))
         var selected = Materia()
 
+        editar.text = resources.getString(R.string.btn_edit) + " ${selected}"
+        borrar.text = resources.getString(R.string.btn_delete) + " ${selected}"
         editar.visibility = View.INVISIBLE
         borrar.visibility = View.INVISIBLE
 
-        try
-        {
-            val colores = arrayOf(resources.getColor(R.color.naranja), resources.getColor(R.color.naranjafuerte))
-            val materiasToDisplay = dataManager.leerMaterias()
-            val adaptador = CustomAdapterListView<Materia>(applicationContext, materiasToDisplay, colores)
-            materias.adapter = adaptador
-            materias.isVerticalScrollBarEnabled = true
-        }
-        catch(ex : Exception)
-        {
-            val view = findViewById<View>(android.R.id.content)
-            val texto : String = ex.message.toString()
-            val color : Int = resources.getColor(R.color.rojosangre)
-            SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
-        }
+        val colores = arrayOf(resources.getColor(R.color.naranja), resources.getColor(R.color.naranjafuerte))
+        val materiasToDisplay = dataManager.leerMaterias()
+        val adaptador = CustomAdapterListView<Materia>(applicationContext, materiasToDisplay, colores)
+        materias.adapter = adaptador
+        materias.isVerticalScrollBarEnabled = true
 
         materias.setOnItemClickListener(
         { parent, view, pos, id ->
 
             selected = parent.getItemAtPosition(pos) as Materia
+
             editar.visibility = View.VISIBLE
             borrar.visibility = View.VISIBLE
+            editar.text = resources.getString(R.string.btn_edit) + " ${selected}"
+            borrar.text = resources.getString(R.string.btn_delete) + " ${selected}"
+
             val texto : String = "Materia ${selected} seleccionada"
             val color : Int = resources.getColor(R.color.brat)
             SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
@@ -77,7 +72,7 @@ class AdministrarMaterias : AppCompatActivity()
         {
             var data = selected.id.toString()
             val intent = Intent(applicationContext, EditarMateria::class.java)
-            intent.putExtra("idParaEditar", data) //manda el input a la segunda actividad
+            intent.putExtra("idParaEditar", data)
             startActivity(intent)
         })
 

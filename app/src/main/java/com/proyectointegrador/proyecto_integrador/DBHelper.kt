@@ -18,7 +18,7 @@ class DBHelper(val contexto : Context?, val dbName : String?) : SQLiteOpenHelper
         if(dbName == contexto!!.resources.getString(R.string.db_alumnos))
         {
             val comandoSQL : String = "CREATE TABLE ${tableName}(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
-                    "nombre VARCHAR(100), apellidoP VARCHAR(100), apellidoM VARCHAR(100), " +
+                    "matricula VARCHAR(20), nombre VARCHAR(100), apellidoP VARCHAR(100), apellidoM VARCHAR(100), " +
                     "fecha VARCHAR(20), genero VARCHAR(100))"
 
             db.execSQL(comandoSQL)
