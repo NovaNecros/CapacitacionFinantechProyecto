@@ -128,18 +128,27 @@ class MenuProfesores : AppCompatActivity()
 
         calificar.setOnClickListener(View.OnClickListener
         {
-            calificacion = Calificacion(applicationContext, alumno, materia, lectorCalificacion.text.toString().toDouble())
-            val dataManagerCalificaciones = DataManager(applicationContext, resources.getString(R.string.db_calificaciones))
-            dataManagerCalificaciones.guardarCalificacion(calificacion)
+            val calificacionInput : String = lectorCalificacion.text.toString()
 
             val view = findViewById<View>(android.R.id.content)
-            val texto : String = "${alumno} obtuvo ${calificacion} en ${materia}"
-            val color : Int = resources.getColor(R.color.brat)
-            SnackbarUtil.showSnackbar(applicationContext, view!!, texto, color)
+            var texto : String = resources.getString(R.string.no_calif_ex)
+            var color : Int = resources.getColor(R.color.rojo)
 
-            lectorCalificacion.text.clear()
-            lectorCalificacion.visibility = View.INVISIBLE
-            alumnos.setSelection(0)
+            if(calificacionInput.isEmpty())
+            {
+                calificacion = Calificacion(applicationContext, alumno, materia, calificacionInput.toDouble())
+                val dataManagerCalificaciones = DataManager(applicationContext, resources.getString(R.string.db_calificaciones))
+                dataManagerCalificaciones.guardarCalificacion(calificacion)
+
+                texto = "${alumno} obtuvo ${calificacion} en ${materia}"
+                color = resources.getColor(R.color.brat)
+
+                lectorCalificacion.text.clear()
+                lectorCalificacion.visibility = View.INVISIBLE
+                alumnos.setSelection(0)
+            }
+
+            SnackbarUtil.showSnackbar(applicationContext, view!!, texto, color)
         })
 
         regresar.setOnClickListener(View.OnClickListener
