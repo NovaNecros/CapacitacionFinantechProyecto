@@ -127,6 +127,33 @@ class DataManager(val contexto : Context, dbName : String)
         return alumno
     }
 
+    fun buscarMatricula(matricula : String) : Alumno?
+    {
+        val columnas = arrayOf("id", "matricula", "nombre", "apellidoP", "apellidoM", "genero", "fecha")
+
+        val cursor: Cursor = baseDatos.query(tableName, columnas, "matricula = ?", arrayOf(matricula), null, null, null)
+
+        if(cursor.moveToFirst())
+        {
+            val alumno = Alumno()
+
+            alumno.id = cursor.getInt(0)
+            alumno.matricula = cursor.getString(1)
+            alumno.nombre = cursor.getString(2)
+            alumno.apellidoP = cursor.getString(3)
+            alumno.apellidoM = cursor.getString(4)
+            alumno.generos = cursor.getString(5)
+            alumno.fecha = cursor.getString(6)
+            cursor.close()
+
+            return alumno
+        }
+
+        cursor.close()
+
+        return null
+    }
+
     fun borrarAlumno(alumno : Alumno)
     : Int = baseDatos.delete(tableName, "id = ?", arrayOf(alumno.id.toString()))
 
@@ -241,6 +268,35 @@ class DataManager(val contexto : Context, dbName : String)
 
         return calificacion
     }
+
+    fun leerCalificacionesAlumno(alumno : Alumno) : Array<Calificacion>
+    {
+        return leerCalificacionesAlumno(alumno.id)
+    }
+
+    fun leerCalificacionesAlumno(idAlumno: Int): Array<Calificacion>
+    {
+        val calificaciones = mutableListOf<Calificacion>()
+        val columnas = arrayOf("id", "alumno", "materia", "numero", "nota")
+
+        val cursor: Cursor = baseDatos.query(tableName, columnas, "alumno = ?", arrayOf(idAlumno.toString()), null, null, null)
+        while(cursor.moveToNext())
+        {
+            val calificacion = Calificacion()
+
+            calificacion.id = cursor.getInt(0)
+            calificacion.alumno = leerAlumno(cursor.getInt(1))
+            calificacion.materia = leerMateria(cursor.getInt(2))
+            calificacion.numero = cursor.getDouble(3)
+            calificacion.nota = cursor.getString(4)
+
+            calificaciones.add(calificacion)
+        }
+        cursor.close()
+
+        return calificaciones.toTypedArray()
+    }
+
 
     fun borrarCalificacion(calificacion : Calificacion)
     : Int = baseDatos.delete(tableName, "id = ?", arrayOf(calificacion.id.toString()))

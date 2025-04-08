@@ -28,7 +28,7 @@
 
     <LinearLayout
         android:layout_width="375dp"
-        android:layout_height="344dp"
+        android:layout_height="424dp"
         android:layout_marginTop="21dp"
         android:layout_marginBottom="16dp"
         android:orientation="vertical"
@@ -36,27 +36,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintVertical_bias="0.6"
         app:layout_constraintHorizontal_bias="0.5">
-
-        <TextView
-            android:id="@+id/nombre"
-            android:visibility="visible"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/name"
-            android:textStyle="bold"
-            android:textSize="18sp"/>
-        <EditText
-            android:id="@+id/lector_nombre"
-            android:visibility="visible"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:layout_marginBottom="32dp"/>
 
         <ScrollView
             android:layout_width="match_parent"
