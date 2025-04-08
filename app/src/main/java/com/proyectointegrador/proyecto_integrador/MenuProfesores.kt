@@ -134,7 +134,7 @@ class MenuProfesores : AppCompatActivity()
             var texto : String = resources.getString(R.string.no_calif_ex)
             var color : Int = resources.getColor(R.color.rojo)
 
-            if(calificacionInput.isEmpty())
+            if(calificacionInput.isNotEmpty())
             {
                 calificacion = Calificacion(applicationContext, alumno, materia, calificacionInput.toDouble())
                 val dataManagerCalificaciones = DataManager(applicationContext, resources.getString(R.string.db_calificaciones))
