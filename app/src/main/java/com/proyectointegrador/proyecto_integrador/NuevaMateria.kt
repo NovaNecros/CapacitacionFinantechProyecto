@@ -75,10 +75,14 @@ class NuevaMateria : AppCompatActivity()
 
                 texto = "Materia ${materia} guardada"
                 color = resources.getColor(R.color.brat)
+                SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
 
                 lectorClave.text.clear()
                 lectorNombre.text.clear()
                 lectorCreditos.text.clear()
+
+                val intent = Intent(this, AdministrarMaterias::class.java)
+                startActivity(intent)
             }
 
             SnackbarUtil.showSnackbar(applicationContext, view, texto, color)

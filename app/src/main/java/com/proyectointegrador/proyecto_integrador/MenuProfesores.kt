@@ -30,7 +30,7 @@ class MenuProfesores : AppCompatActivity()
             insets
         }
 
-        val calificacion = findViewById<TextView>(R.id.calificacion)
+        val calificacionTexto = findViewById<TextView>(R.id.calificacion)
         val lectorCalificacion = findViewById<EditText>(R.id.lector_calificacion)
 
         val calificar = findViewById<Button>(R.id.btn_calificar)
@@ -38,19 +38,20 @@ class MenuProfesores : AppCompatActivity()
 
         var materia = Materia()
         var alumno = Alumno()
+        var calificacion = Calificacion()
 
         val materias = findViewById<Spinner>(R.id.spinner_materias)
         val alumnos = findViewById<Spinner>(R.id.spinner_alumnos)
 
-        calificacion.visibility = View.INVISIBLE
+        calificacionTexto.visibility = View.INVISIBLE
         lectorCalificacion.visibility = View.INVISIBLE
         alumnos.visibility = View.INVISIBLE
         calificar.visibility = View.INVISIBLE
 
-        val dataManager = DataManager(applicationContext, resources.getString(R.string.db_materias))
+        val dataManagerMaterias = DataManager(applicationContext, resources.getString(R.string.db_materias))
         val colores = arrayOf(resources.getColor(R.color.azulchillon), resources.getColor(R.color.azulmetalico),
             resources.getColor(R.color.azulreal))
-        val materiasToDisplay = dataManager.leerMaterias().toMutableList()
+        val materiasToDisplay = dataManagerMaterias.leerMaterias().toMutableList()
         //La mejor manera que se me ocurrió de agregar un default al spinner
         materiasToDisplay.add(0, Materia("Selecciona una materia..."))
 
@@ -67,10 +68,10 @@ class MenuProfesores : AppCompatActivity()
                 {
                     materia = parent.getItemAtPosition(pos) as Materia
 
-                    val dataManager = DataManager(applicationContext, resources.getString(R.string.db_alumnos))
+                    val dataManagerAlumnos = DataManager(applicationContext, resources.getString(R.string.db_alumnos))
                     val colores = arrayOf(resources.getColor(R.color.azulmetalico), resources.getColor(R.color.azulchillon),
                     resources.getColor(R.color.azulreal))
-                    val alumnosToDisplay = dataManager.leerAlumnos().toMutableList()
+                    val alumnosToDisplay = dataManagerAlumnos.leerAlumnos().toMutableList()
                     alumnosToDisplay.add(0, Alumno("Selecciona un alumno..."))
 
                     val adaptadorAlumnos = CustomAdapterSpinner<Alumno>(applicationContext, R.layout.item_spinner, alumnosToDisplay, colores)
@@ -90,12 +91,12 @@ class MenuProfesores : AppCompatActivity()
                     alumnos.visibility = View.INVISIBLE
                 }
 
-                calificacion.visibility = View.INVISIBLE
+                calificacionTexto.visibility = View.INVISIBLE
                 lectorCalificacion.visibility = View.INVISIBLE
                 calificar.visibility = View.INVISIBLE
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>) { }
+            override fun onNothingSelected(parent : AdapterView<*>) { }
         }
 
         alumnos.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
@@ -110,24 +111,35 @@ class MenuProfesores : AppCompatActivity()
                     val color : Int = resources.getColor(R.color.brat)
                     SnackbarUtil.showSnackbar(applicationContext, view!!, texto, color)
 
-                    calificacion.visibility = View.VISIBLE
+                    calificacionTexto.visibility = View.VISIBLE
                     lectorCalificacion.visibility = View.VISIBLE
                     calificar.visibility = View.VISIBLE
                 }
                 else
                 {
-                    calificacion.visibility = View.INVISIBLE
+                    calificacionTexto.visibility = View.INVISIBLE
                     lectorCalificacion.visibility = View.INVISIBLE
                     calificar.visibility = View.INVISIBLE
                 }
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>) { }
+            override fun onNothingSelected(parent : AdapterView<*>) { }
         }
 
         calificar.setOnClickListener(View.OnClickListener
         {
-            //TODO
+            calificacion = Calificacion(applicationContext, alumno, materia, lectorCalificacion.text.toString().toDouble())
+//            val dataManagerCalificaciones = DataManager(applicationContext, resources.getString(R.string.db_calificaciones))
+//            dataManagerCalificaciones.guardarCalificacion(calificacion)
+
+            val view = findViewById<View>(android.R.id.content)
+            val texto : String = "${alumno} obtuvo ${calificacion}\nen ${materia}"
+            val color : Int = resources.getColor(R.color.brat)
+            SnackbarUtil.showSnackbar(applicationContext, view!!, texto, color)
+
+            lectorCalificacion.text.clear()
+            lectorCalificacion.visibility = View.INVISIBLE
+            alumnos.setSelection(0)
         })
 
         regresar.setOnClickListener(View.OnClickListener

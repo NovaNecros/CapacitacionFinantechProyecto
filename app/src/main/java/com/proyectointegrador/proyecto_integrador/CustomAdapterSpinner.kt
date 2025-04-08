@@ -42,7 +42,6 @@ class CustomAdapterSpinner<T>(contexto : Context, resource : Int, data : Mutable
             if(pos == 0) //default
             {
                 view.setBackgroundColor(colores[n])
-                view.setTextColor(context.resources.getColor(R.color.black))
             }
             else for(i in 0 until n)
             {

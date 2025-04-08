@@ -36,6 +36,37 @@ class DataManager(contexto : Context, dbName : String)
         dbHelper.onUpgrade(baseDatos, 1, 1)
     }
 
+    //asigna el primer ID disponible al nuevo dato
+    fun getNewID() : Int
+    {
+        val cursor = baseDatos.rawQuery("SELECT id FROM ${tableName} ORDER BY id", null)
+
+        if(cursor.count == 0)
+        {
+            cursor.close()
+            return 1
+        }
+
+        var lastID : Int = 0
+
+        while(cursor.moveToNext())
+        {
+            val currentID = cursor.getInt(0)
+
+            if(currentID != lastID + 1)
+            {
+                cursor.close()
+                return lastID + 1
+            }
+            lastID = currentID
+        }
+
+        cursor.close()
+        return lastID + 1
+    }
+
+
+    //Métodos para alumnos
     fun guardarAlumno(alumno : Alumno)
     {
         val valores = ContentValues()
@@ -47,31 +78,6 @@ class DataManager(contexto : Context, dbName : String)
         valores.put("apellidoM", alumno.apellidoM)
         valores.put("fecha", alumno.fecha)
         valores.put("genero", alumno.generos.toString())
-
-        baseDatos.insert(tableName, null, valores)
-    }
-
-    fun guardarMateria(materia : Materia)
-    {
-        val valores = ContentValues()
-
-        valores.put("id", materia.id)
-        valores.put("clave", materia.clave)
-        valores.put("nombre", materia.nombre)
-        valores.put("creditos", materia.creditos)
-
-        baseDatos.insert(tableName, null, valores)
-    }
-
-    fun guardarCalificacion(calificacion : Calificacion)
-    {
-        val valores = ContentValues()
-
-        valores.put("id", calificacion.id)
-        valores.put("alumno", calificacion.alumno.id)
-        valores.put("materia", calificacion.materia.id)
-        valores.put("numero", calificacion.numero)
-        valores.put("nota", calificacion.nota)
 
         baseDatos.insert(tableName, null, valores)
     }
@@ -121,6 +127,23 @@ class DataManager(contexto : Context, dbName : String)
         return alumno
     }
 
+    fun borrarAlumno(alumno : Alumno)
+    : Int = baseDatos.delete(tableName, "id = ?", arrayOf(alumno.id.toString()))
+
+
+    //Métodos para materias
+    fun guardarMateria(materia : Materia)
+    {
+        val valores = ContentValues()
+
+        valores.put("id", materia.id)
+        valores.put("clave", materia.clave)
+        valores.put("nombre", materia.nombre)
+        valores.put("creditos", materia.creditos)
+
+        baseDatos.insert(tableName, null, valores)
+    }
+
     fun leerMaterias() : Array<Materia>
     {
         val materias = mutableListOf<Materia>()
@@ -158,6 +181,24 @@ class DataManager(contexto : Context, dbName : String)
         cursor.close()
 
         return materia
+    }
+
+    fun borrarMateria(materia : Materia)
+    : Int = baseDatos.delete(tableName, "id = ?", arrayOf(materia.id.toString()))
+
+
+    //Métodos para calificaciones
+    fun guardarCalificacion(calificacion : Calificacion)
+    {
+        val valores = ContentValues()
+
+        valores.put("id", calificacion.id)
+        valores.put("alumno", calificacion.alumno.id)
+        valores.put("materia", calificacion.materia.id)
+        valores.put("numero", calificacion.numero)
+        valores.put("nota", calificacion.nota)
+
+        baseDatos.insert(tableName, null, valores)
     }
 
     fun leerCalificaciones() : Array<Calificacion>
@@ -201,41 +242,6 @@ class DataManager(contexto : Context, dbName : String)
         return calificacion
     }
 
-    fun borrarAlumno(alumno : Alumno)
-    : Int = baseDatos.delete(tableName, "id = ?", arrayOf(alumno.id.toString()))
-
-    fun borrarMateria(materia : Materia)
-    : Int = baseDatos.delete(tableName, "id = ?", arrayOf(materia.id.toString()))
-
     fun borrarCalificacion(calificacion : Calificacion)
     : Int = baseDatos.delete(tableName, "id = ?", arrayOf(calificacion.id.toString()))
-
-    //asigna el primer ID disponible al nuevo dato
-    fun getNewID() : Int
-    {
-        val cursor = baseDatos.rawQuery("SELECT id FROM ${tableName} ORDER BY id", null)
-
-        if(cursor.count == 0)
-        {
-            cursor.close()
-            return 1
-        }
-
-        var lastID : Int = 0
-
-        while(cursor.moveToNext())
-        {
-            val currentID = cursor.getInt(0)
-
-            if(currentID != lastID + 1)
-            {
-                cursor.close()
-                return lastID + 1
-            }
-            lastID = currentID
-        }
-
-        cursor.close()
-        return lastID + 1
-    }
 }

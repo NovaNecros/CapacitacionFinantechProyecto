@@ -24,13 +24,14 @@ class Calificacion()
 
     fun calcularNota(numero : Double) : String
     {
-        return when
-        {
-            numero >= 9.0 -> R.string.muy_bien.toString()
-            numero >= 7.5 -> R.string.bien.toString()
-            numero >= 6.0 -> R.string.suficiente.toString()
-            else -> R.string.no_aprobado.toString()
-        }
+        return ":)"
+//        return when
+//        {
+//            numero >= 9.0 -> R.string.muy_bien.toString()
+//            numero >= 7.5 && numero < 9.0 -> R.string.bien.toString()
+//            numero >= 6.0 && numero < 7.5 -> R.string.suficiente.toString()
+//            else -> R.string.no_aprobado.toString()
+//        }
     }
 
     override fun toString() : String

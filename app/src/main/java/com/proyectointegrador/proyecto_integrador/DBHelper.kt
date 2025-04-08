@@ -8,30 +8,46 @@ import android.database.sqlite.SQLiteOpenHelper
 
 class DBHelper(val contexto : Context?, val dbName : String?) : SQLiteOpenHelper(contexto, dbName, null, 1)
 {
-    var tableName : String =
-        if(dbName == contexto!!.resources.getString(R.string.db_alumnos)) { contexto.resources.getString(R.string.table_alumnos) }
-    else if(dbName == contexto.resources.getString(R.string.db_materias)) { contexto.resources.getString(R.string.table_materias) }
-    else { "" }
+    var tableName : String = when(dbName)
+    {
+         contexto!!.resources.getString(R.string.db_alumnos) -> contexto.resources.getString(R.string.table_alumnos)
+        contexto.resources.getString(R.string.db_materias) -> contexto.resources.getString(R.string.table_materias)
+        contexto.resources.getString(R.string.db_calificaciones) -> contexto.resources.getString(R.string.table_calificaciones)
+        else -> ""
+    }
 
     override fun onCreate(db : SQLiteDatabase)
     {
-        if(dbName == contexto!!.resources.getString(R.string.db_alumnos))
+        when(dbName)
         {
-            val comandoSQL : String = "CREATE TABLE ${tableName}(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
-                    "matricula VARCHAR(20), nombre VARCHAR(100), apellidoP VARCHAR(100), apellidoM VARCHAR(100), " +
-                    "fecha VARCHAR(20), genero VARCHAR(100))"
+            contexto!!.resources.getString(R.string.db_alumnos) ->
+            {
+                val comandoSQL: String =
+                    "CREATE TABLE ${tableName}(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                            "matricula VARCHAR(20), nombre VARCHAR(100), apellidoP VARCHAR(100), apellidoM VARCHAR(100), " +
+                            "fecha VARCHAR(20), genero VARCHAR(100))"
 
-            db.execSQL(comandoSQL)
-        }
-        else if(dbName == contexto.resources.getString(R.string.db_materias))
-        {
-            val comandoSQL : String = "CREATE TABLE ${tableName}(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                db.execSQL(comandoSQL)
+            }
+
+            contexto.resources.getString(R.string.db_materias) ->
+            {
+                val comandoSQL : String =
+                    "CREATE TABLE ${tableName}(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
                     "clave VARCHAR(20), nombre VARCHAR(100), creditos VARCHAR(10))"
 
-            db.execSQL(comandoSQL)
+                db.execSQL(comandoSQL)
+            }
+
+            contexto.resources.getString(R.string.db_calificaciones) ->
+            {
+                val comandoSQL : String =
+                    "CREATE TABLE ${tableName}(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                        "alumno INTEGER, materia INTEGER, numero REAL, nota VARCHAR(10))"
+
+                db.execSQL(comandoSQL)
+            }
         }
-
-
     }
 
     override fun onUpgrade(db : SQLiteDatabase, oldVersion : Int, newVersion : Int)
