@@ -48,7 +48,8 @@ class MenuProfesores : AppCompatActivity()
         calificar.visibility = View.INVISIBLE
 
         val dataManager = DataManager(applicationContext, resources.getString(R.string.db_materias))
-        val colores = arrayOf(resources.getColor(R.color.azulchillon), resources.getColor(R.color.azulmetalico))
+        val colores = arrayOf(resources.getColor(R.color.azulchillon), resources.getColor(R.color.azulmetalico),
+            resources.getColor(R.color.azulreal))
         val materiasToDisplay = dataManager.leerMaterias().toMutableList()
         //La mejor manera que se me ocurrió de agregar un default al spinner
         materiasToDisplay.add(0, Materia("Selecciona una materia..."))
@@ -67,7 +68,8 @@ class MenuProfesores : AppCompatActivity()
                     materia = parent.getItemAtPosition(pos) as Materia
 
                     val dataManager = DataManager(applicationContext, resources.getString(R.string.db_alumnos))
-                    val colores = arrayOf(resources.getColor(R.color.azulmetalico), resources.getColor(R.color.azulchillon))
+                    val colores = arrayOf(resources.getColor(R.color.azulmetalico), resources.getColor(R.color.azulchillon),
+                    resources.getColor(R.color.azulreal))
                     val alumnosToDisplay = dataManager.leerAlumnos().toMutableList()
                     alumnosToDisplay.add(0, Alumno("Selecciona un alumno..."))
 

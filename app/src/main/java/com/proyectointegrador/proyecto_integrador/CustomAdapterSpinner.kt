@@ -16,7 +16,7 @@ class CustomAdapterSpinner<T>(contexto : Context, resource : Int, data : Mutable
     constructor(contexto : Context, resource: Int, data : Array<T>, colores : Array<Int>)
     : this(contexto, resource, data.toMutableList(), colores)
 
-    val n = colores.size
+    val n = colores.size-1
 
     override fun getView(pos : Int, convertView : View?, parent : ViewGroup) : View
     {
@@ -39,9 +39,9 @@ class CustomAdapterSpinner<T>(contexto : Context, resource : Int, data : Mutable
     {
         if(view is TextView)
         {
-            if(pos == 0)
+            if(pos == 0) //default
             {
-                view.setBackgroundColor(context.resources.getColor(R.color.plateado))
+                view.setBackgroundColor(colores[n])
                 view.setTextColor(context.resources.getColor(R.color.black))
             }
             else for(i in 0 until n)

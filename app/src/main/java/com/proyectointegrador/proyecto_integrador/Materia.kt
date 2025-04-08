@@ -19,7 +19,7 @@ class Materia()
     constructor(contexto : Context, clave : String, nombre : String, creditos : String)
             : this(nombre)
     {
-        this.id = DataManager(contexto, contexto.resources.getString(R.string.db_materias)).getNewMateriaID()
+        this.id = DataManager(contexto, contexto.resources.getString(R.string.db_materias)).getNewID()
         this.clave = clave
         this.creditos = creditos
     }

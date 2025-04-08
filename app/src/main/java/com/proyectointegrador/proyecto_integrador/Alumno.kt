@@ -23,7 +23,7 @@ class Alumno()
     constructor(contexto : Context, matricula : String, nombre : String, apellidoP : String, apellidoM : String, generos : String, fecha : String)
             : this(nombre)
     {
-        this.id = DataManager(contexto, contexto.resources.getString(R.string.db_alumnos)).getNewAlumnoID()
+        this.id = DataManager(contexto, contexto.resources.getString(R.string.db_alumnos)).getNewID()
         this.matricula = matricula
         this.apellidoP = apellidoP
         this.apellidoM = apellidoM

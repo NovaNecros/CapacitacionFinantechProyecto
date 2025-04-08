@@ -6,6 +6,8 @@
     <string name="table_alumnos" translatable="false">alumnos</string>
     <string name="db_materias" translatable="false">materias.db</string>
     <string name="table_materias" translatable="false">materias</string>
+    <string name="db_calificaciones" translatable="false">calificaciones.db</string>
+    <string name="table_calificaciones" translatable="false">calificaciones</string>
 
     <string name="matricula" translatable="false">Matrícula</string>
     <string name="name" translatable="false">Nombre</string>
@@ -62,4 +64,8 @@
     <string name="spinner_default" translatable="false">Selecciona...</string>
     <string name="default_text" translatable="false">:b</string>
 
+    <string name="muy_bien" translatable="false">MB</string>
+    <string name="bien" translatable="false">B</string>
+    <string name="suficiente" translatable="false">S</string>
+    <string name="no_aprobado" translatable="false">NA</string>
 </resources>
