@@ -9,7 +9,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class DataManager(contexto : Context, dbName : String)
+class DataManager(val contexto : Context, dbName : String)
 {
     val dbHelper  : SQLiteOpenHelper = DBHelper(contexto, dbName)
     var baseDatos : SQLiteDatabase = dbHelper.writableDatabase

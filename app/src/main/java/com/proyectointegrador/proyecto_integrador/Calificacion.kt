@@ -6,6 +6,7 @@ import android.content.Context
 
 class Calificacion()
 {
+    var contexto : Context? = null
     var id : Int = 0
     var alumno : Alumno = Alumno()
     var materia : Materia = Materia()
@@ -15,7 +16,8 @@ class Calificacion()
     constructor(contexto : Context, alumno : Alumno, materia : Materia, numero : Double)
             : this()
     {
-        this.id = DataManager(contexto, R.string.db_calificaciones.toString()).getNewID()
+        this.contexto = contexto
+        this.id = DataManager(contexto, contexto.resources.getString(R.string.db_calificaciones)).getNewID()
         this.alumno = alumno
         this.materia = materia
         this.numero = numero
@@ -24,14 +26,13 @@ class Calificacion()
 
     fun calcularNota(numero : Double) : String
     {
-        return ":)"
-//        return when
-//        {
-//            numero >= 9.0 -> R.string.muy_bien.toString()
-//            numero >= 7.5 && numero < 9.0 -> R.string.bien.toString()
-//            numero >= 6.0 && numero < 7.5 -> R.string.suficiente.toString()
-//            else -> R.string.no_aprobado.toString()
-//        }
+        return when
+        {
+            numero >= 9.0 -> contexto!!.resources.getString(R.string.muy_bien)
+            numero >= 7.5 -> contexto!!.resources.getString(R.string.bien)
+            numero >= 6.0 -> contexto!!.resources.getString(R.string.suficiente)
+            else -> contexto!!.resources.getString(R.string.no_aprobado)
+        }
     }
 
     override fun toString() : String

@@ -129,11 +129,11 @@ class MenuProfesores : AppCompatActivity()
         calificar.setOnClickListener(View.OnClickListener
         {
             calificacion = Calificacion(applicationContext, alumno, materia, lectorCalificacion.text.toString().toDouble())
-//            val dataManagerCalificaciones = DataManager(applicationContext, resources.getString(R.string.db_calificaciones))
-//            dataManagerCalificaciones.guardarCalificacion(calificacion)
+            val dataManagerCalificaciones = DataManager(applicationContext, resources.getString(R.string.db_calificaciones))
+            dataManagerCalificaciones.guardarCalificacion(calificacion)
 
             val view = findViewById<View>(android.R.id.content)
-            val texto : String = "${alumno} obtuvo ${calificacion}\nen ${materia}"
+            val texto : String = "${alumno} obtuvo ${calificacion} en ${materia}"
             val color : Int = resources.getColor(R.color.brat)
             SnackbarUtil.showSnackbar(applicationContext, view!!, texto, color)
 
