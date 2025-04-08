@@ -11,12 +11,16 @@ class Materia()
     var nombre : String = ""
     var creditos : String = ""
 
+    constructor(nombre : String) : this()
+    {
+        this.nombre = nombre
+    }
+
     constructor(contexto : Context, clave : String, nombre : String, creditos : String)
-            : this()
+            : this(nombre)
     {
         this.id = DataManager(contexto, contexto.resources.getString(R.string.db_materias)).getNewMateriaID()
         this.clave = clave
-        this.nombre = nombre
         this.creditos = creditos
     }
 

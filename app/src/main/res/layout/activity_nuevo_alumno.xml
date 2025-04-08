@@ -211,6 +211,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/verdebosque"
             android:text="@string/btn_save"
+            android:textStyle="bold"
             android:textSize="28sp"
             android:textColor="@color/white"/>
         <Button
@@ -220,6 +221,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/rojopastel"
             android:text="@string/btn_clear"
+            android:textStyle="bold"
             android:textSize="28sp"
             android:textColor="@color/white"/>
         <Button

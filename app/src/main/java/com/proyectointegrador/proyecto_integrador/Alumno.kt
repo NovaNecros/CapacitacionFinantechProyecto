@@ -14,12 +14,17 @@ class Alumno()
     var generos : String = ""
     var fecha : String = ""
 
+    //Este constructor se usa para crear un alumno artificial para darle una opción de default al spinner
+    constructor(nombre : String) : this()
+    {
+        this.nombre = nombre
+    }
+
     constructor(contexto : Context, matricula : String, nombre : String, apellidoP : String, apellidoM : String, generos : String, fecha : String)
-            : this()
+            : this(nombre)
     {
         this.id = DataManager(contexto, contexto.resources.getString(R.string.db_alumnos)).getNewAlumnoID()
         this.matricula = matricula
-        this.nombre = nombre
         this.apellidoP = apellidoP
         this.apellidoM = apellidoM
         this.generos = generos

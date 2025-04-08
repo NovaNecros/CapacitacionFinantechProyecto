@@ -50,6 +50,8 @@ class MenuProfesores : AppCompatActivity()
         val dataManager = DataManager(applicationContext, resources.getString(R.string.db_materias))
         val colores = arrayOf(resources.getColor(R.color.azulchillon), resources.getColor(R.color.azulmetalico))
         val materiasToDisplay = dataManager.leerMaterias().toMutableList()
+        //La mejor manera que se me ocurrió de agregar un default al spinner
+        materiasToDisplay.add(0, Materia("Selecciona una materia..."))
 
         val adaptadorMaterias = CustomAdapterSpinner<Materia>(applicationContext, R.layout.item_spinner, materiasToDisplay, colores)
         adaptadorMaterias.setDropDownViewResource(R.layout.item_dropdown)
@@ -67,6 +69,7 @@ class MenuProfesores : AppCompatActivity()
                     val dataManager = DataManager(applicationContext, resources.getString(R.string.db_alumnos))
                     val colores = arrayOf(resources.getColor(R.color.azulmetalico), resources.getColor(R.color.azulchillon))
                     val alumnosToDisplay = dataManager.leerAlumnos().toMutableList()
+                    alumnosToDisplay.add(0, Alumno("Selecciona un alumno..."))
 
                     val adaptadorAlumnos = CustomAdapterSpinner<Alumno>(applicationContext, R.layout.item_spinner, alumnosToDisplay, colores)
                     adaptadorAlumnos.setDropDownViewResource(R.layout.item_dropdown)

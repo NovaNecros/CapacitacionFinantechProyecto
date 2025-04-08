@@ -95,7 +95,7 @@
             android:textStyle="bold"
             android:textSize="28sp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/brat"/>
+            android:backgroundTint="@color/verdeclaro"/>
 
 
     </LinearLayout>
