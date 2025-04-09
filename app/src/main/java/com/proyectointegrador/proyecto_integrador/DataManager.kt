@@ -279,7 +279,7 @@ class DataManager(val contexto : Context, dbName : String)
         val calificaciones = mutableListOf<Calificacion>()
         val columnas = arrayOf("id", "alumno", "materia", "numero", "nota")
 
-        val cursor: Cursor = baseDatos.query(tableName, columnas, "alumno = ?", arrayOf(idAlumno.toString()), null, null, null)
+        val cursor : Cursor = baseDatos.query(tableName, columnas, "alumno = ?", arrayOf(idAlumno.toString()), null, null, null)
         while(cursor.moveToNext())
         {
             val calificacion = Calificacion()

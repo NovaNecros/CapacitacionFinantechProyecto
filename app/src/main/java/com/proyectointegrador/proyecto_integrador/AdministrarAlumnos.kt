@@ -16,6 +16,8 @@ import android.widget.ListView
 
 class AdministrarAlumnos : AppCompatActivity()
 {
+    var dataManager : DataManager? = null
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -33,12 +35,12 @@ class AdministrarAlumnos : AppCompatActivity()
         val borrar = findViewById<Button>(R.id.btn_borrar)
         val regresar = findViewById<TextView>(R.id.btn_back)
         val alumnos = findViewById<ListView>(R.id.lista_alumnos)
-        val dataManager = DataManager(applicationContext, resources.getString(R.string.db_alumnos))
+        dataManager = DataManager(applicationContext, resources.getString(R.string.db_alumnos))
 
         var selected = Alumno()
 
         val colores = arrayOf(resources.getColor(R.color.naranja), resources.getColor(R.color.naranjafuerte))
-        val alumnosToDisplay = dataManager.leerAlumnos()
+        val alumnosToDisplay = dataManager!!.leerAlumnos()
         val adaptador = CustomAdapterListView<Alumno>(applicationContext, alumnosToDisplay, colores)
         alumnos.adapter = adaptador
         alumnos.isVerticalScrollBarEnabled = true
@@ -77,7 +79,7 @@ class AdministrarAlumnos : AppCompatActivity()
 
         borrar.setOnClickListener(View.OnClickListener
         { view ->
-            val res : Int = dataManager.borrarAlumno(selected)
+            val res : Int = dataManager!!.borrarAlumno(selected)
             if(res>0)
             {
                 val texto : String = "Alumno ${selected} eliminado"
@@ -103,5 +105,17 @@ class AdministrarAlumnos : AppCompatActivity()
             intent = Intent(applicationContext, ControlEscolar::class.java)
             startActivity(intent)
         })
+    }
+
+    override fun onPause()
+    {
+        dataManager!!.cerrar()
+        super.onPause()
+    }
+
+    override fun onResume()
+    {
+        dataManager!!.abrir()
+        super.onResume()
     }
 }

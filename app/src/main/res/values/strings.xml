@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">SQLite_en_Android</string>
+    <string name="app_name" translatable="false">Proyecto Integrador</string>
     <string name="titulo" translatable="false">Módulo Escolar</string>
 
     <string name="db_alumnos" translatable="false">alumnos.db</string>

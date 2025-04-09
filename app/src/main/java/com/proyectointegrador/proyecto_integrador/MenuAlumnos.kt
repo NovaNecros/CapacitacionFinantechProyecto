@@ -50,16 +50,19 @@ class MenuAlumnos : AppCompatActivity()
                 if(alumno != null)
                 {
                     val intent = Intent(applicationContext, PerfilAcademico::class.java)
-                    intent.putExtra("alumno", alumno.id.toString())
+                    intent.putExtra("alumno", alumno.id)
                     startActivity(intent)
+                }
+                else
+                {
+                    SnackbarUtil.showSnackbar(applicationContext, view!!, texto, color)
                 }
             }
             else
             {
                 texto = resources.getString(R.string.no_matricula_ex)
+                SnackbarUtil.showSnackbar(applicationContext, view!!, texto, color)
             }
-
-            SnackbarUtil.showSnackbar(applicationContext, view!!, texto, color)
         })
 
         regresar.setOnClickListener(View.OnClickListener

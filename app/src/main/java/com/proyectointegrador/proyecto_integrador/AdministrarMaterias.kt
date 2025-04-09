@@ -16,6 +16,8 @@ import android.widget.ListView
 
 class AdministrarMaterias : AppCompatActivity()
 {
+    var dataManager : DataManager? = null
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -33,7 +35,7 @@ class AdministrarMaterias : AppCompatActivity()
         val borrar = findViewById<Button>(R.id.btn_borrar)
         val regresar = findViewById<TextView>(R.id.btn_back)
         val materias = findViewById<ListView>(R.id.materias)
-        val dataManager = DataManager(applicationContext, resources.getString(R.string.db_materias))
+        dataManager = DataManager(applicationContext, resources.getString(R.string.db_materias))
         var selected = Materia()
 
         editar.text = resources.getString(R.string.btn_edit) + " ${selected}"
@@ -42,7 +44,7 @@ class AdministrarMaterias : AppCompatActivity()
         borrar.visibility = View.INVISIBLE
 
         val colores = arrayOf(resources.getColor(R.color.naranja), resources.getColor(R.color.naranjafuerte))
-        val materiasToDisplay = dataManager.leerMaterias()
+        val materiasToDisplay = dataManager!!.leerMaterias()
         val adaptador = CustomAdapterListView<Materia>(applicationContext, materiasToDisplay, colores)
         materias.adapter = adaptador
         materias.isVerticalScrollBarEnabled = true
@@ -78,7 +80,7 @@ class AdministrarMaterias : AppCompatActivity()
 
         borrar.setOnClickListener(View.OnClickListener
         { view ->
-            val res : Int = dataManager.borrarMateria(selected)
+            val res : Int = dataManager!!.borrarMateria(selected)
             if(res>0)
             {
                 val texto : String = "Materia ${selected} eliminada"
@@ -104,5 +106,17 @@ class AdministrarMaterias : AppCompatActivity()
             intent = Intent(applicationContext, ControlEscolar::class.java)
             startActivity(intent)
         })
+    }
+
+    override fun onPause()
+    {
+        dataManager!!.cerrar()
+        super.onPause()
+    }
+
+    override fun onResume()
+    {
+        dataManager!!.abrir()
+        super.onResume()
     }
 }

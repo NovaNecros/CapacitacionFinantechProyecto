@@ -18,6 +18,10 @@ import android.content.Intent
 
 class MenuProfesores : AppCompatActivity()
 {
+    var dataManagerAlumnos : DataManager? = null
+    var dataManagerMaterias : DataManager? = null
+    var dataManagerCalificaciones : DataManager? = null
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -48,10 +52,13 @@ class MenuProfesores : AppCompatActivity()
         alumnos.visibility = View.INVISIBLE
         calificar.visibility = View.INVISIBLE
 
-        val dataManagerMaterias = DataManager(applicationContext, resources.getString(R.string.db_materias))
+        dataManagerAlumnos = DataManager(applicationContext, resources.getString(R.string.db_alumnos))
+        dataManagerMaterias = DataManager(applicationContext, resources.getString(R.string.db_materias))
+        dataManagerCalificaciones = DataManager(applicationContext, resources.getString(R.string.db_calificaciones))
+
         val colores = arrayOf(resources.getColor(R.color.azulchillon), resources.getColor(R.color.azulmetalico),
             resources.getColor(R.color.azulreal))
-        val materiasToDisplay = dataManagerMaterias.leerMaterias().toMutableList()
+        val materiasToDisplay = dataManagerMaterias!!.leerMaterias().toMutableList()
         //La mejor manera que se me ocurrió de agregar un default al spinner
         materiasToDisplay.add(0, Materia("Selecciona una materia..."))
 
@@ -68,14 +75,15 @@ class MenuProfesores : AppCompatActivity()
                 {
                     materia = parent.getItemAtPosition(pos) as Materia
 
-                    val dataManagerAlumnos = DataManager(applicationContext, resources.getString(R.string.db_alumnos))
                     val colores = arrayOf(resources.getColor(R.color.azulmetalico), resources.getColor(R.color.azulchillon),
                     resources.getColor(R.color.azulreal))
-                    val alumnosToDisplay = dataManagerAlumnos.leerAlumnos().toMutableList()
+
+                    val alumnosToDisplay = dataManagerAlumnos!!.leerAlumnos().toMutableList()
                     alumnosToDisplay.add(0, Alumno("Selecciona un alumno..."))
 
                     val adaptadorAlumnos = CustomAdapterSpinner<Alumno>(applicationContext, R.layout.item_spinner, alumnosToDisplay, colores)
                     adaptadorAlumnos.setDropDownViewResource(R.layout.item_dropdown)
+
                     alumnos.adapter = adaptadorAlumnos
                     alumnos.isVerticalScrollBarEnabled = true
 
@@ -137,8 +145,8 @@ class MenuProfesores : AppCompatActivity()
             if(calificacionInput.isNotEmpty())
             {
                 calificacion = Calificacion(applicationContext, alumno, materia, calificacionInput.toDouble())
-                val dataManagerCalificaciones = DataManager(applicationContext, resources.getString(R.string.db_calificaciones))
-                dataManagerCalificaciones.guardarCalificacion(calificacion)
+
+                dataManagerCalificaciones!!.guardarCalificacion(calificacion)
 
                 texto = "${alumno} obtuvo ${calificacion} en ${materia}"
                 color = resources.getColor(R.color.brat)
@@ -156,5 +164,21 @@ class MenuProfesores : AppCompatActivity()
             intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
         })
+    }
+
+    override fun onPause()
+    {
+        dataManagerAlumnos!!.cerrar()
+        dataManagerMaterias!!.cerrar()
+        dataManagerCalificaciones!!.cerrar()
+        super.onPause()
+    }
+
+    override fun onResume()
+    {
+        dataManagerAlumnos!!.abrir()
+        dataManagerMaterias!!.abrir()
+        dataManagerCalificaciones!!.abrir()
+        super.onResume()
     }
 }

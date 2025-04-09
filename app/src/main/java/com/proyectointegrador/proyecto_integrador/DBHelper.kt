@@ -10,7 +10,7 @@ class DBHelper(val contexto : Context?, val dbName : String?) : SQLiteOpenHelper
 {
     var tableName : String = when(dbName)
     {
-         contexto!!.resources.getString(R.string.db_alumnos) -> contexto.resources.getString(R.string.table_alumnos)
+        contexto!!.resources.getString(R.string.db_alumnos) -> contexto.resources.getString(R.string.table_alumnos)
         contexto.resources.getString(R.string.db_materias) -> contexto.resources.getString(R.string.table_materias)
         contexto.resources.getString(R.string.db_calificaciones) -> contexto.resources.getString(R.string.table_calificaciones)
         else -> ""

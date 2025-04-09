@@ -9,13 +9,18 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 import android.widget.TextView
+import android.widget.Button
 import android.widget.ListView
 import android.view.View
 import android.content.Intent
 
 class PerfilAcademico : AppCompatActivity()
 {
-    override fun onCreate(savedInstanceState: Bundle?)
+    var dataManagerAlumnos : DataManager? = null
+    var dataManagerMaterias : DataManager? = null
+    var dataManagerCalificaciones : DataManager? = null
+
+    override fun onCreate(savedInstanceState : Bundle?)
     {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -27,24 +32,31 @@ class PerfilAcademico : AppCompatActivity()
             insets
         }
 
-        val regresar = findViewById<TextView>(R.id.btn_back)
+        val nombre = findViewById<TextView>(R.id.titulo)
+        val regresar = findViewById<Button>(R.id.btn_back)
         val calificaciones = findViewById<ListView>(R.id.lista_materias)
 
         val colores = arrayOf(resources.getColor(R.color.naranja),
             resources.getColor(R.color.naranjafuerte), resources.getColor(R.color.dorado))
-        val dataManagerMaterias = DataManager(applicationContext, resources.getString(R.string.db_materias))
-        val dataManagerCalificaciones = DataManager(applicationContext, resources.getString(R.string.db_calificaciones))
+
+        dataManagerAlumnos = DataManager(applicationContext, resources.getString(R.string.db_alumnos))
+        dataManagerMaterias = DataManager(applicationContext, resources.getString(R.string.db_materias))
+        dataManagerCalificaciones = DataManager(applicationContext, resources.getString(R.string.db_calificaciones))
 
         val bundle = intent.extras
-        val alumno = bundle?.getString("alumno")
-        val calificacionesToDisplay = dataManagerCalificaciones.leerCalificacionesAlumno(alumno!!.toInt())
-        val calificacionesTexto = mutableListOf<String>()
+        val alumnoID = bundle?.getInt("alumno")
+        nombre.text = dataManagerAlumnos!!.leerAlumno(alumnoID!!).toString()
 
-        for(calificacion in calificacionesToDisplay)
-        {
-            val materia = dataManagerMaterias.leerMateria(calificacion.materia.id)
-            calificacionesTexto.add("${materia}\t${calificacion}")
-        }
+
+
+        val calificacionesTexto = mutableListOf<String>()
+//        val calificacionesToDisplay = dataManagerCalificaciones!!.leerCalificacionesAlumno(alumnoID)
+//
+//        for(calificacion in calificacionesToDisplay)
+//        {
+//            val materia = dataManagerMaterias!!.leerMateria(calificacion.materia.id)
+//            calificacionesTexto.add("${materia} - ${calificacion}")
+//        }
 
         val adaptador = CustomAdapterListView<String>(applicationContext, calificacionesTexto, colores)
         calificaciones.adapter = adaptador
@@ -55,5 +67,21 @@ class PerfilAcademico : AppCompatActivity()
             intent = Intent(applicationContext, MenuAlumnos::class.java)
             startActivity(intent)
         })
+    }
+
+    override fun onPause()
+    {
+        dataManagerAlumnos!!.cerrar()
+        dataManagerMaterias!!.cerrar()
+        dataManagerCalificaciones!!.cerrar()
+        super.onPause()
+    }
+
+    override fun onResume()
+    {
+        dataManagerAlumnos!!.abrir()
+        dataManagerMaterias!!.abrir()
+        dataManagerCalificaciones!!.abrir()
+        super.onResume()
     }
 }
