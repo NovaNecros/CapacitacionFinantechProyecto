@@ -61,6 +61,10 @@ class PerfilAcademico : AppCompatActivity()
         boleta.isVerticalScrollBarEnabled = true
 
         promedio.text = String.format("%.2f", promedio(calificaciones))
+        if(promedio.text.toString() == "NaN")
+        {
+            promedio.text = ""
+        }
 
         regresar.setOnClickListener(View.OnClickListener
         {

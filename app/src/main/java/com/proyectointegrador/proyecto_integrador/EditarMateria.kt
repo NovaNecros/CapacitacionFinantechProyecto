@@ -42,6 +42,7 @@ class EditarMateria : AppCompatActivity()
         val bundle = intent.extras
         val data = bundle?.getString("idParaEditar")
         var materia = dataManager!!.leerMateria(data!!.toInt())
+        val id : Int = materia.id
 
         lectorClave.setText(materia.clave.toString())
         lectorNombre.setText(materia.nombre)
@@ -80,7 +81,10 @@ class EditarMateria : AppCompatActivity()
                 SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
 
                 dataManager!!.borrarMateria(materia)
+
                 materia = Materia(applicationContext, clave, nombre, creditos)
+                materia.id = id
+
                 dataManager!!.guardarMateria(materia)
 
                 lectorClave.text.clear()

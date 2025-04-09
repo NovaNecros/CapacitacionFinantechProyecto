@@ -70,6 +70,7 @@ class EditarAlumno : AppCompatActivity()
         val bundle = intent.extras
         val data = bundle?.getString("idParaEditar")
         var alumno = dataManager!!.leerAlumno(data!!.toInt())
+        val id : Int = alumno.id
 
         lectorMatricula.setText(alumno.matricula.toString())
         lectorNombre.setText(alumno.nombre)
@@ -157,9 +158,12 @@ class EditarAlumno : AppCompatActivity()
             }
             else
             {
-                val fulanito = Alumno(applicationContext, matricula, nombre, apellidoP, apellidoM, generosUsuario.toString(), cumFecha)
                 dataManager!!.borrarAlumno(alumno)
-                dataManager!!.guardarAlumno(fulanito)
+
+                alumno = Alumno(applicationContext, matricula, nombre, apellidoP, apellidoM, generosUsuario.toString(), cumFecha)
+                alumno.id = id
+
+                dataManager!!.guardarAlumno(alumno)
 
                 texto = "Alumno ${alumno} actualizado"
                 color = resources.getColor(R.color.brat)

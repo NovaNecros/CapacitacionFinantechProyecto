@@ -78,10 +78,17 @@ class MenuProfesores : AppCompatActivity()
                     val colores = arrayOf(resources.getColor(R.color.azulmetalico), resources.getColor(R.color.azulchillon),
                     resources.getColor(R.color.azulreal))
 
-                    val alumnosToDisplay = dataManagerAlumnos!!.leerAlumnos().toMutableList()
-                    alumnosToDisplay.add(0, Alumno("Selecciona un alumno..."))
+                    val alumnosTodos = dataManagerAlumnos!!.leerAlumnos()
 
-                    val adaptadorAlumnos = CustomAdapterSpinner<Alumno>(applicationContext, R.layout.item_spinner, alumnosToDisplay, colores)
+                    val calificaciones = dataManagerCalificaciones!!.leerCalificaciones()
+                        .filter { it.materia.id == materia.id }.map { it.alumno.id }
+
+                    val alumnosSinCalificacion = alumnosTodos
+                        .filterNot { calificaciones.contains(it.id) }.toMutableList()
+
+                    alumnosSinCalificacion.add(0, Alumno("Selecciona un alumno..."))
+
+                    val adaptadorAlumnos = CustomAdapterSpinner<Alumno>(applicationContext, R.layout.item_spinner, alumnosSinCalificacion, colores)
                     adaptadorAlumnos.setDropDownViewResource(R.layout.item_dropdown)
 
                     alumnos.adapter = adaptadorAlumnos
