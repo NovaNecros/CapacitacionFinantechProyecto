@@ -60,7 +60,7 @@ class PerfilAcademico : AppCompatActivity()
         boleta.adapter = adaptador
         boleta.isVerticalScrollBarEnabled = true
 
-        promedio.text = promedio(calificaciones).toString()
+        promedio.text = String.format("%.2f", promedio(calificaciones))
 
         regresar.setOnClickListener(View.OnClickListener
         {
@@ -90,7 +90,14 @@ class PerfilAcademico : AppCompatActivity()
         var total = 0.0
         for(calificacion in calificaciones)
         {
-            total += calificacion.numero
+            val nota : String = calificacion.nota
+            when(nota)
+            {
+                applicationContext.resources.getString(R.string.muy_bien) -> total += 10.0
+                applicationContext.resources.getString(R.string.bien) -> total += 8.0
+                applicationContext.resources.getString(R.string.suficiente) -> total += 6.0
+                applicationContext.resources.getString(R.string.no_aprobado) -> total += 5.0
+            }
         }
 
         return total / calificaciones.size
