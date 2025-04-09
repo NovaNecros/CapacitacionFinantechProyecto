@@ -16,6 +16,8 @@
     <color name="rojochillon">#FF0000</color>
     <color name="verdeclaro">#77DD77</color>
     <color name="naranjaclaro">#FFB347</color>
+    <color name="rojoclaro">#FF6961</color>
+
     <color name="rositafosfo">#FF007F</color>
     <color name="amarillosuave">#F6E28C</color>
 
@@ -34,7 +36,7 @@
     <color name="naranjapastel">#FFDAB3</color>
     <color name="amarillopastel">#FFF9C4</color>
     <color name="verdepastel">#C6EFCE</color>
-    <color name="rojopastel">#FF6961</color>
+    <color name="rojopastel">#FFB3B3</color>
     <color name="azulpastel">#AEC6CF</color>
     <color name="rosapastel">#FAD0C9</color>
 </resources>

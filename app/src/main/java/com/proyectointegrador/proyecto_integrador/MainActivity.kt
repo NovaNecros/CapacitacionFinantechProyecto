@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
 
         val controlEscolar = findViewById<Button>(R.id.btn_ctrl_escolar)
         val menuProfesores = findViewById<Button>(R.id.btn_profesores)
-        val menuAlumnos = findViewById<TextView>(R.id.btn_alumnos)
+        val menuAlumnos = findViewById<Button>(R.id.btn_alumnos)
 
         controlEscolar.setOnClickListener(this)
         menuProfesores.setOnClickListener(this)
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
             }
             R.id.btn_profesores ->
             {
-                intent = Intent(applicationContext, MenuProfesores::class.java)
+                intent = Intent(applicationContext, Calificar::class.java)
                 startActivity(intent)
             }
             R.id.btn_alumnos ->

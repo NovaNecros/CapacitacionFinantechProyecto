@@ -117,7 +117,7 @@
             android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/rojopastel"
+            android:backgroundTint="@color/rojoclaro"
             android:text="@string/btn_clear"
             android:textSize="28sp"
             android:textColor="@color/white"/>

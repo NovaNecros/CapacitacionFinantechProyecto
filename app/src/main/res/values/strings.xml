@@ -17,6 +17,7 @@
     <string name="creditos" translatable="false">Créditos</string>
 
     <string name="calif" translatable="false">Calificación</string>
+    <string name="califs" translatable="false">Calificaciones</string>
     <string name="promedio" translatable="false">Promedio</string>
 
     <string name="apellido_p" translatable="false">Apellido Paterno</string>
@@ -49,10 +50,16 @@
 
     <string name="btn_new_alumno" translatable="false">Nuevo Alumno</string>
     <string name="btn_new_materia" translatable="false">Nueva Materia</string>
+
     <string name="btn_delete" translatable="false">Eliminar</string>
     <string name="btn_edit" translatable="false">Editar</string>
+
     <string name="btn_edit_materia" translatable="false">Editar Materia</string>
     <string name="btn_edit_alumno" translatable="false">Editar Alumno</string>
+    <string name="btn_edit_calif" translatable="false">Corregir</string>
+
+    <string name="btn_asignar_calif" translatable="false">Asignar Calificación</string>
+    <string name="btn_ver_calif" translatable="false">Ver Calificaciones</string>
 
     <string name="no_matricula_ex" translatable="false">Escribe la matrícula</string>
     <string name="matricula_invalida_ex" translatable="false">Matrícula inválida</string>"

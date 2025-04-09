@@ -122,7 +122,7 @@
             android:textStyle="bold"
             android:textSize="28sp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/rojopastel"/>
+            android:backgroundTint="@color/rojoclaro"/>
     </LinearLayout>
 
 

@@ -252,22 +252,29 @@ class DataManager(val contexto : Context, dbName : String)
         return calificaciones.toTypedArray()
     }
 
-    fun leerCalificacion(id : Int) : Calificacion
+    fun leerCalificacion(alumnoId : Int, materiaId : Int): Calificacion?
     {
-        val calificacion = Calificacion()
         val columnas = arrayOf("id", "alumno", "materia", "numero", "nota")
-        val cursor : Cursor = baseDatos.query(tableName, columnas, "id = ?", arrayOf(id.toString()), null, null, null)
+        val cursor: Cursor = baseDatos.query(tableName, columnas,
+            "alumno = ? AND materia = ?", arrayOf(alumnoId.toString(), materiaId.toString()), null, null, null)
 
-        cursor.moveToFirst()
-        calificacion.id = cursor.getInt(0)
-        calificacion.alumno = DataManager(contexto, contexto.resources.getString(R.string.db_alumnos)).leerAlumno(cursor.getInt(1))
-        calificacion.materia = DataManager(contexto, contexto.resources.getString(R.string.db_materias)).leerMateria(cursor.getInt(2))
-        calificacion.numero = cursor.getDouble(3)
-        calificacion.nota = cursor.getString(4)
+        if (cursor.moveToFirst())
+        {
+            val calificacion = Calificacion()
+            calificacion.id = cursor.getInt(0)
+            calificacion.alumno = leerAlumno(cursor.getInt(1))
+            calificacion.materia = leerMateria(cursor.getInt(2))
+            calificacion.numero = cursor.getDouble(3)
+            calificacion.nota = cursor.getString(4)
+            cursor.close()
+
+            return calificacion
+        }
+
         cursor.close()
-
-        return calificacion
+        return null
     }
+
 
     fun leerCalificacionesAlumno(alumno : Alumno) : Array<Calificacion>
     {

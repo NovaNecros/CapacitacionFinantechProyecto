@@ -6,7 +6,7 @@
     android:id="@+id/menu_profesores"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/azulpastel"
+    android:background="@color/rojopastel"
     tools:context=".MenuProfesores">
 
     <TextView
@@ -25,48 +25,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.225"
         app:layout_constraintHorizontal_bias="0.5"/>
-    <LinearLayout
-        android:layout_width="375dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_bias="0.55">
-
-        <Spinner
-            android:id="@+id/spinner_materias"
-            android:visibility="visible"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="56dp"/>
-
-        <Spinner
-            android:id="@+id/spinner_alumnos"
-            android:visibility="visible"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="72dp"/>
-
-        <TextView
-            android:id="@+id/calificacion"
-            android:visibility="visible"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/calif"
-            android:textStyle="bold"
-            android:textSize="18sp"/>
-        <EditText
-            android:id="@+id/lector_calificacion"
-            android:visibility="visible"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text"/>
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="375dp"
@@ -77,23 +35,35 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95"
+        app:layout_constraintVertical_bias="0.75"
         app:layout_constraintHorizontal_bias="0.5">
 
         <Button
-            android:id="@+id/btn_calificar"
+            android:id="@+id/btn_ctrl_escolar"
             android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/btn_calificar"
+            android:text="@string/btn_asignar_calif"
             android:textStyle="bold"
             android:textSize="28sp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/verdebosque"
+            android:backgroundTint="@color/azulchillon"
             android:layout_marginBottom="24dp"/>
 
         <Button
-            android:id="@+id/btn_back"
+            android:id="@+id/btn_profesores"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_ver_calif"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/verdeclaro"
+            android:layout_marginBottom="24dp"/>
+
+        <Button
+            android:id="@+id/btn_alumnos"
             android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

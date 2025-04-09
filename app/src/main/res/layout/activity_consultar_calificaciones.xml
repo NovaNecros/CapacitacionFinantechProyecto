@@ -3,20 +3,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/consultar_calificaciones"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/crema"
-    tools:context=".MainActivity">
+    android:background="@color/verdepastel"
+    tools:context=".ConsultarCalificaciones">
 
     <TextView
         android:id="@+id/titulo"
         android:visibility="visible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/titulo"
+        android:text="@string/califs"
         android:textStyle="bold"
-        android:textSize="64sp"
+        android:textSize="56sp"
         android:textColor="@color/black"
         android:gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,6 +25,34 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.225"
         app:layout_constraintHorizontal_bias="0.5"/>
+    <LinearLayout
+        android:layout_width="375dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.5">
+
+        <Spinner
+            android:id="@+id/spinner_materias"
+            android:visibility="visible"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"/>
+
+        <ListView
+            android:id="@+id/alumnos"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:text="@string/calif"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="375dp"
@@ -35,43 +63,43 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.75"
+        app:layout_constraintVertical_bias="0.95"
         app:layout_constraintHorizontal_bias="0.5">
 
         <Button
-            android:id="@+id/btn_ctrl_escolar"
+            android:id="@+id/btn_edit"
             android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/btn_ctrl_escolar"
+            android:text="@string/btn_edit_calif"
             android:textStyle="bold"
             android:textSize="28sp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/verdeclaro"
-            android:layout_marginBottom="24dp"/>
+            android:backgroundTint="@color/azulchillon"
+            android:layout_marginBottom="8dp"/>
 
         <Button
-            android:id="@+id/btn_profesores"
+            android:id="@+id/btn_borrar"
             android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/btn_prof"
+            android:text="@string/btn_delete"
             android:textStyle="bold"
             android:textSize="28sp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/rojosangre"
-            android:layout_marginBottom="24dp"/>
+            android:backgroundTint="@color/moradofuerte"
+            android:layout_marginBottom="8dp"/>
 
         <Button
-            android:id="@+id/btn_alumnos"
+            android:id="@+id/btn_back"
             android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/btn_alumno"
+            android:text="@string/btn_back"
             android:textStyle="bold"
             android:textSize="28sp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/violeta"/>
+            android:backgroundTint="@color/rojosangre"/>
 
     </LinearLayout>
 
