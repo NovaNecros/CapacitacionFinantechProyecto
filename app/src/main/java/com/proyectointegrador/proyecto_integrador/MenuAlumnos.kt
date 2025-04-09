@@ -71,4 +71,16 @@ class MenuAlumnos : AppCompatActivity()
             startActivity(intent)
         })
     }
+
+    override fun onPause()
+    {
+        dataManager!!.cerrar()
+        super.onPause()
+    }
+
+    override fun onResume()
+    {
+        dataManager!!.abrir()
+        super.onResume()
+    }
 }
