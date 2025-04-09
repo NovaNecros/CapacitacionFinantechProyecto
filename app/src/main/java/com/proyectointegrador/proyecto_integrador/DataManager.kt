@@ -239,8 +239,8 @@ class DataManager(val contexto : Context, dbName : String)
             val calificacion = Calificacion()
 
             calificacion.id = cursor.getInt(0)
-            calificacion.alumno = leerAlumno(cursor.getInt(1))
-            calificacion.materia = leerMateria(cursor.getInt(2))
+            calificacion.alumno = DataManager(contexto, contexto.resources.getString(R.string.db_alumnos)).leerAlumno(cursor.getInt(1))
+            calificacion.materia = DataManager(contexto, contexto.resources.getString(R.string.db_materias)).leerMateria(cursor.getInt(2))
             calificacion.numero = cursor.getDouble(3)
             calificacion.nota = cursor.getString(4)
 
@@ -260,8 +260,8 @@ class DataManager(val contexto : Context, dbName : String)
 
         cursor.moveToFirst()
         calificacion.id = cursor.getInt(0)
-        calificacion.alumno = leerAlumno(cursor.getInt(1))
-        calificacion.materia = leerMateria(cursor.getInt(2))
+        calificacion.alumno = DataManager(contexto, contexto.resources.getString(R.string.db_alumnos)).leerAlumno(cursor.getInt(1))
+        calificacion.materia = DataManager(contexto, contexto.resources.getString(R.string.db_materias)).leerMateria(cursor.getInt(2))
         calificacion.numero = cursor.getDouble(3)
         calificacion.nota = cursor.getString(4)
         cursor.close()
@@ -280,13 +280,14 @@ class DataManager(val contexto : Context, dbName : String)
         val columnas = arrayOf("id", "alumno", "materia", "numero", "nota")
 
         val cursor : Cursor = baseDatos.query(tableName, columnas, "alumno = ?", arrayOf(idAlumno.toString()), null, null, null)
+
         while(cursor.moveToNext())
         {
             val calificacion = Calificacion()
 
             calificacion.id = cursor.getInt(0)
-            calificacion.alumno = leerAlumno(cursor.getInt(1))
-            calificacion.materia = leerMateria(cursor.getInt(2))
+            calificacion.alumno = DataManager(contexto, contexto.resources.getString(R.string.db_alumnos)).leerAlumno(cursor.getInt(1))
+            calificacion.materia = DataManager(contexto, contexto.resources.getString(R.string.db_materias)).leerMateria(cursor.getInt(2))
             calificacion.numero = cursor.getDouble(3)
             calificacion.nota = cursor.getString(4)
 

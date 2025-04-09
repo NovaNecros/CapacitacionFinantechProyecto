@@ -24,8 +24,8 @@ class DBHelper(val contexto : Context?, val dbName : String?) : SQLiteOpenHelper
             {
                 val comandoSQL: String =
                     "CREATE TABLE ${tableName}(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
-                            "matricula VARCHAR(20), nombre VARCHAR(100), apellidoP VARCHAR(100), apellidoM VARCHAR(100), " +
-                            "fecha VARCHAR(20), genero VARCHAR(100))"
+                    "matricula VARCHAR(20), nombre VARCHAR(100), apellidoP VARCHAR(100), apellidoM VARCHAR(100), " +
+                    "fecha VARCHAR(20), genero VARCHAR(100))"
 
                 db.execSQL(comandoSQL)
             }
@@ -43,7 +43,7 @@ class DBHelper(val contexto : Context?, val dbName : String?) : SQLiteOpenHelper
             {
                 val comandoSQL : String =
                     "CREATE TABLE ${tableName}(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
-                        "alumno INTEGER, materia INTEGER, numero REAL, nota VARCHAR(10))"
+                    "alumno INTEGER, materia INTEGER, numero REAL, nota VARCHAR(10))"
 
                 db.execSQL(comandoSQL)
             }
