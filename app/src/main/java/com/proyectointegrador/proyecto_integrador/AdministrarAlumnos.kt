@@ -16,7 +16,8 @@ import android.widget.ListView
 
 class AdministrarAlumnos : AppCompatActivity()
 {
-    var dataManager : DataManager? = null
+    var dataManagerAlumnos : DataManager? = null
+    var dataManagerCalificaciones : DataManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -35,14 +36,15 @@ class AdministrarAlumnos : AppCompatActivity()
         val borrar = findViewById<Button>(R.id.btn_borrar)
         val regresar = findViewById<TextView>(R.id.btn_back)
         val alumnos = findViewById<ListView>(R.id.lista_alumnos)
-        dataManager = DataManager(applicationContext, resources.getString(R.string.db_alumnos))
-
         var selected = Alumno()
 
-        actualizarListaAlumnos()
+        dataManagerAlumnos = DataManager(applicationContext, resources.getString(R.string.db_alumnos))
+        dataManagerCalificaciones = DataManager(applicationContext, resources.getString(R.string.db_calificaciones))
 
         editar.visibility = View.INVISIBLE
         borrar.visibility = View.INVISIBLE
+
+        actualizarListaAlumnos()
 
         alumnos.setOnItemClickListener(
         { parent, view, pos, id ->
@@ -75,8 +77,8 @@ class AdministrarAlumnos : AppCompatActivity()
 
         borrar.setOnClickListener(View.OnClickListener
         { view ->
-            val resCalifs : Int = dataManager!!.borrarCalificacionesPorAlumno(selected)
-            val resAlumno : Int = dataManager!!.borrarAlumno(selected)
+            val resCalifs : Int = dataManagerCalificaciones!!.borrarCalificacionesPorAlumno(selected)
+            val resAlumno : Int = dataManagerAlumnos!!.borrarAlumno(selected)
 
             if(resAlumno>0 && resCalifs>0)
             {
@@ -84,6 +86,8 @@ class AdministrarAlumnos : AppCompatActivity()
                 val color : Int = resources.getColor(R.color.brat)
                 SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
 
+                editar.visibility = View.INVISIBLE
+                borrar.visibility = View.INVISIBLE
                 actualizarListaAlumnos()
             }
             else if(resAlumno==0)
@@ -111,26 +115,25 @@ class AdministrarAlumnos : AppCompatActivity()
 
     override fun onPause()
     {
-        dataManager!!.cerrar()
+        dataManagerAlumnos!!.cerrar()
         super.onPause()
     }
 
     override fun onResume()
     {
-        dataManager!!.abrir()
+        dataManagerAlumnos!!.abrir()
         super.onResume()
     }
 
     fun actualizarListaAlumnos()
     {
-        val alumnosTodos = dataManager!!.leerAlumnos()
+        val alumnos = dataManagerAlumnos!!.leerAlumnos()
 
         val colores = arrayOf(resources.getColor(R.color.naranja), resources.getColor(R.color.naranjafuerte))
-        val adaptador = CustomAdapterListView<Alumno>(applicationContext, alumnosTodos, colores)
+        val adaptador = CustomAdapterListView<Alumno>(applicationContext, alumnos, colores)
 
-        val boleta = findViewById<ListView>(R.id.lista_alumnos)
-        boleta.adapter = adaptador
-        boleta.isVerticalScrollBarEnabled = true
+        val alumnosToDisplay = findViewById<ListView>(R.id.lista_alumnos)
+        alumnosToDisplay.adapter = adaptador
+        alumnosToDisplay.isVerticalScrollBarEnabled = true
     }
-
 }

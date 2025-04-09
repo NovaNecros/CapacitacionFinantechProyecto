@@ -16,7 +16,8 @@ import android.widget.ListView
 
 class AdministrarMaterias : AppCompatActivity()
 {
-    var dataManager : DataManager? = null
+    var dataManagerMaterias : DataManager? = null
+    var dataManagerCalificaciones : DataManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -35,29 +36,25 @@ class AdministrarMaterias : AppCompatActivity()
         val borrar = findViewById<Button>(R.id.btn_borrar)
         val regresar = findViewById<TextView>(R.id.btn_back)
         val materias = findViewById<ListView>(R.id.materias)
-        dataManager = DataManager(applicationContext, resources.getString(R.string.db_materias))
         var selected = Materia()
 
-        editar.text = resources.getString(R.string.btn_edit) + " ${selected}"
-        borrar.text = resources.getString(R.string.btn_delete) + " ${selected}"
+        dataManagerMaterias = DataManager(applicationContext, resources.getString(R.string.db_materias))
+        dataManagerCalificaciones = DataManager(applicationContext, resources.getString(R.string.db_calificaciones))
+
         editar.visibility = View.INVISIBLE
         borrar.visibility = View.INVISIBLE
 
-        val colores = arrayOf(resources.getColor(R.color.naranja), resources.getColor(R.color.naranjafuerte))
-        val materiasToDisplay = dataManager!!.leerMaterias()
-        val adaptador = CustomAdapterListView<Materia>(applicationContext, materiasToDisplay, colores)
-        materias.adapter = adaptador
-        materias.isVerticalScrollBarEnabled = true
+        actualizarListaMaterias()
 
         materias.setOnItemClickListener(
         { parent, view, pos, id ->
 
             selected = parent.getItemAtPosition(pos) as Materia
 
-            editar.visibility = View.VISIBLE
-            borrar.visibility = View.VISIBLE
             editar.text = resources.getString(R.string.btn_edit) + " ${selected}"
             borrar.text = resources.getString(R.string.btn_delete) + " ${selected}"
+            editar.visibility = View.VISIBLE
+            borrar.visibility = View.VISIBLE
 
             val texto : String = "Materia ${selected} seleccionada"
             val color : Int = resources.getColor(R.color.brat)
@@ -80,8 +77,8 @@ class AdministrarMaterias : AppCompatActivity()
 
         borrar.setOnClickListener(View.OnClickListener
         { view ->
-            val resMateria : Int = dataManager!!.borrarMateria(selected)
-            val resCalifs : Int = dataManager!!.borrarCalificacionesPorMateria(selected)
+            val resMateria : Int = dataManagerMaterias!!.borrarMateria(selected)
+            val resCalifs : Int = dataManagerCalificaciones!!.borrarCalificacionesPorMateria(selected)
 
             if(resMateria>0 && resCalifs>0)
             {
@@ -89,9 +86,10 @@ class AdministrarMaterias : AppCompatActivity()
                 val color : Int = resources.getColor(R.color.brat)
                 SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
 
-                //reinicia la actividad para actualizar la lista
-                intent = Intent(applicationContext, AdministrarMaterias::class.java)
-                startActivity(intent)
+                //actualiza el ListView de materias
+                actualizarListaMaterias()
+                editar.visibility = View.INVISIBLE
+                borrar.visibility = View.INVISIBLE
             }
             else if(resMateria==0)
             {
@@ -118,13 +116,25 @@ class AdministrarMaterias : AppCompatActivity()
 
     override fun onPause()
     {
-        dataManager!!.cerrar()
+        dataManagerMaterias!!.cerrar()
         super.onPause()
     }
 
     override fun onResume()
     {
-        dataManager!!.abrir()
+        dataManagerMaterias!!.abrir()
         super.onResume()
+    }
+
+    fun actualizarListaMaterias()
+    {
+        val materias = dataManagerMaterias!!.leerMaterias()
+
+        val colores = arrayOf(resources.getColor(R.color.naranja), resources.getColor(R.color.naranjafuerte))
+        val adaptador = CustomAdapterListView<Materia>(applicationContext, materias, colores)
+
+        val materiasToDisplay = findViewById<ListView>(R.id.lista_materias)
+        materiasToDisplay.adapter = adaptador
+        materiasToDisplay.isVerticalScrollBarEnabled = true
     }
 }
