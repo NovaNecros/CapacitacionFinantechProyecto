@@ -39,11 +39,7 @@ class AdministrarAlumnos : AppCompatActivity()
 
         var selected = Alumno()
 
-        val colores = arrayOf(resources.getColor(R.color.naranja), resources.getColor(R.color.naranjafuerte))
-        val alumnosToDisplay = dataManager!!.leerAlumnos()
-        val adaptador = CustomAdapterListView<Alumno>(applicationContext, alumnosToDisplay, colores)
-        alumnos.adapter = adaptador
-        alumnos.isVerticalScrollBarEnabled = true
+        actualizarListaAlumnos()
 
         editar.visibility = View.INVISIBLE
         borrar.visibility = View.INVISIBLE
@@ -88,9 +84,7 @@ class AdministrarAlumnos : AppCompatActivity()
                 val color : Int = resources.getColor(R.color.brat)
                 SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
 
-                //reinicia la actividad para actualizar la lista
-                intent = Intent(applicationContext, AdministrarAlumnos::class.java)
-                startActivity(intent)
+                actualizarListaAlumnos()
             }
             else if(resAlumno==0)
             {
@@ -126,4 +120,17 @@ class AdministrarAlumnos : AppCompatActivity()
         dataManager!!.abrir()
         super.onResume()
     }
+
+    fun actualizarListaAlumnos()
+    {
+        val alumnosTodos = dataManager!!.leerAlumnos()
+
+        val colores = arrayOf(resources.getColor(R.color.naranja), resources.getColor(R.color.naranjafuerte))
+        val adaptador = CustomAdapterListView<Alumno>(applicationContext, alumnosTodos, colores)
+
+        val boleta = findViewById<ListView>(R.id.lista_alumnos)
+        boleta.adapter = adaptador
+        boleta.isVerticalScrollBarEnabled = true
+    }
+
 }
