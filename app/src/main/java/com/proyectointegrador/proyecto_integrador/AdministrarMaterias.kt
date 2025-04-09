@@ -77,10 +77,10 @@ class AdministrarMaterias : AppCompatActivity()
 
         borrar.setOnClickListener(View.OnClickListener
         { view ->
-            val resMateria : Int = dataManagerMaterias!!.borrarMateria(selected)
-            val resCalifs : Int = dataManagerCalificaciones!!.borrarCalificacionesPorMateria(selected)
+            val res : Int = dataManagerMaterias!!.borrarMateria(selected)
+            dataManagerCalificaciones!!.borrarCalificacionesPorMateria(selected)
 
-            if(resMateria>0 && resCalifs>0)
+            if(res>0)
             {
                 val texto : String = "Materia ${selected} eliminada"
                 val color : Int = resources.getColor(R.color.brat)
@@ -91,17 +91,9 @@ class AdministrarMaterias : AppCompatActivity()
                 editar.visibility = View.INVISIBLE
                 borrar.visibility = View.INVISIBLE
             }
-            else if(resMateria==0)
-            {
-                //inidca el ID que tiene la materia que no se pudo eliminar
-                //para ayudar a rastrear el error a la implementación de la base de datos
-                val texto : String = "Error al eliminar\nID=${resMateria}"
-                val color : Int = resources.getColor(R.color.rojosangre)
-                SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
-            }
             else
             {
-                val texto : String = "Error al eliminar\nID=${resCalifs}"
+                val texto : String = "Error al eliminar materia"
                 val color : Int = resources.getColor(R.color.rojosangre)
                 SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
             }
@@ -117,12 +109,14 @@ class AdministrarMaterias : AppCompatActivity()
     override fun onPause()
     {
         dataManagerMaterias!!.cerrar()
+        dataManagerCalificaciones!!.cerrar()
         super.onPause()
     }
 
     override fun onResume()
     {
         dataManagerMaterias!!.abrir()
+        dataManagerCalificaciones!!.abrir()
         super.onResume()
     }
 
@@ -130,10 +124,10 @@ class AdministrarMaterias : AppCompatActivity()
     {
         val materias = dataManagerMaterias!!.leerMaterias()
 
-        val colores = arrayOf(resources.getColor(R.color.naranja), resources.getColor(R.color.naranjafuerte))
+        val colores = arrayOf(resources.getColor(R.color.rositafosfo), resources.getColor(R.color.rosafuerte))
         val adaptador = CustomAdapterListView<Materia>(applicationContext, materias, colores)
 
-        val materiasToDisplay = findViewById<ListView>(R.id.lista_materias)
+        val materiasToDisplay = findViewById<ListView>(R.id.materias)
         materiasToDisplay.adapter = adaptador
         materiasToDisplay.isVerticalScrollBarEnabled = true
     }

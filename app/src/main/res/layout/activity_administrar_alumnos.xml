@@ -27,7 +27,7 @@
         app:layout_constraintHorizontal_bias="0.5"/>
 
     <ListView
-        android:id="@+id/lista_alumnos"
+        android:id="@+id/alumnos"
         android:layout_width="375dp"
         android:layout_height="250dp"
         android:orientation="vertical"

@@ -35,7 +35,7 @@ class AdministrarAlumnos : AppCompatActivity()
         val editar = findViewById<Button>(R.id.btn_edit)
         val borrar = findViewById<Button>(R.id.btn_borrar)
         val regresar = findViewById<TextView>(R.id.btn_back)
-        val alumnos = findViewById<ListView>(R.id.lista_alumnos)
+        val alumnos = findViewById<ListView>(R.id.alumnos)
         var selected = Alumno()
 
         dataManagerAlumnos = DataManager(applicationContext, resources.getString(R.string.db_alumnos))
@@ -77,30 +77,23 @@ class AdministrarAlumnos : AppCompatActivity()
 
         borrar.setOnClickListener(View.OnClickListener
         { view ->
-            val resCalifs : Int = dataManagerCalificaciones!!.borrarCalificacionesPorAlumno(selected)
-            val resAlumno : Int = dataManagerAlumnos!!.borrarAlumno(selected)
+            dataManagerCalificaciones!!.borrarCalificacionesPorAlumno(selected)
+            val res : Int = dataManagerAlumnos!!.borrarAlumno(selected)
 
-            if(resAlumno>0 && resCalifs>0)
+            if(res>0)
             {
                 val texto : String = "Alumno ${selected} eliminado"
                 val color : Int = resources.getColor(R.color.brat)
                 SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
 
+                //actualiza el ListView de alumnos
+                actualizarListaAlumnos()
                 editar.visibility = View.INVISIBLE
                 borrar.visibility = View.INVISIBLE
-                actualizarListaAlumnos()
-            }
-            else if(resAlumno==0)
-            {
-                //inidca el ID que tiene el alumno que no se pudo eliminar
-                //para ayudar a rastrear el error a la implemntación de la base de datos
-                val texto : String = "Error al eliminar\nID=${resAlumno}"
-                val color : Int = resources.getColor(R.color.rojosangre)
-                SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
             }
             else
             {
-                val texto : String = "Error al eliminar\nID=${resCalifs}"
+                val texto : String = "Error al eliminar materia"
                 val color : Int = resources.getColor(R.color.rojosangre)
                 SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
             }
@@ -116,12 +109,14 @@ class AdministrarAlumnos : AppCompatActivity()
     override fun onPause()
     {
         dataManagerAlumnos!!.cerrar()
+        dataManagerCalificaciones!!.cerrar()
         super.onPause()
     }
 
     override fun onResume()
     {
         dataManagerAlumnos!!.abrir()
+        dataManagerCalificaciones!!.abrir()
         super.onResume()
     }
 
@@ -132,7 +127,7 @@ class AdministrarAlumnos : AppCompatActivity()
         val colores = arrayOf(resources.getColor(R.color.naranja), resources.getColor(R.color.naranjafuerte))
         val adaptador = CustomAdapterListView<Alumno>(applicationContext, alumnos, colores)
 
-        val alumnosToDisplay = findViewById<ListView>(R.id.lista_alumnos)
+        val alumnosToDisplay = findViewById<ListView>(R.id.alumnos)
         alumnosToDisplay.adapter = adaptador
         alumnosToDisplay.isVerticalScrollBarEnabled = true
     }
