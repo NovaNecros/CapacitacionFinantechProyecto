@@ -80,8 +80,10 @@ class AdministrarMaterias : AppCompatActivity()
 
         borrar.setOnClickListener(View.OnClickListener
         { view ->
-            val res : Int = dataManager!!.borrarMateria(selected)
-            if(res>0)
+            val resMateria : Int = dataManager!!.borrarMateria(selected)
+            val resCalifs : Int = dataManager!!.borrarCalificacionesPorMateria(selected)
+
+            if(resMateria>0 && resCalifs>0)
             {
                 val texto : String = "Materia ${selected} eliminada"
                 val color : Int = resources.getColor(R.color.brat)
@@ -91,11 +93,17 @@ class AdministrarMaterias : AppCompatActivity()
                 intent = Intent(applicationContext, AdministrarMaterias::class.java)
                 startActivity(intent)
             }
-            else
+            else if(resMateria==0)
             {
                 //inidca el ID que tiene la materia que no se pudo eliminar
                 //para ayudar a rastrear el error a la implementación de la base de datos
-                val texto : String = "Error al eliminar\nID=${res}"
+                val texto : String = "Error al eliminar\nID=${resMateria}"
+                val color : Int = resources.getColor(R.color.rojosangre)
+                SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
+            }
+            else
+            {
+                val texto : String = "Error al eliminar\nID=${resCalifs}"
                 val color : Int = resources.getColor(R.color.rojosangre)
                 SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
             }

@@ -75,24 +75,7 @@ class MenuProfesores : AppCompatActivity()
                 {
                     materia = parent.getItemAtPosition(pos) as Materia
 
-                    val colores = arrayOf(resources.getColor(R.color.azulmetalico), resources.getColor(R.color.azulchillon),
-                    resources.getColor(R.color.azulreal))
-
-                    val alumnosTodos = dataManagerAlumnos!!.leerAlumnos()
-
-                    val calificaciones = dataManagerCalificaciones!!.leerCalificaciones()
-                        .filter { it.materia.id == materia.id }.map { it.alumno.id }
-
-                    val alumnosSinCalificacion = alumnosTodos
-                        .filterNot { calificaciones.contains(it.id) }.toMutableList()
-
-                    alumnosSinCalificacion.add(0, Alumno("Selecciona un alumno..."))
-
-                    val adaptadorAlumnos = CustomAdapterSpinner<Alumno>(applicationContext, R.layout.item_spinner, alumnosSinCalificacion, colores)
-                    adaptadorAlumnos.setDropDownViewResource(R.layout.item_dropdown)
-
-                    alumnos.adapter = adaptadorAlumnos
-                    alumnos.isVerticalScrollBarEnabled = true
+                    actualizarSpinnerAlumnos(materia)
 
                     val texto : String = "${materia} seleccionada"
                     val color : Int = resources.getColor(R.color.brat)
@@ -164,6 +147,8 @@ class MenuProfesores : AppCompatActivity()
             }
 
             SnackbarUtil.showSnackbar(applicationContext, view!!, texto, color)
+
+            actualizarSpinnerAlumnos(materia)
         })
 
         regresar.setOnClickListener(View.OnClickListener
@@ -187,5 +172,28 @@ class MenuProfesores : AppCompatActivity()
         dataManagerMaterias!!.abrir()
         dataManagerCalificaciones!!.abrir()
         super.onResume()
+    }
+
+    fun actualizarSpinnerAlumnos(materia : Materia)
+    {
+        val alumnosTodos = dataManagerAlumnos!!.leerAlumnos()
+
+        val calificaciones = dataManagerCalificaciones!!.leerCalificaciones()
+            .filter { it.materia.id == materia.id }.map { it.alumno.id }
+
+        val alumnosSinCalificacion = alumnosTodos
+            .filterNot { calificaciones.contains(it.id) }.toMutableList()
+
+        alumnosSinCalificacion.add(0, Alumno("Selecciona un alumno..."))
+
+        val colores = arrayOf(resources.getColor(R.color.azulmetalico), resources.getColor(R.color.azulchillon),
+            resources.getColor(R.color.azulreal))
+
+        val adaptadorAlumnos = CustomAdapterSpinner<Alumno>(applicationContext, R.layout.item_spinner, alumnosSinCalificacion, colores)
+        adaptadorAlumnos.setDropDownViewResource(R.layout.item_dropdown)
+
+        val alumnos = findViewById<Spinner>(R.id.spinner_alumnos)
+        alumnos.adapter = adaptadorAlumnos
+        alumnos.isVerticalScrollBarEnabled = true
     }
 }

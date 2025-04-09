@@ -298,7 +298,12 @@ class DataManager(val contexto : Context, dbName : String)
         return calificaciones.toTypedArray()
     }
 
-
     fun borrarCalificacion(calificacion : Calificacion)
     : Int = baseDatos.delete(tableName, "id = ?", arrayOf(calificacion.id.toString()))
+
+    fun borrarCalificacionesPorAlumno(alumno : Alumno)
+    : Int = baseDatos.delete("calificaciones", "alumno = ?", arrayOf(alumno.id.toString()))
+
+    fun borrarCalificacionesPorMateria(materia : Materia)
+    : Int = baseDatos.delete(tableName, "materia = ?", arrayOf(materia.id.toString()))
 }

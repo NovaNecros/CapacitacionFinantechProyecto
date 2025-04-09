@@ -60,11 +60,9 @@ class PerfilAcademico : AppCompatActivity()
         boleta.adapter = adaptador
         boleta.isVerticalScrollBarEnabled = true
 
-        promedio.text = String.format("%.2f", promedio(calificaciones))
-        if(promedio.text.toString() == "NaN")
-        {
-            promedio.text = ""
-        }
+        val promedioAlumno : Double = promedio(calificaciones)
+        promedio.text = if(promedioAlumno.isNaN()) {""}
+        else { String.format("%.2f", promedioAlumno) }
 
         regresar.setOnClickListener(View.OnClickListener
         {

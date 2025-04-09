@@ -79,8 +79,10 @@ class AdministrarAlumnos : AppCompatActivity()
 
         borrar.setOnClickListener(View.OnClickListener
         { view ->
-            val res : Int = dataManager!!.borrarAlumno(selected)
-            if(res>0)
+            val resCalifs : Int = dataManager!!.borrarCalificacionesPorAlumno(selected)
+            val resAlumno : Int = dataManager!!.borrarAlumno(selected)
+
+            if(resAlumno>0 && resCalifs>0)
             {
                 val texto : String = "Alumno ${selected} eliminado"
                 val color : Int = resources.getColor(R.color.brat)
@@ -90,11 +92,17 @@ class AdministrarAlumnos : AppCompatActivity()
                 intent = Intent(applicationContext, AdministrarAlumnos::class.java)
                 startActivity(intent)
             }
-            else
+            else if(resAlumno==0)
             {
                 //inidca el ID que tiene el alumno que no se pudo eliminar
                 //para ayudar a rastrear el error a la implemntación de la base de datos
-                val texto : String = "Error al eliminar\nID=${res}"
+                val texto : String = "Error al eliminar\nID=${resAlumno}"
+                val color : Int = resources.getColor(R.color.rojosangre)
+                SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
+            }
+            else
+            {
+                val texto : String = "Error al eliminar\nID=${resCalifs}"
                 val color : Int = resources.getColor(R.color.rojosangre)
                 SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
             }
