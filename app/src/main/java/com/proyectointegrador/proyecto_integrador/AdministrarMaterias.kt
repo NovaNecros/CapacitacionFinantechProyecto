@@ -41,8 +41,8 @@ class AdministrarMaterias : AppCompatActivity()
         dataManagerMaterias = DataManager(applicationContext, resources.getString(R.string.db_materias))
         dataManagerCalificaciones = DataManager(applicationContext, resources.getString(R.string.db_calificaciones))
 
-        editar.visibility = View.INVISIBLE
-        borrar.visibility = View.INVISIBLE
+        editar.visibility = View.GONE
+        borrar.visibility = View.GONE
 
         actualizarListaMaterias()
 
@@ -88,8 +88,8 @@ class AdministrarMaterias : AppCompatActivity()
 
                 //actualiza el ListView de materias
                 actualizarListaMaterias()
-                editar.visibility = View.INVISIBLE
-                borrar.visibility = View.INVISIBLE
+                editar.visibility = View.GONE
+                borrar.visibility = View.GONE
             }
             else
             {

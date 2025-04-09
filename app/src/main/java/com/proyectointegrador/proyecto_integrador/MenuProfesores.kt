@@ -47,10 +47,10 @@ class MenuProfesores : AppCompatActivity()
         val materias = findViewById<Spinner>(R.id.spinner_materias)
         val alumnos = findViewById<Spinner>(R.id.spinner_alumnos)
 
-        calificacionTexto.visibility = View.INVISIBLE
-        lectorCalificacion.visibility = View.INVISIBLE
-        alumnos.visibility = View.INVISIBLE
-        calificar.visibility = View.INVISIBLE
+        calificacionTexto.visibility = View.GONE
+        lectorCalificacion.visibility = View.GONE
+        alumnos.visibility = View.GONE
+        calificar.visibility = View.GONE
 
         dataManagerAlumnos = DataManager(applicationContext, resources.getString(R.string.db_alumnos))
         dataManagerMaterias = DataManager(applicationContext, resources.getString(R.string.db_materias))
@@ -86,12 +86,12 @@ class MenuProfesores : AppCompatActivity()
                 }
                 else
                 {
-                    alumnos.visibility = View.INVISIBLE
+                    alumnos.visibility = View.GONE
                 }
 
-                calificacionTexto.visibility = View.INVISIBLE
-                lectorCalificacion.visibility = View.INVISIBLE
-                calificar.visibility = View.INVISIBLE
+                calificacionTexto.visibility = View.GONE
+                lectorCalificacion.visibility = View.GONE
+                calificar.visibility = View.GONE
             }
 
             override fun onNothingSelected(parent : AdapterView<*>) { }
@@ -115,9 +115,9 @@ class MenuProfesores : AppCompatActivity()
                 }
                 else
                 {
-                    calificacionTexto.visibility = View.INVISIBLE
-                    lectorCalificacion.visibility = View.INVISIBLE
-                    calificar.visibility = View.INVISIBLE
+                    calificacionTexto.visibility = View.GONE
+                    lectorCalificacion.visibility = View.GONE
+                    calificar.visibility = View.GONE
                 }
             }
 
@@ -142,7 +142,7 @@ class MenuProfesores : AppCompatActivity()
                 color = resources.getColor(R.color.brat)
 
                 lectorCalificacion.text.clear()
-                lectorCalificacion.visibility = View.INVISIBLE
+                lectorCalificacion.visibility = View.GONE
                 alumnos.setSelection(0)
             }
 

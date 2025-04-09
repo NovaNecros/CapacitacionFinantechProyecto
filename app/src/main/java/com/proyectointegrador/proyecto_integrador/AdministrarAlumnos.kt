@@ -41,8 +41,8 @@ class AdministrarAlumnos : AppCompatActivity()
         dataManagerAlumnos = DataManager(applicationContext, resources.getString(R.string.db_alumnos))
         dataManagerCalificaciones = DataManager(applicationContext, resources.getString(R.string.db_calificaciones))
 
-        editar.visibility = View.INVISIBLE
-        borrar.visibility = View.INVISIBLE
+        editar.visibility = View.GONE
+        borrar.visibility = View.GONE
 
         actualizarListaAlumnos()
 
@@ -88,8 +88,8 @@ class AdministrarAlumnos : AppCompatActivity()
 
                 //actualiza el ListView de alumnos
                 actualizarListaAlumnos()
-                editar.visibility = View.INVISIBLE
-                borrar.visibility = View.INVISIBLE
+                editar.visibility = View.GONE
+                borrar.visibility = View.GONE
             }
             else
             {
