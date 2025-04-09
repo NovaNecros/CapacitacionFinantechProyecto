@@ -33,8 +33,9 @@ class PerfilAcademico : AppCompatActivity()
         }
 
         val nombre = findViewById<TextView>(R.id.titulo)
+        val promedio = findViewById<TextView>(R.id.promedio_alumno)
         val regresar = findViewById<Button>(R.id.btn_back)
-        val calificaciones = findViewById<ListView>(R.id.lista_materias)
+        val boleta = findViewById<ListView>(R.id.lista_materias)
         val colores = arrayOf(resources.getColor(R.color.naranja), resources.getColor(R.color.naranjafuerte))
 
         dataManagerAlumnos = DataManager(applicationContext, resources.getString(R.string.db_alumnos))
@@ -43,20 +44,23 @@ class PerfilAcademico : AppCompatActivity()
 
         val bundle = intent.extras
         val alumnoID = bundle?.getInt("alumno")
-        nombre.text = dataManagerAlumnos!!.leerAlumno(alumnoID!!).toString()
+        val alumno = dataManagerAlumnos!!.leerAlumno(alumnoID!!)
+        nombre.text = "${alumno.nombre} ${alumno.apellidoP} ${alumno.apellidoM}".trim()
 
-        val calificacionesTexto = mutableListOf<String>()
-        val calificacionesToDisplay = dataManagerCalificaciones!!.leerCalificacionesAlumno(alumnoID)
+        val calificacionesMaterias = mutableListOf<String>()
+        val calificaciones = dataManagerCalificaciones!!.leerCalificacionesAlumno(alumnoID)
 
-        for(calificacion in calificacionesToDisplay)
+        for(calificacion in calificaciones)
         {
             val materia = dataManagerMaterias!!.leerMateria(calificacion.materia.id)
-            calificacionesTexto.add("${materia} - ${calificacion}")
+            calificacionesMaterias.add("${materia} - ${calificacion}")
         }
 
-        val adaptador = CustomAdapterListView<String>(applicationContext, calificacionesTexto, colores)
-        calificaciones.adapter = adaptador
-        calificaciones.isVerticalScrollBarEnabled = true
+        val adaptador = CustomAdapterListView<String>(applicationContext, calificacionesMaterias, colores)
+        boleta.adapter = adaptador
+        boleta.isVerticalScrollBarEnabled = true
+
+        promedio.text = promedio(calificaciones).toString()
 
         regresar.setOnClickListener(View.OnClickListener
         {
@@ -79,5 +83,16 @@ class PerfilAcademico : AppCompatActivity()
         dataManagerMaterias!!.abrir()
         dataManagerCalificaciones!!.abrir()
         super.onResume()
+    }
+
+    fun promedio(calificaciones : Array<Calificacion>) : Double
+    {
+        var total = 0.0
+        for(calificacion in calificaciones)
+        {
+            total += calificacion.numero
+        }
+
+        return total / calificaciones.size
     }
 }

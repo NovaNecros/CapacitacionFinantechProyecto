@@ -11,10 +11,13 @@
     <string name="table_calificaciones" translatable="false">calificaciones</string>
 
     <string name="matricula" translatable="false">Matrícula</string>
+    <string name="key" translatable="false">Clave</string>
+
     <string name="name" translatable="false">Nombre</string>
     <string name="creditos" translatable="false">Créditos</string>
-    <string name="key" translatable="false">Clave</string>
+
     <string name="calif" translatable="false">Calificación</string>
+    <string name="promedio" translatable="false">Promedio</string>
 
     <string name="apellido_p" translatable="false">Apellido Paterno</string>
     <string name="apellido_m" translatable="false">Apellido Materno</string>
