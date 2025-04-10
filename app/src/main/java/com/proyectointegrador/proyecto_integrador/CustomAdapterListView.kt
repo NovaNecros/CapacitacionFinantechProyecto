@@ -9,10 +9,9 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 
-class CustomAdapterListView<T>(context : Context, val data : MutableList<T>, val colores : Array<Int>)
-    : ArrayAdapter<T>(context, R.layout.item_listview, R.id.textViewItem, data)
+open class CustomAdapterListView<T>(contexto : Context, val data : MutableList<T>, val colores : Array<Int>)
+    : ArrayAdapter<T>(contexto, R.layout.item_listview, R.id.textViewItem, data)
 {
-
     constructor(contexto : Context, data : Array<T>, colores : Array<Int>)
     : this(contexto, data.toMutableList(), colores)
 
@@ -22,16 +21,26 @@ class CustomAdapterListView<T>(context : Context, val data : MutableList<T>, val
         val textViewItem = view.findViewById<TextView>(R.id.textViewItem)
         textViewItem.text = data[pos].toString().trim() //elimina espacios en blanco al inicio y al final
 
-        //Alterna entre colores para facilitar la lectura
-        val n = colores.size
-        for(i in 0 until n)
-        {
-            if(i == pos % n)
-            {
-                view.setBackgroundColor(colores[i])
-            }
-        }
+        setColores(pos, view)
 
         return view
+    }
+
+    //Alterna entre colores para facilitar la lectura
+    fun setColores(pos : Int, view : View)
+    {
+        val n = colores.size
+
+        if(view is TextView)
+        {
+            for(i in 0 until n)
+            {
+                if(pos % n == i)
+                {
+                    view.setBackgroundColor(colores[i])
+                    break
+                }
+            }
+        }
     }
 }
