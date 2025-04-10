@@ -52,8 +52,8 @@ class ConsultarCalificaciones : AppCompatActivity()
         dataManagerMaterias = DataManager(applicationContext, resources.getString(R.string.db_materias))
         dataManagerCalificaciones = DataManager(applicationContext, resources.getString(R.string.db_calificaciones))
 
-        val colores = arrayOf(resources.getColor(R.color.azulchillon), resources.getColor(R.color.azulmetalico),
-            resources.getColor(R.color.azulreal))
+        val colores = arrayOf(resources.getColor(R.color.verdebosque), resources.getColor(R.color.verdeclaro),
+            resources.getColor(R.color.brat))
         val materiasToDisplay = dataManagerMaterias!!.leerMaterias().toMutableList()
         //La mejor manera que se me ocurrió de agregar un default al spinner
         materiasToDisplay.add(0, Materia("Selecciona una materia..."))
@@ -71,13 +71,12 @@ class ConsultarCalificaciones : AppCompatActivity()
                 {
                     materia = parent.getItemAtPosition(pos) as Materia
 
-                    actualizarSpinnerAlumnos(materia)
+                    actualizarListaCalificaciones(materia)
 
                     val texto : String = "${materia} seleccionada"
                     val color : Int = resources.getColor(R.color.brat)
                     SnackbarUtil.showSnackbar(applicationContext, view!!, texto, color)
 
-                    alumnos.setSelection(0)
                     alumnos.visibility = View.VISIBLE
                 }
                 else
@@ -92,21 +91,21 @@ class ConsultarCalificaciones : AppCompatActivity()
             override fun onNothingSelected(parent : AdapterView<*>) { }
         }
 
-        alumnos.setOnItemClickListener(
-        { parent, view, pos, id ->
-
-            alumno = parent.getItemAtPosition(pos) as Alumno
-            calificacion = dataManagerCalificaciones!!.leerCalificacion(alumno.id, materia.id)!!
-
-            editar.text = resources.getString(R.string.btn_edit) + resources.getString(R.string.calif) + " de ${alumno}"
-            eliminar.text = resources.getString(R.string.btn_delete) + resources.getString(R.string.calif) + " de ${alumno}"
-            editar.visibility = View.VISIBLE
-            eliminar.visibility = View.VISIBLE
-
-            val texto : String = "Alumno ${alumno} seleccionado"
-            val color : Int = resources.getColor(R.color.brat)
-            SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
-        })
+//        alumnos.setOnItemClickListener(
+//        { parent, view, pos, id ->
+//
+//            alumno = parent.getItemAtPosition(pos) as Alumno
+//            calificacion = dataManagerCalificaciones!!.leerCalificacion(alumno.id, materia.id)!!
+//
+//            editar.text = resources.getString(R.string.btn_edit) + resources.getString(R.string.calif) + " de ${alumno}"
+//            eliminar.text = resources.getString(R.string.btn_delete) + resources.getString(R.string.calif) + " de ${alumno}"
+//            editar.visibility = View.VISIBLE
+//            eliminar.visibility = View.VISIBLE
+//
+//            val texto : String = "Alumno ${alumno} seleccionado"
+//            val color : Int = resources.getColor(R.color.brat)
+//            SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
+//        })
 
         editar.setOnClickListener(View.OnClickListener
         {
@@ -115,17 +114,16 @@ class ConsultarCalificaciones : AppCompatActivity()
 
         eliminar.setOnClickListener(View.OnClickListener
         { view ->
-            dataManagerCalificaciones!!.borrarCalificacionesPorAlumno(alumno)
-            val res : Int = dataManagerAlumnos!!.borrarAlumno(alumno)
+            val res = dataManagerCalificaciones!!.borrarCalificacion(calificacion)
 
             if(res>0)
             {
-                val texto : String = "Alumno ${alumno} eliminado"
+                val texto : String = "Calificacion de ${alumno} en ${materia} eliminada"
                 val color : Int = resources.getColor(R.color.brat)
                 SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
 
-                //actualiza el ListView de alumnos
-                actualizarListaAlumnos()
+                //actualiza el ListView de calificaciones
+                actualizarListaCalificaciones(materia)
                 editar.visibility = View.GONE
                 eliminar.visibility = View.GONE
             }
@@ -160,38 +158,24 @@ class ConsultarCalificaciones : AppCompatActivity()
         super.onResume()
     }
 
-    fun actualizarSpinnerAlumnos(materia : Materia)
+    fun actualizarListaCalificaciones(materia : Materia)
     {
-        val alumnosTodos = dataManagerAlumnos!!.leerAlumnos()
-
         val calificaciones = dataManagerCalificaciones!!.leerCalificaciones()
-            .filter { it.materia.id == materia.id }.map { it.alumno.id }
+            .filter { it.materia.id == materia.id }
 
-        val alumnosSinCalificacion = alumnosTodos
-            .filterNot { calificaciones.contains(it.id) }.toMutableList()
+        val colores = arrayOf(resources.getColor(R.color.verdeclaro), resources.getColor(R.color.verdebosque))
 
-        alumnosSinCalificacion.add(0, Alumno("Selecciona un alumno..."))
+        val calificacionesAlumnos = mutableListOf<String>()
+        for(calificacion in calificaciones)
+        {
+            val alumno = dataManagerAlumnos!!.leerAlumno(calificacion.alumno.id)
+            calificacionesAlumnos.add("${alumno} - ${calificacion}")
+        }
 
-        val colores = arrayOf(resources.getColor(R.color.verdeclaro), resources.getColor(R.color.verdebosque),
-            resources.getColor(R.color.brat))
+        val adaptador = CustomAdapterListView<String>(applicationContext, calificacionesAlumnos, colores)
+        val califsToDisplay = findViewById<ListView>(R.id.alumnos)
 
-        val adaptadorAlumnos = CustomAdapterSpinner<Alumno>(applicationContext, R.layout.item_spinner, alumnosSinCalificacion, colores)
-        adaptadorAlumnos.setDropDownViewResource(R.layout.item_dropdown)
-
-        val alumnos = findViewById<Spinner>(R.id.spinner_alumnos)
-        alumnos.adapter = adaptadorAlumnos
-        alumnos.isVerticalScrollBarEnabled = true
-    }
-
-    fun actualizarListaAlumnos()
-    {
-        val alumnos = dataManagerAlumnos!!.leerAlumnos()
-
-        val colores = arrayOf(resources.getColor(R.color.verdebosque), resources.getColor(R.color.verdeclaro))
-        val adaptador = CustomAdapterListView<Alumno>(applicationContext, alumnos, colores)
-
-        val alumnosToDisplay = findViewById<ListView>(R.id.alumnos)
-        alumnosToDisplay.adapter = adaptador
-        alumnosToDisplay.isVerticalScrollBarEnabled = true
+        califsToDisplay.adapter = adaptador
+        califsToDisplay.isVerticalScrollBarEnabled = true
     }
 }

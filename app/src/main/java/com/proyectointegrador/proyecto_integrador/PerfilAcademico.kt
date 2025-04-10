@@ -48,7 +48,8 @@ class PerfilAcademico : AppCompatActivity()
         nombre.text = "${alumno.nombre} ${alumno.apellidoP} ${alumno.apellidoM}".trim()
 
         val calificacionesMaterias = mutableListOf<String>()
-        val calificaciones = dataManagerCalificaciones!!.leerCalificacionesAlumno(alumnoID)
+        val calificaciones = dataManagerCalificaciones!!.leerCalificaciones()
+            .filter { it.alumno.id == alumnoID }
 
         for(calificacion in calificaciones)
         {
@@ -87,7 +88,7 @@ class PerfilAcademico : AppCompatActivity()
         super.onResume()
     }
 
-    fun promedio(calificaciones : Array<Calificacion>) : Double
+    fun promedio(calificaciones : List<Calificacion>) : Double
     {
         var total = 0.0
         for(calificacion in calificaciones)

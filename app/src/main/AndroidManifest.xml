@@ -26,14 +26,6 @@
             android:exported="true">
         </activity>
         <activity
-            android:name=".Calificar"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".MenuAlumnos"
-            android:exported="true">
-        </activity>
-        <activity
             android:name=".AdministrarAlumnos"
             android:exported="true">
         </activity>
@@ -58,7 +50,23 @@
             android:exported="true">
         </activity>
         <activity
+            android:name=".MenuProfesores"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".Calificar"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".ConsultarCalificaciones"
+            android:exported="true">
+        </activity>
+        <activity
             android:name=".PerfilAcademico"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".MenuAlumnos"
             android:exported="true">
         </activity>
     </application>

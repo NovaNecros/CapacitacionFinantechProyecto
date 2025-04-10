@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener
             }
             R.id.btn_profesores ->
             {
-                intent = Intent(applicationContext, Calificar::class.java)
+                intent = Intent(applicationContext, MenuProfesores::class.java)
                 startActivity(intent)
             }
             R.id.btn_alumnos ->

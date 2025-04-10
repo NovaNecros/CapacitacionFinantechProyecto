@@ -281,12 +281,41 @@ class DataManager(val contexto : Context, dbName : String)
         return leerCalificacionesAlumno(alumno.id)
     }
 
-    fun leerCalificacionesAlumno(idAlumno: Int): Array<Calificacion>
+    fun leerCalificacionesAlumno(idAlumno : Int): Array<Calificacion>
     {
         val calificaciones = mutableListOf<Calificacion>()
         val columnas = arrayOf("id", "alumno", "materia", "numero", "nota")
 
         val cursor : Cursor = baseDatos.query(tableName, columnas, "alumno = ?", arrayOf(idAlumno.toString()), null, null, null)
+
+        while(cursor.moveToNext())
+        {
+            val calificacion = Calificacion()
+
+            calificacion.id = cursor.getInt(0)
+            calificacion.alumno = DataManager(contexto, contexto.resources.getString(R.string.db_alumnos)).leerAlumno(cursor.getInt(1))
+            calificacion.materia = DataManager(contexto, contexto.resources.getString(R.string.db_materias)).leerMateria(cursor.getInt(2))
+            calificacion.numero = cursor.getDouble(3)
+            calificacion.nota = cursor.getString(4)
+
+            calificaciones.add(calificacion)
+        }
+        cursor.close()
+
+        return calificaciones.toTypedArray()
+    }
+
+    fun leerCalificacionesMateria(materia : Materia) : Array<Calificacion>
+    {
+        return leerCalificacionesAlumno(materia.id)
+    }
+
+    fun leerCalificacionesMateria(idMateria : Int): Array<Calificacion>
+    {
+        val calificaciones = mutableListOf<Calificacion>()
+        val columnas = arrayOf("id", "alumno", "materia", "numero", "nota")
+
+        val cursor : Cursor = baseDatos.query(tableName, columnas, "materia = ?", arrayOf(idMateria.toString()), null, null, null)
 
         while(cursor.moveToNext())
         {

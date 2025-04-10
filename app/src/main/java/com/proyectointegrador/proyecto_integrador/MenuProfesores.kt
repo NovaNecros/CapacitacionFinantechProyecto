@@ -53,7 +53,7 @@ class MenuProfesores : AppCompatActivity(), View.OnClickListener
             }
             R.id.btn_alumnos ->
             {
-                intent = Intent(applicationContext, MenuAlumnos::class.java)
+                intent = Intent(applicationContext, MainActivity::class.java)
                 startActivity(intent)
             }
         }
