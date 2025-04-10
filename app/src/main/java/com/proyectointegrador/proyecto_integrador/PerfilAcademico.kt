@@ -47,17 +47,17 @@ class PerfilAcademico : AppCompatActivity()
         val alumno = dataManagerAlumnos!!.leerAlumno(alumnoID!!)
         nombre.text = "${alumno.nombre} ${alumno.apellidoP} ${alumno.apellidoM}".trim()
 
-        val calificacionesMaterias = mutableListOf<String>()
         val calificaciones = dataManagerCalificaciones!!.leerCalificaciones()
-            .filter { it.alumno.id == alumnoID }
+            .filter { it.alumno.id == alumnoID }.toMutableList()
+        val materias = mutableListOf<Materia>()
 
         for(calificacion in calificaciones)
         {
-            val materia = dataManagerMaterias!!.leerMateria(calificacion.materia.id)
-            calificacionesMaterias.add("${materia} - ${calificacion}")
+            materias.add(dataManagerMaterias!!.leerMateria(calificacion.materia.id))
+
         }
 
-        val adaptador = CustomAdapterListView<String>(applicationContext, calificacionesMaterias, colores)
+        val adaptador = CustomAdapterListViewDoble<Materia, Calificacion>(applicationContext, materias, calificaciones, colores)
         boleta.adapter = adaptador
         boleta.isVerticalScrollBarEnabled = true
 

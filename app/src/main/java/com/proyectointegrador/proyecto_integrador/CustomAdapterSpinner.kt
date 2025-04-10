@@ -37,19 +37,16 @@ class CustomAdapterSpinner<T>(contexto : Context, resource : Int, data : Mutable
     //Alterna entre colores para facilitar la lectura
     fun setColores(pos : Int, view : View, colores : Array<Int>)
     {
-        if(view is TextView)
+        if(pos == 0) //default
         {
-            if(pos == 0) //default
+            view.setBackgroundColor(colores[n])
+        }
+        else for(i in 0 until n)
+        {
+            if(pos % n == i)
             {
-                view.setBackgroundColor(colores[n])
-            }
-            else for(i in 0 until n)
-            {
-                if(pos % n == i)
-                {
-                    view.setBackgroundColor(colores[i])
-                    break
-                }
+                view.setBackgroundColor(colores[i])
+                break
             }
         }
     }

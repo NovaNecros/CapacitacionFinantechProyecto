@@ -91,21 +91,21 @@ class ConsultarCalificaciones : AppCompatActivity()
             override fun onNothingSelected(parent : AdapterView<*>) { }
         }
 
-//        alumnos.setOnItemClickListener(
-//        { parent, view, pos, id ->
-//
-//            alumno = parent.getItemAtPosition(pos) as Alumno
-//            calificacion = dataManagerCalificaciones!!.leerCalificacion(alumno.id, materia.id)!!
-//
-//            editar.text = resources.getString(R.string.btn_edit) + resources.getString(R.string.calif) + " de ${alumno}"
-//            eliminar.text = resources.getString(R.string.btn_delete) + resources.getString(R.string.calif) + " de ${alumno}"
-//            editar.visibility = View.VISIBLE
-//            eliminar.visibility = View.VISIBLE
-//
-//            val texto : String = "Alumno ${alumno} seleccionado"
-//            val color : Int = resources.getColor(R.color.brat)
-//            SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
-//        })
+        alumnos.setOnItemClickListener(
+        { parent, view, pos, id ->
+
+            alumno = parent.getItemAtPosition(pos) as Alumno
+            calificacion = dataManagerCalificaciones!!.leerCalificacion(alumno.id, materia.id)!!
+
+            editar.text = resources.getString(R.string.btn_edit) + resources.getString(R.string.calif) + " de ${alumno}"
+            eliminar.text = resources.getString(R.string.btn_delete) + resources.getString(R.string.calif) + " de ${alumno}"
+            editar.visibility = View.VISIBLE
+            eliminar.visibility = View.VISIBLE
+
+            val texto : String = "Alumno ${alumno} seleccionado"
+            val color : Int = resources.getColor(R.color.brat)
+            SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
+        })
 
         editar.setOnClickListener(View.OnClickListener
         {
@@ -160,19 +160,19 @@ class ConsultarCalificaciones : AppCompatActivity()
 
     fun actualizarListaCalificaciones(materia : Materia)
     {
-        val calificaciones = dataManagerCalificaciones!!.leerCalificaciones()
-            .filter { it.materia.id == materia.id }
-
         val colores = arrayOf(resources.getColor(R.color.verdeclaro), resources.getColor(R.color.verdebosque))
 
-        val calificacionesAlumnos = mutableListOf<String>()
+        val calificaciones = dataManagerCalificaciones!!.leerCalificaciones()
+            .filter { it.materia.id == materia.id }.toMutableList()
+
+        val alumnos = mutableListOf<Alumno>()
+
         for(calificacion in calificaciones)
         {
-            val alumno = dataManagerAlumnos!!.leerAlumno(calificacion.alumno.id)
-            calificacionesAlumnos.add("${alumno} - ${calificacion}")
+            alumnos.add(dataManagerAlumnos!!.leerAlumno(calificacion.alumno.id))
         }
 
-        val adaptador = CustomAdapterListView<String>(applicationContext, calificacionesAlumnos, colores)
+        val adaptador = CustomAdapterListViewDoble<Alumno, Calificacion>(applicationContext, alumnos, calificaciones, colores)
         val califsToDisplay = findViewById<ListView>(R.id.alumnos)
 
         califsToDisplay.adapter = adaptador

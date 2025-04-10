@@ -33,6 +33,6 @@ class Alumno()
 
     override fun toString() : String
     {
-        return this.nombre
+        return (this.nombre + " " + this.apellidoP + " " + this.apellidoM).trim()
     }
 }

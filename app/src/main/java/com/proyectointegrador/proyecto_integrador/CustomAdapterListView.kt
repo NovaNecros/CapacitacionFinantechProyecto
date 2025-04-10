@@ -31,15 +31,12 @@ open class CustomAdapterListView<T>(contexto : Context, val data : MutableList<T
     {
         val n = colores.size
 
-        if(view is TextView)
+        for(i in 0 until n)
         {
-            for(i in 0 until n)
+            if(pos % n == i)
             {
-                if(pos % n == i)
-                {
-                    view.setBackgroundColor(colores[i])
-                    break
-                }
+                view.setBackgroundColor(colores[i])
+                break
             }
         }
     }
