@@ -35,7 +35,7 @@ class AdministrarAlumnos : AppCompatActivity()
         val editar = findViewById<Button>(R.id.btn_edit)
         val borrar = findViewById<Button>(R.id.btn_borrar)
         val regresar = findViewById<TextView>(R.id.btn_back)
-        val alumnos = findViewById<ListView>(R.id.alumnos)
+        val alumnos = findViewById<ListView>(R.id.calificaciones)
         var selected = Alumno()
 
         dataManagerAlumnos = DataManager(applicationContext, resources.getString(R.string.db_alumnos))
@@ -127,7 +127,7 @@ class AdministrarAlumnos : AppCompatActivity()
         val colores = arrayOf(resources.getColor(R.color.naranja), resources.getColor(R.color.naranjafuerte))
         val adaptador = CustomAdapterListView<Alumno>(applicationContext, alumnos, colores)
 
-        val alumnosToDisplay = findViewById<ListView>(R.id.alumnos)
+        val alumnosToDisplay = findViewById<ListView>(R.id.calificaciones)
         alumnosToDisplay.adapter = adaptador
         alumnosToDisplay.isVerticalScrollBarEnabled = true
     }

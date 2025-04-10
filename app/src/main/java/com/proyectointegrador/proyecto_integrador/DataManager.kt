@@ -258,7 +258,7 @@ class DataManager(val contexto : Context, dbName : String)
         val cursor: Cursor = baseDatos.query(tableName, columnas,
             "alumno = ? AND materia = ?", arrayOf(alumnoId.toString(), materiaId.toString()), null, null, null)
 
-        if (cursor.moveToFirst())
+        if(cursor.moveToFirst())
         {
             val calificacion = Calificacion()
             calificacion.id = cursor.getInt(0)
@@ -274,7 +274,6 @@ class DataManager(val contexto : Context, dbName : String)
         cursor.close()
         return null
     }
-
 
     fun leerCalificacionesAlumno(alumno : Alumno) : Array<Calificacion>
     {

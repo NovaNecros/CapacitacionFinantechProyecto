@@ -41,10 +41,10 @@ class ConsultarCalificaciones : AppCompatActivity()
         var alumno = Alumno()
         var calificacion = Calificacion()
 
-        val alumnos = findViewById<ListView>(R.id.alumnos)
+        val calificaciones = findViewById<ListView>(R.id.calificaciones)
         val materias = findViewById<Spinner>(R.id.spinner_materias)
 
-        alumnos.visibility = View.GONE
+        calificaciones.visibility = View.GONE
         editar.visibility = View.GONE
         eliminar.visibility = View.GONE
 
@@ -77,11 +77,11 @@ class ConsultarCalificaciones : AppCompatActivity()
                     val color : Int = resources.getColor(R.color.brat)
                     SnackbarUtil.showSnackbar(applicationContext, view!!, texto, color)
 
-                    alumnos.visibility = View.VISIBLE
+                    calificaciones.visibility = View.VISIBLE
                 }
                 else
                 {
-                    alumnos.visibility = View.GONE
+                    calificaciones.visibility = View.GONE
                 }
 
                 editar.visibility = View.GONE
@@ -91,18 +91,17 @@ class ConsultarCalificaciones : AppCompatActivity()
             override fun onNothingSelected(parent : AdapterView<*>) { }
         }
 
-        alumnos.setOnItemClickListener(
+        calificaciones.setOnItemClickListener(
         { parent, view, pos, id ->
 
-            alumno = parent.getItemAtPosition(pos) as Alumno
-            calificacion = dataManagerCalificaciones!!.leerCalificacion(alumno.id, materia.id)!!
+            calificacion = parent.getItemAtPosition(pos) as Calificacion
 
             editar.text = resources.getString(R.string.btn_edit) + resources.getString(R.string.calif) + " de ${alumno}"
             eliminar.text = resources.getString(R.string.btn_delete) + resources.getString(R.string.calif) + " de ${alumno}"
             editar.visibility = View.VISIBLE
             eliminar.visibility = View.VISIBLE
 
-            val texto : String = "Alumno ${alumno} seleccionado"
+            val texto : String = "Calificacion de ${alumno} seleccionada"
             val color : Int = resources.getColor(R.color.brat)
             SnackbarUtil.showSnackbar(applicationContext, view, texto, color)
         })
@@ -173,7 +172,7 @@ class ConsultarCalificaciones : AppCompatActivity()
         }
 
         val adaptador = CustomAdapterListViewDoble<Alumno, Calificacion>(applicationContext, alumnos, calificaciones, colores)
-        val califsToDisplay = findViewById<ListView>(R.id.alumnos)
+        val califsToDisplay = findViewById<ListView>(R.id.calificaciones)
 
         califsToDisplay.adapter = adaptador
         califsToDisplay.isVerticalScrollBarEnabled = true

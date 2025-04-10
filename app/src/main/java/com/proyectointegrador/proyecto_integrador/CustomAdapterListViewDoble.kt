@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 class CustomAdapterListViewDoble<T, E>(contexto : Context, val data1 : MutableList<T>, val data2 : MutableList<E>, colores : Array<Int>)
-    : CustomAdapterListView<T>(contexto, data1, colores)
+    : CustomAdapterListView<E>(contexto, data2, colores)
 {
 
     constructor(contexto : Context, data1 : Array<T>, data2 : Array<E>, colores : Array<Int>)
