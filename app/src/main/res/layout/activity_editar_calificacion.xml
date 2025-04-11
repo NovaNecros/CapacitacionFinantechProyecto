@@ -1,29 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/consultar_calificaciones"
+    android:id="@+id/editar_calificacion"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/verdepastel"
-    tools:context=".ConsultarCalificaciones">
+    android:background="@color/azulpastel"
+    tools:context=".com.proyectointegrador.proyecto_integrador.EditarCalificacion">
 
     <TextView
         android:id="@+id/titulo"
         android:visibility="visible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/califs"
+        android:text="@string/edit_calif"
         android:textStyle="bold"
-        android:textSize="56sp"
+        android:textSize="48sp"
         android:textColor="@color/black"
         android:gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.225"
+        app:layout_constraintVertical_bias="0.2"
         app:layout_constraintHorizontal_bias="0.5"/>
     <LinearLayout
         android:layout_width="375dp"
@@ -35,23 +34,43 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_bias="0.5">
+        app:layout_constraintVertical_bias="0.55">
 
-        <Spinner
-            android:id="@+id/spinner_materias"
-            android:visibility="visible"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"/>
-
-        <ListView
-            android:id="@+id/calificaciones"
+        <TextView
+            android:id="@+id/materia"
             android:visibility="visible"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:text="@string/calif"
+            android:layout_height="wrap_content"
+            android:text="@string/name"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginBottom="24dp"/>
+
+        <TextView
+            android:id="@+id/alumno"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_materias"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginBottom="72dp"/>
+
+        <TextView
+            android:id="@+id/calificacion"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/new_calif"
             android:textStyle="bold"
             android:textSize="18sp"/>
+        <EditText
+            android:id="@+id/lector_calificacion"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="numberDecimal"/>
     </LinearLayout>
 
     <LinearLayout
@@ -67,39 +86,27 @@
         app:layout_constraintHorizontal_bias="0.5">
 
         <Button
-            android:id="@+id/btn_edit"
+            android:id="@+id/btn_calificar"
             android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/edit_calif"
+            android:text="@string/btn_corregir"
             android:textStyle="bold"
             android:textSize="28sp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/azulchillon"
-            android:layout_marginBottom="8dp"/>
-
-        <Button
-            android:id="@+id/btn_borrar"
-            android:visibility="visible"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_delete_calif"
-            android:textStyle="bold"
-            android:textSize="28sp"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/moradofuerte"
-            android:layout_marginBottom="8dp"/>
+            android:backgroundTint="@color/violeta"
+            android:layout_marginBottom="24dp"/>
 
         <Button
             android:id="@+id/btn_back"
             android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/btn_back"
+            android:text="@string/btn_cancel"
             android:textStyle="bold"
             android:textSize="28sp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/rojosangre"/>
+            android:backgroundTint="@color/verdebosque"/>
 
     </LinearLayout>
 

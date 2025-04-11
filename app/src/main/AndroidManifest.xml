@@ -62,6 +62,10 @@
             android:exported="true">
         </activity>
         <activity
+            android:name=".com.proyectointegrador.proyecto_integrador.EditarCalificacion"
+            android:exported="true">
+        </activity>
+        <activity
             android:name=".PerfilAcademico"
             android:exported="true">
         </activity>

@@ -14,6 +14,7 @@ import android.widget.AdapterView
 import android.widget.Spinner
 import android.view.View
 import android.content.Intent
+import com.proyectointegrador.proyecto_integrador.com.proyectointegrador.proyecto_integrador.EditarCalificacion
 
 class ConsultarCalificaciones : AppCompatActivity()
 {
@@ -96,8 +97,6 @@ class ConsultarCalificaciones : AppCompatActivity()
 
             calificacion = parent.getItemAtPosition(pos) as Calificacion
 
-            editar.text = resources.getString(R.string.btn_edit) + resources.getString(R.string.calif) + " de ${alumno}"
-            eliminar.text = resources.getString(R.string.btn_delete) + resources.getString(R.string.calif) + " de ${alumno}"
             editar.visibility = View.VISIBLE
             eliminar.visibility = View.VISIBLE
 
@@ -108,7 +107,10 @@ class ConsultarCalificaciones : AppCompatActivity()
 
         editar.setOnClickListener(View.OnClickListener
         {
-            //TODO
+            var data = calificacion.id.toString()
+            val intent = Intent(applicationContext, EditarCalificacion::class.java)
+            intent.putExtra("idParaEditar", data)
+            startActivity(intent)
         })
 
         eliminar.setOnClickListener(View.OnClickListener

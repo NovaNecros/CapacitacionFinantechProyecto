@@ -53,16 +53,21 @@
 
     <string name="btn_delete" translatable="false">Eliminar</string>
     <string name="btn_edit" translatable="false">Editar</string>
+    <string name="btn_corregir" translatable="false">Corregir</string>
 
     <string name="btn_edit_materia" translatable="false">Editar Materia</string>
     <string name="btn_edit_alumno" translatable="false">Editar Alumno</string>
-    <string name="btn_edit_calif" translatable="false">Corregir</string>
+    <string name="btn_edit_calif" translatable="false">Corregir Calificación</string>
 
     <string name="btn_asignar_calif" translatable="false">Asignar Calificación</string>
+    <string name="btn_delete_calif" translatable="false">Eliminar Calificación</string>"
     <string name="btn_ver_calif" translatable="false">Ver Calificaciones</string>
 
     <string name="no_matricula_ex" translatable="false">Escribe la matrícula</string>
-    <string name="matricula_invalida_ex" translatable="false">Matrícula inválida</string>"
+    <string name="matricula_invalida_ex" translatable="false">Matrícula inválida</string>
+
+    <string name="edit_calif" translatable="false">Corregir Calificación</string>
+    <string name="new_calif" translatable="false">Nueva Calificación</string>"
 
     <string name="no_nombre_alumno_ex" translatable="false">Escribe el nombre</string>
     <string name="no_apellido_p_ex" translatable="false">Escribe el apellido paterno</string>
